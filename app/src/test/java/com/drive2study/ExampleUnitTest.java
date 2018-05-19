@@ -1,4 +1,4 @@
-package com.example.idod.drive2studyandroid;
+package com.drive2study;
 
 import org.junit.Test;
 

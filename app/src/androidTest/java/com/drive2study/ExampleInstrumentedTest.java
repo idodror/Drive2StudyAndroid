@@ -1,4 +1,4 @@
-package com.example.idod.drive2studyandroid;
+package com.drive2study;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.idod.drive2studyandroid", appContext.getPackageName());
+        assertEquals("com.drive2study", appContext.getPackageName());
     }
 }

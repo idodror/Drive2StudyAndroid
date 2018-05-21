@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "78213365437",
+    "firebase_url": "https://drivetostudyandorid.firebaseio.com",
+    "project_id": "drivetostudyandorid",
+    "storage_bucket": "drivetostudyandorid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78213365437:android:895596c6b4146e45",
+        "android_client_info": {
+          "package_name": "com.drive2study"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78213365437-mv7s92rpb5ntus2vr53duqv44e57un26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLopgPYvK61Lrhqhtv0VObnEPc0sbut0U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

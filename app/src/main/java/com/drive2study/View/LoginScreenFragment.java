@@ -26,9 +26,7 @@ public class LoginScreenFragment extends Fragment {
     EditText emailEt;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login_screen, container, false);
 
         emailEt = view.findViewById(R.id.et_user_email);

@@ -1,18 +1,18 @@
 package com.drive2study;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-
+import com.drive2study.Model.Student;
+import com.drive2study.Model.Model;
+import com.drive2study.View.CreateAccountFragment;
 import com.drive2study.View.EmailLoginFragment;
 import com.drive2study.View.LoginScreenFragment;
 
-
 public class MainActivity extends Activity implements
-        LoginScreenFragment.LoginScreenFragmentDelegate, EmailLoginFragment.EmailLoginFragmentDelegate {
+        LoginScreenFragment.LoginScreenFragmentDelegate, EmailLoginFragment.EmailLoginFragmentDelegate, CreateAccountFragment.CreateAccountFragmentDelegate {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +31,33 @@ public class MainActivity extends Activity implements
     public void onConWithEmail(String email) {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        EmailLoginFragment emailLoginFrag = new EmailLoginFragment();
+
         Bundle args = new Bundle();
         args.putString("username", email);
-        emailLoginFrag.setArguments(args);
-        transaction.replace(R.id.main_container, emailLoginFrag);
+
+        // TODO: Check if there is such user
+        if(false) {
+            EmailLoginFragment emailLoginFragment = new EmailLoginFragment();
+            emailLoginFragment.setArguments(args);
+            transaction.replace(R.id.main_container, emailLoginFragment);
+        } else {
+            CreateAccountFragment createAccountFragment = new CreateAccountFragment();
+            createAccountFragment.setArguments(args);
+            transaction.replace(R.id.main_container, createAccountFragment);
+        }
+
         transaction.addToBackStack(null);
         transaction.commit();
-        Log.d("TAG", "Login Screen Succeeded " + email);
     }
 
     @Override
     public void onSignIn(String email, String password) {
         Log.d("TAG", "Signing in with: " + email + ", pass: " + password);
+    }
+
+    @Override
+    public void onJoin(Student student) {
+        Log.d("TAG", "done");
+        Model.instance.addStudent(student);
     }
 }

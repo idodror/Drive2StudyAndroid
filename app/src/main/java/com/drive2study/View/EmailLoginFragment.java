@@ -3,7 +3,6 @@ package com.drive2study.View;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,16 +31,15 @@ public class EmailLoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_email_login, container, false);
 
         userEmailText = view.findViewById(R.id.text_username);
         final String username = getArguments().getString("username");
         userEmailText.setText(username);
-        passwordEt = view.findViewById(R.id.et_password);
+        passwordEt = view.findViewById(R.id.et_login_password);
 
-        Button signin = view.findViewById(R.id.btn_signin);
-        signin.setOnClickListener(new View.OnClickListener() {
+        Button signIn = view.findViewById(R.id.btn_signin);
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String password = passwordEt.getText().toString();

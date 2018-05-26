@@ -10,4 +10,11 @@
     <string name="login_or_email">----------------- Or use email -----------------</string>
     <string name="login_email">Email Address</string>
     <string name="login_con_with_email">Continue With Email</string>
+    <string name="register_create_account">Create your account</string>
+    <string name="register_join">Join</string>
+    <string name="register_empty_or_null">Please fill all the fields</string>
+    <string name="register_first_name">First Name</string>
+    <string name="register_last_name">Last Name</string>
+    <string name="register_study">Study...</string>
+    <string name="register_password">Password</string>
 </resources>

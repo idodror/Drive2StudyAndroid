@@ -12,8 +12,9 @@ import java.util.List;
 public class ModelFirebase {
 
     public void addStudent(Student student){
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("students").child(student.userName).setValue(student);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("students").child(student.userName).push();
+        mDatabase.child("fName").setValue(student.fName);
+        //mDatabase.child("students").child(student.userName).setValue(student);
     }
 
     public void cancellGetAllStudents() {
@@ -25,7 +26,7 @@ public class ModelFirebase {
         public void onSuccess(List<Student> studentslist);
     }
 
-    ValueEventListener eventListener;
+    private ValueEventListener eventListener;
 
     public void getAllStudents(final GetAllStudentsListener listener) {
         DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("students");

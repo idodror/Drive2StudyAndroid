@@ -38,12 +38,12 @@
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginEnd="45dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="1dp"
@@ -72,13 +72,14 @@
 
     <TextView
         android:id="@+id/text_username"
-        android:layout_width="224dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="290dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="16dp"
         android:text=""
         android:textAlignment="center"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_username" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_login_password"
         android:layout_width="167dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="108dp"

@@ -94,7 +94,7 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="@string/login_email"
-        android:inputType="textWebEmailAddress"
+        android:inputType="textEmailAddress"
         android:selectAllOnFocus="false"
         android:singleLine="false"
         android:textAlignment="center"

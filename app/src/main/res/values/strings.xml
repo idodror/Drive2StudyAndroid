@@ -15,6 +15,14 @@
     <string name="register_empty_or_null">Please fill all the fields</string>
     <string name="register_first_name">First Name</string>
     <string name="register_last_name">Last Name</string>
-    <string name="register_study">Study...</string>
+    <string name="register_study">Study…</string>
     <string name="register_password">Password</string>
+    <string name="title_activity_app">AppActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="nav_marker">Map</string>
+    <string name="nav_drive">Drive</string>
+    <string name="nav_ride">Ride</string>
+    <string name="nav_chat">Chat</string>
 </resources>

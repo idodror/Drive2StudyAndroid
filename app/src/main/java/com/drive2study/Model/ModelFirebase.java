@@ -6,15 +6,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class ModelFirebase {
 
     public void addStudent(Student student){
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("students").child(student.userName).push();
-        mDatabase.child("fName").setValue(student.fName);
-        //mDatabase.child("students").child(student.userName).setValue(student);
+        final Map<String, Object> dataMap = new HashMap<>();
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("students");
+        dataMap.put(student.userName, student.toMap());
+        mDatabase.updateChildren(dataMap);
     }
 
     public void cancellGetAllStudents() {

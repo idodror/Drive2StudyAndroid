@@ -13,6 +13,11 @@ import android.widget.TextView;
 import com.drive2study.R;
 import com.drive2study.Model.Student;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class CreateAccountFragment extends Fragment {
     public interface CreateAccountFragmentDelegate {
         void onJoin(Student student);
@@ -34,7 +39,7 @@ public class CreateAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-
+        final FirebaseAuth auth = FirebaseAuth.getInstance();
         final String username = getArguments().getString("username");
         userEmailText = view.findViewById(R.id.text_username_register);
         userEmailText.setText(username);
@@ -48,6 +53,7 @@ public class CreateAccountFragment extends Fragment {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                auth.createUserWithEmailAndPassword(userEmailText.getText().toString(), passwordEt.getText().toString());
                 Student student = new Student();
                 String password = passwordEt.getText().toString();
                 student.userName = username;

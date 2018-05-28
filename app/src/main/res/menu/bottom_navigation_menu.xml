@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/app_nav_item_map"
+        android:enabled="true"
+        android:icon="@drawable/marker_black"
+        android:title="@string/nav_marker"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/app_nav_item_drive"
+        android:enabled="true"
+        android:icon="@drawable/drive_marker_black"
+        android:title="@string/nav_drive"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/app_nav_item_ride"
+        android:enabled="true"
+        android:icon="@drawable/ride_marker_black"
+        android:title="@string/nav_ride"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/app_nav_item_chat"
+        android:enabled="true"
+        android:icon="@drawable/chat_marker_black"
+        android:title="@string/nav_chat"
+        app:showAsAction="ifRoom" />
+
+</menu>

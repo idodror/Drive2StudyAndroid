@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends Activity implements
         LoginScreenFragment.LoginScreenFragmentDelegate, EmailLoginFragment.EmailLoginFragmentDelegate, CreateAccountFragment.CreateAccountFragmentDelegate {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +56,11 @@ public class MainActivity extends Activity implements
 
     @Override
     public void onConWithFacebook() {
+        MyApplication.currentStudent.study = "Computer Science";
+        MyApplication.currentStudent.userName = "ido@bla.com";
+        MyApplication.currentStudent.fName = "Ido";
+        MyApplication.currentStudent.lName = "Dror";
+        MyApplication.currentStudent.daysInCollege[2] = true;
         startActivity(new Intent(MainActivity.this, AppActivity.class));
     }
 
@@ -70,6 +73,5 @@ public class MainActivity extends Activity implements
     public void onJoin(Student student) {
         Log.d("TAG", "done");
         Model.instance.addStudent(student);
-
     }
 }

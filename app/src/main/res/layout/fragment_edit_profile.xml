@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:fitsSystemWindows="true">
+
+
+    <EditText
+        android:id="@+id/edit_profile_et_study"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="81dp"
+        android:layout_marginStart="81dp"
+        android:ems="10"
+        android:hint="@string/register_study"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_et_last_name" />
+
+    <Button
+        android:id="@+id/btn_edit_profile_change_avatar"
+        android:layout_width="182dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginStart="101dp"
+        android:background="@android:color/transparent"
+        android:text="@string/edit_profile_avatar_change"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_avatar" />
+
+    <TextView
+        android:id="@+id/txt_label_edit_profile"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="102dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/edit_profile_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit_profile_dashes"
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="41dp"
+        android:layout_marginStart="41dp"
+        android:text="@string/login_dashes_line"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_label_edit_profile" />
+
+    <ImageView
+        android:id="@+id/edit_profile_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_dashes"
+        app:srcCompat="@drawable/student_avatar" />
+
+    <EditText
+        android:id="@+id/edit_profile_et_last_name"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="81dp"
+        android:layout_marginStart="81dp"
+        android:ems="10"
+        android:hint="@string/register_last_name"
+        android:inputType="text|textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_et_first_name" />
+
+    <EditText
+        android:id="@+id/edit_profile_et_first_name"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="81dp"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/register_first_name"
+        android:inputType="text|textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile_change_avatar" />
+
+    <Button
+        android:id="@+id/btn_save_edit_profile_changes"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/green_button_background"
+        android:text="@string/edit_profile_save_changes"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_label_days_in_college"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="81dp"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/edit_profile_choose_days_label"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_et_study" />
+
+    <CheckBox
+        android:id="@+id/cb_sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="10dp"
+        android:checked="false"
+        android:text="@string/edit_profile_days_sunday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_label_days_in_college" />
+
+    <CheckBox
+        android:id="@+id/cb_monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:text="@string/edit_profile_days_monday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_sunday" />
+
+    <CheckBox
+        android:id="@+id/cb_tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:text="@string/edit_profile_days_tuesday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_monday" />
+
+    <CheckBox
+        android:id="@+id/cb_wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:text="@string/edit_profile_days_wednesday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_tuesday" />
+
+    <CheckBox
+        android:id="@+id/cb_thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/edit_profile_days_thursday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/cb_sunday"
+        app:layout_constraintTop_toBottomOf="@+id/txt_label_days_in_college" />
+
+    <CheckBox
+        android:id="@+id/cb_friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:text="@string/edit_profile_days_friday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/cb_monday"
+        app:layout_constraintTop_toBottomOf="@+id/cb_thursday" />
+
+    <CheckBox
+        android:id="@+id/cb_saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/edit_profile_days_saturday"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/cb_tuesday"
+        app:layout_constraintTop_toBottomOf="@+id/cb_friday" />
+</android.support.constraint.ConstraintLayout>

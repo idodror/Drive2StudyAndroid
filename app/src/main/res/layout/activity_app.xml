@@ -11,7 +11,8 @@
     <FrameLayout
         android:id="@+id/main_app_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        style="@style/AppTheme" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/app_nav_bar"

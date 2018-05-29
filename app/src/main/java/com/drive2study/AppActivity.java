@@ -1,6 +1,7 @@
 package com.drive2study;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.drive2study.Model.Model;
+import com.drive2study.Model.Student;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.ShowProfileFragment;
@@ -88,5 +91,20 @@ public class AppActivity extends AppCompatActivity implements
     @Override
     public void onEditProfileClicked() {
         setFragment(editProfileFragment);
+    }
+
+    @Override
+    public void onSaveClicked(Student student) {
+
+        // garbage values - until authentication will work
+        student.loginType = "";
+        student.userName ="10";
+        student.imageUrl = "";
+
+
+        Model.instance.addStudent(student);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.popBackStack();
+        Toast.makeText(AppActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
     }
 }

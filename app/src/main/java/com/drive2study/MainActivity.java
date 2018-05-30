@@ -1,10 +1,10 @@
 package com.drive2study;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
@@ -13,7 +13,7 @@ import com.drive2study.View.EmailLoginFragment;
 import com.drive2study.View.LoginScreenFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends Activity implements
+public class MainActivity extends AppCompatActivity implements
         LoginScreenFragment.LoginScreenFragmentDelegate, EmailLoginFragment.EmailLoginFragmentDelegate, CreateAccountFragment.CreateAccountFragmentDelegate {
 
     @Override
@@ -23,7 +23,7 @@ public class MainActivity extends Activity implements
 
         if (savedInstanceState == null) {
             LoginScreenFragment fragment = new LoginScreenFragment();
-            FragmentTransaction tran = getFragmentManager().beginTransaction();
+            FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
             tran.add(R.id.main_container, fragment);
             tran.commit();
         }
@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements
     @Override
     public void onConWithEmail(String email) {
 
-        FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
         Bundle args = new Bundle();

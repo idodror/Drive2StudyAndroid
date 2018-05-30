@@ -1,16 +1,15 @@
 package com.drive2study;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import android.support.v4.app.FragmentManager;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.EditProfileFragment;
@@ -56,7 +55,7 @@ public class AppActivity extends AppCompatActivity implements
         });
 
         if (savedInstanceState == null) {
-            FragmentTransaction tran = getFragmentManager().beginTransaction();
+            FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
             tran.add(R.id.main_app_content, mapFragment);
             tran.commit();
         }
@@ -65,7 +64,7 @@ public class AppActivity extends AppCompatActivity implements
     }
 
     public void setFragment(Fragment fragment) {
-        FragmentTransaction tran = getFragmentManager().beginTransaction();
+        FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
         tran.replace(R.id.main_app_content, fragment);
         tran.addToBackStack(null);
         tran.commit();
@@ -103,7 +102,7 @@ public class AppActivity extends AppCompatActivity implements
 
 
         Model.instance.addStudent(student);
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack();
         Toast.makeText(AppActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
     }

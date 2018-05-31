@@ -1,20 +1,90 @@
 package com.drive2study.Model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Entity
 public class Student implements Serializable {
 
+    @PrimaryKey
+    @NonNull
     public String userName;
     public String fName;
     public String lName;
     public String study;
-    public boolean[] daysInCollege = new boolean[7];
+    @TypeConverters(Converters.class)
+    public boolean[] daysInCollege;
     public String imageUrl;
     public String loginType;
+
+    public Student() {
+        daysInCollege = new boolean[7];
+    }
+
+    @NonNull
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(@NonNull String userName) {
+        this.userName = userName;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getStudy() {
+        return study;
+    }
+
+    public void setStudy(String study) {
+        this.study = study;
+    }
+
+    public boolean[] getDaysInCollege() {
+        return daysInCollege;
+    }
+
+    public void setDaysInCollege(boolean[] daysInCollege) {
+        this.daysInCollege = daysInCollege;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(String loginType) {
+        this.loginType = loginType;
+    }
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

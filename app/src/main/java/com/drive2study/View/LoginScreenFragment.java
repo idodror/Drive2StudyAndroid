@@ -3,13 +3,17 @@ package com.drive2study.View;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.drive2study.R;
+
+import java.util.regex.Matcher;
 
 public class LoginScreenFragment extends Fragment {
 
@@ -25,19 +29,25 @@ public class LoginScreenFragment extends Fragment {
     }
 
     EditText emailEt;
+    TextView validateEmailTxt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login_screen, container, false);
 
         emailEt = view.findViewById(R.id.et_user_email);
+        validateEmailTxt = view.findViewById(R.id.label_valid_email_required);
 
         Button continueWithEmail = view.findViewById(R.id.btn_email_login);
         continueWithEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailEt.getText().toString();
-                if (delegate != null){
+
+                Matcher m = Patterns.EMAIL_ADDRESS.matcher(email);
+                if (!m.matches())    // check validation of email
+                    validateEmailTxt.setVisibility(View.VISIBLE);
+                else if (delegate != null){
                     delegate.onConWithEmail(email);
                 }
             }
@@ -47,9 +57,8 @@ public class LoginScreenFragment extends Fragment {
         continueWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (delegate != null){
+                if (delegate != null)
                     delegate.onConWithFacebook();
-                }
             }
         });
 

@@ -10,17 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.drive2study.R;
 import com.drive2study.Model.Student;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.drive2study.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class CreateAccountFragment extends Fragment {
     public interface CreateAccountFragmentDelegate {
         void onJoin(Student student);
+        void onNotYourEmailAtRegisterPressed();
     }
 
     public CreateAccountFragmentDelegate delegate;
@@ -40,9 +37,13 @@ public class CreateAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         final FirebaseAuth auth = FirebaseAuth.getInstance();
-        final String username = getArguments().getString("username");
+
+
         userEmailText = view.findViewById(R.id.text_username_register);
-        userEmailText.setText(username);
+        if (getArguments() != null) {
+            final String username = getArguments().getString("username");
+            userEmailText.setText(username);
+        }
         fNameEt = view.findViewById(R.id.et_first_name);
         lNameEt = view.findViewById(R.id.et_last_name);
         studyEt = view.findViewById(R.id.et_study);
@@ -56,7 +57,7 @@ public class CreateAccountFragment extends Fragment {
                 auth.createUserWithEmailAndPassword(userEmailText.getText().toString(), passwordEt.getText().toString());
                 Student student = new Student();
                 String password = passwordEt.getText().toString();
-                student.userName = username;
+                student.userName = userEmailText.getText().toString();
                 student.fName = fNameEt.getText().toString();
                 student.lName = lNameEt.getText().toString();
                 student.study = studyEt.getText().toString();
@@ -69,6 +70,15 @@ public class CreateAccountFragment extends Fragment {
                         delegate.onJoin(student);
                     }
                 }
+            }
+        });
+
+        Button notYourEmailBtn = view.findViewById(R.id.register_btn_not_your_email);
+        notYourEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (delegate != null)
+                    delegate.onNotYourEmailAtRegisterPressed();
             }
         });
 

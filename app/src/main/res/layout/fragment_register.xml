@@ -19,7 +19,7 @@
         android:hint="@string/register_password"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_study" />
@@ -34,7 +34,7 @@
         android:hint="@string/register_study"
         android:inputType="text"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_last_name" />
@@ -50,13 +50,13 @@
         android:hint="@string/register_first_name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_not_your_email_register" />
+        app:layout_constraintTop_toBottomOf="@+id/register_btn_not_your_email" />
 
     <Button
-        android:id="@+id/btn_not_your_email_register"
+        android:id="@+id/register_btn_not_your_email"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:layout_marginEnd="148dp"
@@ -66,7 +66,7 @@
         android:text="@string/login_not_your_email"
         android:textAllCaps="false"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +109,7 @@
         android:layout_marginStart="128dp"
         android:layout_marginTop="80dp"
         android:text="@string/register_create_account"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +125,7 @@
         android:hint="@string/register_last_name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_first_name" />
@@ -140,6 +141,7 @@
         android:text="@string/register_join"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_empty_fields" />
@@ -154,6 +156,7 @@
         android:text="@string/register_empty_or_null"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_light"
+        android:textSize="15sp"
         android:textStyle="italic"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-
 import com.drive2study.Model.Student;
 import com.drive2study.MyApplication;
 import com.drive2study.R;

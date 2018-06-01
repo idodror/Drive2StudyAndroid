@@ -22,6 +22,7 @@ public class AppActivity extends AppCompatActivity implements
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
     private EditProfileFragment editProfileFragment;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class AppActivity extends AppCompatActivity implements
         mapFragment = new MapFragment();
         showProfileFragment = new ShowProfileFragment();
         editProfileFragment = new EditProfileFragment();
+        fragmentManager = getSupportFragmentManager();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.app_nav_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -100,9 +102,7 @@ public class AppActivity extends AppCompatActivity implements
         student.userName ="10";
         student.imageUrl = "";
 
-
         Model.instance.addStudent(student);
-        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack();
         Toast.makeText(AppActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
     }

@@ -15,6 +15,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/profile_label_days"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_learning_label" />
 
@@ -28,7 +29,7 @@
         android:text="@string/profile_edit_profile"
         android:textAllCaps="false"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,13 +49,13 @@
     <TextView
         android:id="@+id/txt_profile_full_name"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginEnd="42dp"
         android:layout_marginStart="41dp"
         android:layout_marginTop="15dp"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +69,7 @@
         android:layout_marginTop="25dp"
         android:text="@string/profile_label_learning"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_profile_full_name" />
 
@@ -75,20 +77,22 @@
         android:id="@+id/txt_profile_learning"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="81dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginTop="24dp"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_profile_full_name" />
 
     <TextView
         android:id="@+id/txt_profile_days_list"
         android:layout_width="131dp"
-        android:layout_height="162dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="186dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_profile_learning" />
 

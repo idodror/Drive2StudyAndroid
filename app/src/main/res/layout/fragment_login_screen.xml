@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
@@ -16,6 +17,7 @@
         android:text="@string/login_dashes_line"
         android:textAlignment="center"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +67,7 @@
         android:text="@string/login_sign_in_or_register"
         android:textAlignment="center"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +83,7 @@
         android:text="@string/login_or_email"
         android:textAlignment="center"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +102,7 @@
         android:selectAllOnFocus="false"
         android:singleLine="false"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_use_email" />
@@ -114,8 +118,24 @@
         android:text="@string/login_con_with_email"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_user_email" />
+
+    <TextView
+        android:id="@+id/label_valid_email_required"
+        android:layout_width="271dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/login_screen_valid_email"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_email_login" />
 
 </android.support.constraint.ConstraintLayout>

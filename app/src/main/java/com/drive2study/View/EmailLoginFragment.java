@@ -18,6 +18,8 @@ public class EmailLoginFragment extends Fragment {
 
     public interface EmailLoginFragmentDelegate {
         void onSignIn(String email, String password);
+        void onNotYourEmailAtLoginClicked();
+        void onForgotPasswordClicked(String email);
     }
 
     public EmailLoginFragmentDelegate delegate;
@@ -33,9 +35,9 @@ public class EmailLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_email_login, container, false);
 
-        userEmailText = view.findViewById(R.id.text_username);
-        final String username = getArguments().getString("username");
-        userEmailText.setText(username);
+        userEmailText = view.findViewById(R.id.forgot_password_text_username);
+        final String emailAddress = getArguments().getString("username");
+        userEmailText.setText(emailAddress);
         passwordEt = view.findViewById(R.id.et_login_password);
 
         Button signIn = view.findViewById(R.id.btn_signin);
@@ -43,9 +45,26 @@ public class EmailLoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String password = passwordEt.getText().toString();
-                if (delegate != null){
-                    delegate.onSignIn(username, password);
-                }
+                if (delegate != null)
+                    delegate.onSignIn(emailAddress, password);
+            }
+        });
+
+        Button notYouEmailBtn = view.findViewById(R.id.login_btn_not_your_email);
+        notYouEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (delegate != null)
+                    delegate.onNotYourEmailAtLoginClicked();
+            }
+        });
+
+        Button forgotPassBtn = view.findViewById(R.id.login_btn_forgot_password);
+        forgotPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (delegate != null)
+                    delegate.onForgotPasswordClicked(emailAddress);
             }
         });
 

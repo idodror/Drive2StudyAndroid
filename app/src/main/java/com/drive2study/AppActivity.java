@@ -1,15 +1,15 @@
 package com.drive2study;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.support.v4.app.FragmentManager;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.EditProfileFragment;

@@ -77,7 +77,4 @@
     <string name="lost_password_send_code">Send Now</string>
     <string name="lost_password_dashes_or">----------------------- Or ----------------------</string>
     <string name="lost_password_try_again">Try sign-in again</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

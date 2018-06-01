@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.CreateAccountFragment;
@@ -18,7 +17,10 @@ import com.drive2study.View.LoginScreenFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements
-        LoginScreenFragment.LoginScreenFragmentDelegate, EmailLoginFragment.EmailLoginFragmentDelegate, CreateAccountFragment.CreateAccountFragmentDelegate, ForgotPasswordFragment.ForgotPasswordFragmentDelegate{
+        LoginScreenFragment.LoginScreenFragmentDelegate,
+        EmailLoginFragment.EmailLoginFragmentDelegate,
+        CreateAccountFragment.CreateAccountFragmentDelegate,
+        ForgotPasswordFragment.ForgotPasswordFragmentDelegate {
 
     FragmentManager fragmentManager;
 
@@ -46,10 +48,9 @@ public class MainActivity extends AppCompatActivity implements
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        if(auth.getCurrentUser() == null)
+        if (auth.getCurrentUser() == null)
             nextFrag = new EmailLoginFragment();
-        else
-            nextFrag = new CreateAccountFragment();
+        else nextFrag = new CreateAccountFragment();
 
         nextFrag.setArguments(args);
         transaction.replace(R.id.main_container, nextFrag);
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onJoin(Student student) {
-        Log.d("TAG", "done");
         Model.instance.addStudent(student);
     }
 

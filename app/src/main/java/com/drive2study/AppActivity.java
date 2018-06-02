@@ -14,19 +14,21 @@ import android.widget.Toast;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
+import com.drive2study.View.DriveListFragment;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.PopupDialog;
 import com.drive2study.View.ShowProfileFragment;
 
 public class AppActivity extends AppCompatActivity implements
-        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate {
+        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate, DriveListFragment.StudentsListFragmentDelegate{
 
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
     private EditProfileFragment editProfileFragment;
     private FragmentManager fragmentManager;
     private DialogFragment popupDialog;
+    private DriveListFragment driveListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class AppActivity extends AppCompatActivity implements
         showProfileFragment = new ShowProfileFragment();
         editProfileFragment = new EditProfileFragment();
         fragmentManager = getSupportFragmentManager();
+        driveListFragment = new DriveListFragment();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.app_nav_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -45,7 +48,7 @@ public class AppActivity extends AppCompatActivity implements
                     setFragment(mapFragment);
                     break;
                 case R.id.app_nav_item_drive:
-                    Toast.makeText(AppActivity.this, "Drive Clicked", Toast.LENGTH_SHORT).show();
+                    setFragment(driveListFragment);
                     break;
                 case R.id.app_nav_item_ride:
                     Toast.makeText(AppActivity.this, "Ride Clicked", Toast.LENGTH_SHORT).show();
@@ -126,5 +129,10 @@ public class AppActivity extends AppCompatActivity implements
 
     @Override
     public void onDriveOrRideClicked(String username) {
+    }
+
+    @Override
+    public void onItemSelected(String studentId) {
+
     }
 }

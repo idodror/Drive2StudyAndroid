@@ -27,6 +27,7 @@ public class Student implements Serializable {
 
     public Student() {
         daysInCollege = new boolean[7];
+        userName = "";
     }
 
     @NonNull

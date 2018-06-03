@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
+import com.drive2study.View.AddPopupView;
 import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
@@ -91,6 +92,8 @@ public class AppActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.toolbar_my_profile:
                 setFragment(showProfileFragment);
+                break;
+            case R.id.action_add:
                 break;
         }
         return true;

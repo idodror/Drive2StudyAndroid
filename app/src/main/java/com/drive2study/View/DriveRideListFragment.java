@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -66,6 +68,8 @@ public class DriveRideListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        setHasOptionsMenu(true);
+
         dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
         dataModel.getData().observe(this, driveRideList -> {
             if(driveRideList.size()!=0)
@@ -84,22 +88,15 @@ public class DriveRideListFragment extends Fragment {
         Model.instance.cancellGetAllStudents();
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        //menu.findItem(R.id.toolbar_my_profile).setEnabled(false);
+    }
     class MyAdapter extends BaseAdapter {
         private String type;
         public MyAdapter(String type) {
             this.type=type;
-        DriveRide dr = new DriveRide();
-        dr.setUserName("Moris Amon");
-            dr.setFromWhere("agnon");
-            dr.setType(DriveRide.DRIVER);
-            dr.setImageUrl("http");
-            Model.instance.addDriveRide(dr);
-            dr.setUserName("idoooo");
-            dr.setFromWhere("dsdsdssdds");
-            dr.setType(DriveRide.RIDER);
-            dr.setImageUrl("sssss");
-            Model.instance.addDriveRide(dr);
-
         }
 
         @Override

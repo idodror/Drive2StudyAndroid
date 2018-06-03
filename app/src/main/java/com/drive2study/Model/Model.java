@@ -29,6 +29,10 @@ public class Model {
         modelFirebase = new ModelFirebase();
     }
 
+    ////////////////////////////////////////////////////////
+    ///////////          Student                   /////////
+    ////////////////////////////////////////////////////////
+
     public void cancellGetAllStudents() {
         modelFirebase.cancellGetAllStudents();
     }
@@ -72,6 +76,52 @@ public class Model {
     public void addStudent(Student st){
         modelFirebase.addStudent(st);
     }
+
+    ////////////////////////////////////////////////////////
+    ///////////          DriveRide                   ///////
+    ////////////////////////////////////////////////////////
+
+    public void cancellGetAllDriveRide() {
+        modelFirebase.cancellGetAllDriveRide();
+    }
+
+    class DriveRideListData extends  MutableLiveData<List<DriveRide>>{
+        @Override
+        protected void onActive() {
+            super.onActive();
+            modelFirebase.getAllDriveRide(new ModelFirebase.GetAllDriveRideListener() {
+                @Override
+                public void onSuccess(List<DriveRide> driveRideList) {
+                    Log.d("TAG","FB data = " + driveRideList.size() );
+                    setValue(driveRideList);
+                    for (DriveRide dr_rd : driveRideList){
+                        //AppLocalDb.db.studentDao().insertAll(st);
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected void onInactive() {
+            super.onInactive();
+            modelFirebase.cancellGetAllDriveRide();
+            Log.d("TAG","cancellGetAllStudents");
+        }
+
+        public DriveRideListData() {
+            super();
+            //setValue(AppLocalDb.db.studentDao().getAll());
+            setValue(new LinkedList<DriveRide>());
+        }
+    }
+
+    DriveRideListData driveRideListData = new DriveRideListData();
+
+    public LiveData<List<DriveRide>> getAllDriveRide(){
+        return driveRideListData;
+    }
+
+    public void addDriveRide(DriveRide dr_rd){ modelFirebase.addDriveRide(dr_rd); }
 
 
 

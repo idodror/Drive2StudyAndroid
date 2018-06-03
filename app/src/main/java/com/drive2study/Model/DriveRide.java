@@ -1,5 +1,8 @@
 package com.drive2study.Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DriveRide {
 
     public static final String RIDER = "r";
@@ -12,6 +15,17 @@ public class DriveRide {
 
     public DriveRide() {
 
+    }
+
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("userName", userName);
+        result.put("fromWhere", fromWhere);
+        result.put("type", type);
+        result.put("imageUrl", imageUrl);
+
+        return result;
     }
 
     public String getUserName() {

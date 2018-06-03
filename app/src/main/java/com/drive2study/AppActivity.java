@@ -14,21 +14,22 @@ import android.widget.Toast;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
-import com.drive2study.View.DriveListFragment;
+import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.PopupDialog;
 import com.drive2study.View.ShowProfileFragment;
 
 public class AppActivity extends AppCompatActivity implements
-        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate, DriveListFragment.StudentsListFragmentDelegate{
+        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate, DriveRideListFragment.StudentsListFragmentDelegate{
 
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
     private EditProfileFragment editProfileFragment;
     private FragmentManager fragmentManager;
     private DialogFragment popupDialog;
-    private DriveListFragment driveListFragment;
+    private DriveRideListFragment driveListFragment;
+    private DriveRideListFragment rideListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public class AppActivity extends AppCompatActivity implements
         showProfileFragment = new ShowProfileFragment();
         editProfileFragment = new EditProfileFragment();
         fragmentManager = getSupportFragmentManager();
-        driveListFragment = new DriveListFragment();
+        driveListFragment = new DriveRideListFragment();
+        rideListFragment = new DriveRideListFragment();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.app_nav_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -48,10 +50,12 @@ public class AppActivity extends AppCompatActivity implements
                     setFragment(mapFragment);
                     break;
                 case R.id.app_nav_item_drive:
+                    driveListFragment.setType("d");
                     setFragment(driveListFragment);
                     break;
                 case R.id.app_nav_item_ride:
-                    Toast.makeText(AppActivity.this, "Ride Clicked", Toast.LENGTH_SHORT).show();
+                    rideListFragment.setType("r");
+                    setFragment(rideListFragment);
                     break;
                 case R.id.app_nav_item_chat:
                     Toast.makeText(AppActivity.this, "Chat Clicked", Toast.LENGTH_SHORT).show();

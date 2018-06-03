@@ -25,6 +25,10 @@ import java.util.Map;
 
 public class ModelFirebase {
 
+
+    ////////////////////////////////////////////////////////
+    ///////////          Student                   /////////
+    ////////////////////////////////////////////////////////
     public void addStudent(Student student){
         final Map<String, Object> dataMap = new HashMap<>();
 
@@ -67,6 +71,50 @@ public class ModelFirebase {
     }
 
 
+    ////////////////////////////////////////////////////////
+    ///////////          DriveRide                   ///////
+    ////////////////////////////////////////////////////////
+    public void addDriveRide(DriveRide driveRide){
+        final Map<String, Object> dataMap = new HashMap<>();
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("driveRide");
+        dataMap.put(driveRide.getUserName(), driveRide.toMap());
+        mDatabase.updateChildren(dataMap);
+    }
+
+    public void cancellGetAllDriveRide() {
+        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("driveRide");
+        stRef.removeEventListener(eventDriveRideListener);
+    }
+
+    interface GetAllDriveRideListener{
+        public void onSuccess(List<DriveRide> driveRideList);
+    }
+
+    ValueEventListener eventDriveRideListener;
+
+    public void getAllDriveRide(final GetAllDriveRideListener listener) {
+        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("driveRide");
+
+        eventDriveRideListener = stRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<DriveRide> stList = new LinkedList<>();
+
+                for (DataSnapshot stSnapshot: dataSnapshot.getChildren()) {
+                    DriveRide dr_rd = stSnapshot.getValue(DriveRide.class);
+                    stList.add(dr_rd);
+                }
+                listener.onSuccess(stList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     //Managing Files
     public void saveImage(Bitmap imageBitmap, final Model.SaveImageListener listener) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -94,7 +142,6 @@ public class ModelFirebase {
         });
 
     }
-
 
     public void getImage(String url, final Model.GetImageListener listener){
         FirebaseStorage storage = FirebaseStorage.getInstance();

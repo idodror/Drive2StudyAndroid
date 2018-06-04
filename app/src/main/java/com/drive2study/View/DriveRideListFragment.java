@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.R;
+
+import java.util.Iterator;
 import java.util.List;
 
 public class DriveRideListFragment extends Fragment {
@@ -29,10 +31,6 @@ public class DriveRideListFragment extends Fragment {
     MyAdapter myAdapter;
     DriveRideListViewModel dataModel;
     private String type;
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public interface StudentsListFragmentDelegate{
         void onItemSelected(String studentId);
@@ -54,6 +52,8 @@ public class DriveRideListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drivers_list, container, false);
 
+        this.type = getArguments().getString("type");
+
         list = view.findViewById(R.id.drivers_list_list);
         list.setAdapter(myAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,12 +70,23 @@ public class DriveRideListFragment extends Fragment {
         super.onAttach(context);
         setHasOptionsMenu(true);
 
+        this.type = getArguments().getString("type");
+
         dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
         dataModel.getData().observe(this, driveRideList -> {
-            if(driveRideList.size()!=0)
-                for (DriveRide dr : driveRideList)
+            if(driveRideList.size()!=0){
+                for(Iterator<DriveRide> it = driveRideList.iterator(); it.hasNext();) {
+                    DriveRide dr = it.next();
+                    if(!dr.getType().equals(this.type)) {
+                        it.remove();
+                    }
+                }
+            }
+                /*for (DriveRide dr : driveRideList)
                     if (!dr.getType().equals(this.type))
-                        driveRideList.remove(dr);
+                        driveRideList.remove(dr);*/
+
+
 
             myAdapter.notifyDataSetChanged();
             Log.d("TAG","notifyDataSetChanged" + driveRideList.size());

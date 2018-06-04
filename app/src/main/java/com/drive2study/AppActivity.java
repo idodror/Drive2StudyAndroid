@@ -1,5 +1,6 @@
 package com.drive2study;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
@@ -21,14 +22,18 @@ import com.drive2study.View.MapFragment;
 import com.drive2study.View.PopupDialog;
 import com.drive2study.View.ShowProfileFragment;
 
+import java.util.List;
+
 public class AppActivity extends AppCompatActivity implements
-        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate, DriveRideListFragment.StudentsListFragmentDelegate{
+        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate, DriveRideListFragment.StudentsListFragmentDelegate,
+        AddPopupView.AddPopupViewDelegate{
 
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
     private EditProfileFragment editProfileFragment;
     private FragmentManager fragmentManager;
     private DialogFragment popupDialog;
+    private DialogFragment addDialog;
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
 
@@ -36,6 +41,9 @@ public class AppActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
+
+        Bundle argsDrive = new Bundle();
+        Bundle argsRide = new Bundle();
 
         mapFragment = new MapFragment();
         showProfileFragment = new ShowProfileFragment();
@@ -51,11 +59,13 @@ public class AppActivity extends AppCompatActivity implements
                     setFragment(mapFragment);
                     break;
                 case R.id.app_nav_item_drive:
-                    driveListFragment.setType("d");
+                    argsDrive.putString("type", DriveRide.DRIVER);
+                    driveListFragment.setArguments(argsDrive);
                     setFragment(driveListFragment);
                     break;
                 case R.id.app_nav_item_ride:
-                    rideListFragment.setType("r");
+                    argsRide.putString("type", DriveRide.RIDER);
+                    rideListFragment.setArguments(argsRide);
                     setFragment(rideListFragment);
                     break;
                 case R.id.app_nav_item_chat:
@@ -94,6 +104,27 @@ public class AppActivity extends AppCompatActivity implements
                 setFragment(showProfileFragment);
                 break;
             case R.id.action_add:
+
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+
+                List<Fragment> fragmentList = fragmentManager.getFragments();
+                DriveRideListFragment driveRideFragment = null;
+                if(fragmentList.size()!=0) {
+                    Fragment fragment = fragmentList.get(0);
+                    if (fragment instanceof DriveRideListFragment)
+                        driveRideFragment = (DriveRideListFragment)fragment;
+                }
+                String type=null;
+                if(driveRideFragment!=null)
+                    type = driveRideFragment.getArguments().getString("type");
+
+                ft.addToBackStack(null);
+                addDialog = new AddPopupView();
+                Bundle args = new Bundle();
+                if(type!=null)
+                    args.putString("type", type);
+                addDialog.setArguments(args);
+                addDialog.show(ft, "dialog");
                 break;
         }
         return true;
@@ -136,6 +167,28 @@ public class AppActivity extends AppCompatActivity implements
 
     @Override
     public void onDriveOrRideClicked(String username) {
+
+    }
+
+    @Override
+    public void onAddPopupClose() {
+        addDialog.dismissAllowingStateLoss();
+    }
+
+
+    @Override
+    public void onAddPopupOkClicked(String address, String type) {
+        DriveRide newDriveRide = new DriveRide();
+        newDriveRide.setUserName(MyApplication.currentStudent.userName.toString().replace(".",","));
+        if(MyApplication.currentStudent.imageUrl != null)
+            newDriveRide.setImageUrl(MyApplication.currentStudent.imageUrl);
+        else
+            newDriveRide.setImageUrl("");
+        newDriveRide.setFromWhere(address);
+        newDriveRide.setType(type);
+        onAddPopupClose();
+        Model.instance.addDriveRide(newDriveRide);
+        Toast.makeText(AppActivity.this, "Added Successfully", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -77,4 +77,7 @@
     <string name="lost_password_send_code">Send Now</string>
     <string name="lost_password_dashes_or">----------------------- Or ----------------------</string>
     <string name="lost_password_try_again">Try sign-in again</string>
+    <string name="add_dialog_popup_text">Would you like to add your self into the list? Please fill in an address if you would like other location than yours.</string>
+    <string name="add_dialog_popup_address">Address...</string>
+    <string name="add_dialog_popup_yes">Yes</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.drive2study.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,44 +14,35 @@ import com.drive2study.R;
 public class AddPopupView extends DialogFragment {
 
     public interface AddPopupViewDelegate {
-        void onClose();
-
-        void onDriveOrRideClicked(String username);
+        void onAddPopupClose();
+        void onAddPopupOkClicked(String address, String type);
     }
 
     public AddPopupViewDelegate delegate;
-    private String messageData;
 
+    @SuppressLint("ValidFragment")
     public AddPopupView() {
     }
 
-    TextView messageTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_dialog_popup, container, false);
         getDialog().setTitle("Add Your Self!");
 
-        if (getArguments() != null) {
-            messageData = getArguments().getString("message");
+        TextView addressTextView = view.findViewById(R.id.textAddressView);
 
-        }
-
-        messageTextView = view.findViewById(R.id.add_popup_textView);
-
-        messageTextView.setText(" ");
-
-        Button closeBtn = view.findViewById(R.id.no_button);
+        Button closeBtn = view.findViewById(R.id.popup_btn_close);
         closeBtn.setOnClickListener(v -> {
             if (delegate != null)
-                delegate.onClose();
+                delegate.onAddPopupClose();
         });
 
         Button okBtn = view.findViewById(R.id.yes_button);
         okBtn.setOnClickListener(v -> {
             if (delegate != null) {
                 if (delegate != null)
-                    delegate.onDriveOrRideClicked(messageData);
+                    delegate.onAddPopupOkClicked(addressTextView.getText().toString(),getArguments().getString("type"));
             }
         });
 

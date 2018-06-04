@@ -1,15 +1,11 @@
 package com.drive2study.View;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,9 +17,6 @@ import android.widget.TextView;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.R;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class DriveRideListFragment extends Fragment {
 
@@ -70,23 +63,13 @@ public class DriveRideListFragment extends Fragment {
         super.onAttach(context);
         setHasOptionsMenu(true);
 
-        this.type = getArguments().getString("type");
+        if (getArguments() != null)
+            this.type = getArguments().getString("type");
 
         dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
         dataModel.getData().observe(this, driveRideList -> {
-            if(driveRideList.size()!=0){
-                for(Iterator<DriveRide> it = driveRideList.iterator(); it.hasNext();) {
-                    DriveRide dr = it.next();
-                    if(!dr.getType().equals(this.type)) {
-                        it.remove();
-                    }
-                }
-            }
-                /*for (DriveRide dr : driveRideList)
-                    if (!dr.getType().equals(this.type))
-                        driveRideList.remove(dr);*/
-
-
+            if(driveRideList != null)
+                driveRideList.removeIf(rec-> !rec.getType().equals(this.type));
 
             myAdapter.notifyDataSetChanged();
             Log.d("TAG","notifyDataSetChanged" + driveRideList.size());

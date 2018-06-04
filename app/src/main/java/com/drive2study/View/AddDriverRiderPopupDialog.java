@@ -10,24 +10,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.drive2study.R;
+import com.google.android.gms.maps.model.LatLng;
 
-public class AddPopupView extends DialogFragment {
+public class AddDriverRiderPopupDialog extends DialogFragment {
 
-    public interface AddPopupViewDelegate {
+    public interface AddDriverRiderPopupDialogDelegate {
         void onAddPopupClose();
-        void onAddPopupOkClicked(String address, String type);
+        void onAddPopupOkClicked(String address, String type, LatLng gpsCoordinates);
     }
 
-    public AddPopupViewDelegate delegate;
+    public AddDriverRiderPopupDialogDelegate delegate;
 
     @SuppressLint("ValidFragment")
-    public AddPopupView() {
+    public AddDriverRiderPopupDialog() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_dialog_popup, container, false);
+        View view = inflater.inflate(R.layout.dialog_popup_add_driver_rider, container, false);
         getDialog().setTitle("Add Your Self!");
 
         TextView addressTextView = view.findViewById(R.id.textAddressView);
@@ -42,7 +43,10 @@ public class AddPopupView extends DialogFragment {
         okBtn.setOnClickListener(v -> {
             if (delegate != null) {
                 if (delegate != null)
-                    delegate.onAddPopupOkClicked(addressTextView.getText().toString(),getArguments().getString("type"));
+                    // check if GPS or address
+                    if (!addressTextView.getText().toString().equals(""))
+                        delegate.onAddPopupOkClicked(addressTextView.getText().toString(), getArguments().getString("type"), null);
+                    //else delegate.onAddPopupOkClicked(null, getArguments().getString("type"), new LatLng(GPS));
             }
         });
 
@@ -52,8 +56,8 @@ public class AddPopupView extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof AddPopupViewDelegate) {
-            delegate = (AddPopupViewDelegate) context;
+        if (context instanceof AddDriverRiderPopupDialogDelegate) {
+            delegate = (AddDriverRiderPopupDialogDelegate) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

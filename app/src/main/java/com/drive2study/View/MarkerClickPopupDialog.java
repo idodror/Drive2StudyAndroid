@@ -15,17 +15,17 @@ import com.drive2study.R;
 
 import java.util.Objects;
 
-public class PopupDialog extends DialogFragment {
+public class MarkerClickPopupDialog extends DialogFragment {
 
-    public interface PopupDialogDelegate {
+    public interface MarkerClickPopupDialogDelegate {
         void onClose();
         void onDriveOrRideClicked(String username);
     }
 
-    public PopupDialogDelegate delegate;
+    public MarkerClickPopupDialogDelegate delegate;
     private String username;
 
-    public PopupDialog() {
+    public MarkerClickPopupDialog() {
     }
 
     ImageView userImg;
@@ -34,7 +34,7 @@ public class PopupDialog extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_popup, container, false);
+        View view = inflater.inflate(R.layout.dialog_popup_marker_click, container, false);
         getDialog().setTitle("Marker Details");
 
         if (getArguments() != null) {
@@ -67,8 +67,8 @@ public class PopupDialog extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof PopupDialogDelegate) {
-            delegate = (PopupDialogDelegate) context;
+        if (context instanceof MarkerClickPopupDialogDelegate) {
+            delegate = (MarkerClickPopupDialogDelegate) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

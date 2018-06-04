@@ -1,6 +1,7 @@
 package com.drive2study;
 
-import android.app.Application;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
@@ -15,25 +16,30 @@ import android.widget.Toast;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
-import com.drive2study.View.AddPopupView;
+import com.drive2study.View.AddDriverRiderPopupDialog;
 import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
-import com.drive2study.View.PopupDialog;
+import com.drive2study.View.MarkerClickPopupDialog;
 import com.drive2study.View.ShowProfileFragment;
+import com.google.android.gms.maps.model.LatLng;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
 
 public class AppActivity extends AppCompatActivity implements
-        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, PopupDialog.PopupDialogDelegate, DriveRideListFragment.StudentsListFragmentDelegate,
-        AddPopupView.AddPopupViewDelegate{
+        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, MarkerClickPopupDialog.MarkerClickPopupDialogDelegate, DriveRideListFragment.StudentsListFragmentDelegate,
+        AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate {
 
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
     private EditProfileFragment editProfileFragment;
     private FragmentManager fragmentManager;
-    private DialogFragment popupDialog;
-    private DialogFragment addDialog;
+    private DialogFragment markerClickPopupDialog;
+    private DialogFragment addDriverRiderPopupDialog;
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
 
@@ -104,30 +110,36 @@ public class AppActivity extends AppCompatActivity implements
                 setFragment(showProfileFragment);
                 break;
             case R.id.action_add:
-
-                FragmentTransaction ft = fragmentManager.beginTransaction();
-
-                List<Fragment> fragmentList = fragmentManager.getFragments();
-                DriveRideListFragment driveRideFragment = null;
-                if(fragmentList.size()!=0) {
-                    Fragment fragment = fragmentList.get(0);
-                    if (fragment instanceof DriveRideListFragment)
-                        driveRideFragment = (DriveRideListFragment)fragment;
-                }
-                String type=null;
-                if(driveRideFragment!=null)
-                    type = driveRideFragment.getArguments().getString("type");
-
-                ft.addToBackStack(null);
-                addDialog = new AddPopupView();
-                Bundle args = new Bundle();
-                if(type!=null)
-                    args.putString("type", type);
-                addDialog.setArguments(args);
-                addDialog.show(ft, "dialog");
+                openAddDriverRiderPopup();
                 break;
         }
         return true;
+    }
+
+    private void openAddDriverRiderPopup() {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+
+        List<Fragment> fragmentList = fragmentManager.getFragments();
+        DriveRideListFragment driveRideFragment = null;
+        if (fragmentList.size() != 0) {
+            Fragment fragment = fragmentList.get(0);
+            if (fragment instanceof DriveRideListFragment)
+                driveRideFragment = (DriveRideListFragment) fragment;
+        }
+
+        String type = null;
+        if (driveRideFragment != null && driveRideFragment.getArguments() != null)
+            type = driveRideFragment.getArguments().getString("type");
+
+        ft.addToBackStack(null);
+        addDriverRiderPopupDialog = new AddDriverRiderPopupDialog();
+
+        Bundle args = new Bundle();
+        if (type != null)
+            args.putString("type", type);
+
+        addDriverRiderPopupDialog.setArguments(args);
+        addDriverRiderPopupDialog.show(ft, "dialog");
     }
 
     @Override
@@ -152,17 +164,17 @@ public class AppActivity extends AppCompatActivity implements
     public void onMarkerTap(DriveRide dr) {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
-        popupDialog = new PopupDialog();
+        markerClickPopupDialog = new MarkerClickPopupDialog();
         Bundle args = new Bundle();
         args.putString("username", dr.getUserName());
         args.putString("type", dr.getType());
-        popupDialog.setArguments(args);
-        popupDialog.show(ft, "dialog");
+        markerClickPopupDialog.setArguments(args);
+        markerClickPopupDialog.show(ft, "dialog");
     }
 
     @Override
     public void onClose() {
-        popupDialog.dismissAllowingStateLoss();
+        markerClickPopupDialog.dismissAllowingStateLoss();
     }
 
     @Override
@@ -172,23 +184,84 @@ public class AppActivity extends AppCompatActivity implements
 
     @Override
     public void onAddPopupClose() {
-        addDialog.dismissAllowingStateLoss();
+        addDriverRiderPopupDialog.dismissAllowingStateLoss();
     }
 
 
     @Override
-    public void onAddPopupOkClicked(String address, String type) {
-        DriveRide newDriveRide = new DriveRide();
-        newDriveRide.setUserName(MyApplication.currentStudent.userName.toString().replace(".",","));
-        if(MyApplication.currentStudent.imageUrl != null)
-            newDriveRide.setImageUrl(MyApplication.currentStudent.imageUrl);
-        else
-            newDriveRide.setImageUrl("");
-        newDriveRide.setFromWhere(address);
-        newDriveRide.setType(type);
+    public void onAddPopupOkClicked(String address, String type, LatLng gpsCoordinates) {
+        DriveRide dr = new DriveRide();
+        dr.setUserName(MyApplication.currentStudent.userName.replace(".",","));
+        if (MyApplication.currentStudent.imageUrl != null)
+            dr.setImageUrl(MyApplication.currentStudent.imageUrl);
+        else dr.setImageUrl("");
+        dr.setType(type);
+
+        // address sent
+        if (address != null) {
+            dr.setFromWhere(address);
+            addNewDriveRideAsyncWithAddress(dr, address);
+        }
+        else {  // GPS coordinates sent
+            dr.setCoordinates(gpsCoordinates);
+            addNewDriveRideAsyncWithLatLng(dr, gpsCoordinates);
+        }
         onAddPopupClose();
-        Model.instance.addDriveRide(newDriveRide);
         Toast.makeText(AppActivity.this, "Added Successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    private void addNewDriveRideAsyncWithAddress(DriveRide dr, String address) {
+        CompletableFuture.supplyAsync( () -> generateLatLngFromAddress(address))
+                .thenApply((LatLng latLng) -> {
+                    if (latLng != null)
+                        dr.setCoordinates(latLng);
+                    return 1;
+                } )
+                .thenAccept( answer -> {
+                    Model.instance.addDriveRide(dr);
+                });
+    }
+
+    private void addNewDriveRideAsyncWithLatLng(DriveRide dr, LatLng latLng) {
+        CompletableFuture.supplyAsync( () -> generateAddressFromLatLng(latLng))
+            .thenApply((String str) -> {
+                if (str != null)
+                    dr.setFromWhere(str);
+                return 1;
+            } )
+            .thenAccept( answer -> {
+                Model.instance.addDriveRide(dr);
+            });
+    }
+
+    private String generateAddressFromLatLng(LatLng latLng) {
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        List<Address> address = new ArrayList<>();
+        try {
+            address = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String yourAddress = "bla";
+        if (address.size() > 0) {
+            yourAddress = address.get(0).getAddressLine(0);
+        }
+        return yourAddress;
+    }
+
+    private LatLng generateLatLngFromAddress(String address) {
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        LatLng latLng;
+        try {
+            List<Address> addresses = geoCoder.getFromLocationName(address , 1);
+            if (addresses.size() > 0) {
+                latLng = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+                return latLng;
+            }
+        }
+        catch(Exception e) { return null; }
+        return null;
     }
 
     @Override

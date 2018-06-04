@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
@@ -33,12 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -86,7 +79,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getActivity());
         myGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        //googleMap.addMarker(new MarkerOptions().position(new LatLng(40.689247, -74.044502)).icon(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_map_student)).title("Statue of liberty").snippet("I hope you go there some day"));
         CameraPosition cameraPosition = CameraPosition.builder().target(new LatLng(MAP_DEFAULT_LATITUDE, MAP_DEFUALT_LONGITUDE)).zoom(MAP_DEFUALT_ZOOM).bearing(0).build();
 
         myGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -100,15 +92,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         /////////////////////////////
         // just for tests
+        /////////////////////////////
         DriveRide dr = new DriveRide();
         dr.setType(DriveRide.DRIVER);
         dr.setUserName("ido@bla.com");
         dr.setFromWhere("Dizingof 26, tlv");
-        dr.setImageUrl("");
-        driveRideList.add(dr);
-        dr.setType(DriveRide.RIDER);
-        dr.setUserName("ido@bla.com");
-        dr.setFromWhere("Dizingof 26, tlv");
+        dr.setCoordinates(new LatLng(32.074436, 34.778154));
         dr.setImageUrl("");
         driveRideList.add(dr);
         /////////////////////////////
@@ -118,41 +107,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void addAllMapMarkers() {
         for (final DriveRide dr : driveRideList) {
-
-            ExecutorService executor = Executors.newFixedThreadPool(5);
-            Future<LatLng> f = executor.submit( ()-> getLatLongFromGivenAddress(dr.getFromWhere()));
-
-            LatLng latLng = null;
-            try {
-                latLng = f.get();
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-            if (latLng != null) {
-                MarkerOptions markerOptions = new MarkerOptions().position(latLng).icon(bitmapDescriptorFromVector(getActivity(), dr.getType())).title(dr.getUserName());
+            if (dr.getCoordinates() != null) {
+                MarkerOptions markerOptions = new MarkerOptions().position(dr.getCoordinates()).icon(bitmapDescriptorFromVector(getActivity(), dr.getType())).title(dr.getUserName());
 
                 Marker marker = myGoogleMap.addMarker(markerOptions);
                 mapMarkersToDr.put(marker, dr);
                 Log.d("TAG", "Marker added");
             }
         }
-    }
-
-    private LatLng getLatLongFromGivenAddress(String address)
-    {
-        Geocoder geoCoder = new Geocoder(this.getContext(), Locale.getDefault());
-        LatLng latLng;
-        try {
-            List<Address> addresses = geoCoder.getFromLocationName(address , 1);
-            if (addresses.size() > 0) {
-                latLng = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
-                return latLng;
-            }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, String driverOrRider) {

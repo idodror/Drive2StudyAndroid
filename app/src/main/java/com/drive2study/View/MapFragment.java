@@ -1,5 +1,6 @@
 package com.drive2study.View;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,7 +30,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap myGoogleMap;
     MapView mapView;
     Map<Marker, DriveRide> mapMarkersToDr;
-    List<DriveRide> driveRideList;
 
     public MapFragment() {
         // Required empty public constructor
@@ -57,7 +57,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
-        driveRideList = new ArrayList<>();
         mapMarkersToDr = new HashMap<>();
         return view;
     }
@@ -90,22 +89,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return true;
         });
 
-        /////////////////////////////
-        // just for tests
-        /////////////////////////////
-        DriveRide dr = new DriveRide();
-        dr.setType(DriveRide.DRIVER);
-        dr.setUserName("ido@bla.com");
-        dr.setFromWhere("Dizingof 26, tlv");
-        dr.setCoordinates(new LatLng(32.074436, 34.778154));
-        dr.setImageUrl("");
-        driveRideList.add(dr);
-        /////////////////////////////
-
-        addAllMapMarkers();
+        AppActivity.dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
+        AppActivity.dataModel.getData().observe(this, driveRideList -> {
+            if(driveRideList != null)
+                myGoogleMap.clear();
+                addAllMapMarkers(driveRideList);
+        });
     }
 
-    private void addAllMapMarkers() {
+    private void addAllMapMarkers(List<DriveRide> driveRideList) {
         for (final DriveRide dr : driveRideList) {
             if (dr.getCoordinates() != null) {
                 MarkerOptions markerOptions = new MarkerOptions().position(dr.getCoordinates()).icon(bitmapDescriptorFromVector(getActivity(), dr.getType())).title(dr.getUserName());
@@ -150,7 +142,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_add).setVisible(false); //setEnabled(false);
+        menu.findItem(R.id.action_add).setVisible(false);
     }
 
     @Override

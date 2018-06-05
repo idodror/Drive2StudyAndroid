@@ -94,9 +94,6 @@ public class Model {
                 public void onSuccess(List<DriveRide> driveRideList) {
                     Log.d("TAG","FB data = " + driveRideList.size() );
                     setValue(driveRideList);
-                    for (DriveRide dr_rd : driveRideList){
-                        //AppLocalDb.db.studentDao().insertAll(st);
-                    }
                 }
             });
         }
@@ -110,12 +107,11 @@ public class Model {
 
         public DriveRideListData() {
             super();
-            //setValue(AppLocalDb.db.studentDao().getAll());
-            setValue(new LinkedList<DriveRide>());
+            setValue(new LinkedList<>());
         }
     }
 
-    DriveRideListData driveRideListData = new DriveRideListData();
+    private DriveRideListData driveRideListData = new DriveRideListData();
 
     public LiveData<List<DriveRide>> getAllDriveRide(){
         return driveRideListData;

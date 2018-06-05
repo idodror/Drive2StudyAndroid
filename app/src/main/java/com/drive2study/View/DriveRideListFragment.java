@@ -1,4 +1,5 @@
 package com.drive2study.View;
+
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.R;
@@ -22,17 +24,17 @@ public class DriveRideListFragment extends Fragment {
 
     ListView list;
     MyAdapter myAdapter;
-    DriveRideListViewModel dataModel;
     private String type;
 
-    public interface StudentsListFragmentDelegate{
+    public interface DriveRideListFragmentDelegate{
         void onItemSelected(String studentId);
     }
 
-    public StudentsListFragmentDelegate delegate;
+    public DriveRideListFragmentDelegate delegate;
 
-    public DriveRideListFragment(){}
+    public DriveRideListFragment(){
 
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,8 @@ public class DriveRideListFragment extends Fragment {
         if (getArguments() != null)
             this.type = getArguments().getString("type");
 
-        dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
-        dataModel.getData().observe(this, driveRideList -> {
+        AppActivity.dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
+        AppActivity.dataModel.getData().observe(this, driveRideList -> {
             if(driveRideList != null)
                 driveRideList.removeIf(rec-> !rec.getType().equals(this.type));
 
@@ -95,9 +97,9 @@ public class DriveRideListFragment extends Fragment {
 
         @Override
         public int getCount() {
-            Log.d("TAG","list size:" + dataModel.getData().getValue().size());
+            Log.d("TAG","list size:" + AppActivity.dataModel.getData().getValue().size());
 
-            return dataModel.getData().getValue().size();
+            return AppActivity.dataModel.getData().getValue().size();
         }
 
         @Override
@@ -118,7 +120,7 @@ public class DriveRideListFragment extends Fragment {
 
             }
 
-            final DriveRide dr_rd = dataModel.getData().getValue().get(i);
+            final DriveRide dr_rd = AppActivity.dataModel.getData().getValue().get(i);
 
             TextView userName = view.findViewById(R.id.driveListItem_name);
             TextView fromWhere = view.findViewById(R.id.driveListItem_fromWhere);

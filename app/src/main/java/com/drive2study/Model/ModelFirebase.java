@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -91,7 +92,7 @@ public class ModelFirebase {
         public void onSuccess(List<DriveRide> driveRideList);
     }
 
-    ValueEventListener eventDriveRideListener;
+    private ValueEventListener eventDriveRideListener;
 
     public void getAllDriveRide(final GetAllDriveRideListener listener) {
         DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("driveRide");
@@ -99,13 +100,16 @@ public class ModelFirebase {
         eventDriveRideListener = stRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<DriveRide> stList = new LinkedList<>();
-
-                for (DataSnapshot stSnapshot: dataSnapshot.getChildren()) {
-                    DriveRide dr_rd = stSnapshot.getValue(DriveRide.class);
-                    stList.add(dr_rd);
+                List<DriveRide> drList = new LinkedList<>();
+                for (DataSnapshot drSnapshot: dataSnapshot.getChildren()) {
+                    DriveRide dr_rd = drSnapshot.getValue(DriveRide.class);
+                    Double lat = drSnapshot.child("lat").getValue(Double.class);
+                    Double lng = drSnapshot.child("lng").getValue(Double.class);
+                    if (lat != null && lng != null)
+                        dr_rd.setCoordinates(new LatLng(lat, lng));
+                    drList.add(dr_rd);
                 }
-                listener.onSuccess(stList);
+                listener.onSuccess(drList);
             }
 
             @Override

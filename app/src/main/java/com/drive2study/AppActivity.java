@@ -18,6 +18,7 @@ import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.AddDriverRiderPopupDialog;
 import com.drive2study.View.DriveRideListFragment;
+import com.drive2study.View.DriveRideListViewModel;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.MarkerClickPopupDialog;
@@ -31,7 +32,11 @@ import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
 public class AppActivity extends AppCompatActivity implements
-        MapFragment.MapFragmentDelegate, ShowProfileFragment.ShowProfileFragmentDelegate, EditProfileFragment.EditProfileFragmentDelegate, MarkerClickPopupDialog.MarkerClickPopupDialogDelegate, DriveRideListFragment.StudentsListFragmentDelegate,
+        MapFragment.MapFragmentDelegate,
+        ShowProfileFragment.ShowProfileFragmentDelegate,
+        EditProfileFragment.EditProfileFragmentDelegate,
+        MarkerClickPopupDialog.MarkerClickPopupDialogDelegate,
+        DriveRideListFragment.DriveRideListFragmentDelegate,
         AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate {
 
     private MapFragment mapFragment;
@@ -42,6 +47,7 @@ public class AppActivity extends AppCompatActivity implements
     private DialogFragment addDriverRiderPopupDialog;
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
+    public static DriveRideListViewModel dataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

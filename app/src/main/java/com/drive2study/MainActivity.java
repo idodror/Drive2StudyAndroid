@@ -41,21 +41,30 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onConWithEmail(String email) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment nextFrag;
-        Bundle args = new Bundle();
-        args.putString("username", email);
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() == null)
-            nextFrag = new EmailLoginFragment();
-        else nextFrag = new CreateAccountFragment();
+        Model.instance.userExists(email.replace(".",","), new Model.GetUserExistsListener() {
+            @Override
+            public void onDone(boolean result) {
 
-        nextFrag.setArguments(args);
-        transaction.replace(R.id.main_container, nextFrag);
-        transaction.addToBackStack("firstAppScreen");
-        transaction.commit();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("username", email);
+                Fragment nextFrag;
+
+                if (result)
+                    nextFrag = new EmailLoginFragment();
+                else nextFrag = new CreateAccountFragment();
+
+                nextFrag.setArguments(args);
+                transaction.replace(R.id.main_container, nextFrag);
+                transaction.addToBackStack("firstAppScreen");
+                transaction.commit();
+            }
+        });
+
+
+
     }
 
     @Override

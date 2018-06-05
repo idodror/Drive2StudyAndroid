@@ -77,6 +77,11 @@ public class Model {
         modelFirebase.addStudent(st);
     }
 
+    public interface GetUserExistsListener{
+        void onDone(boolean result);
+    }
+
+
     ////////////////////////////////////////////////////////
     ///////////          DriveRide                   ///////
     ////////////////////////////////////////////////////////
@@ -131,6 +136,8 @@ public class Model {
         void onDone(String url);
     }
 
+
+
     public void saveImage(Bitmap imageBitmap, SaveImageListener listener) {
         modelFirebase.saveImage(imageBitmap,listener);
     }
@@ -140,6 +147,16 @@ public class Model {
     public interface GetImageListener{
         void onDone(Bitmap imageBitmap);
     }
+
+    public void userExists(String email, final GetUserExistsListener listener){
+        modelFirebase.getUserExists(email, new GetUserExistsListener() {
+            @Override
+            public void onDone(boolean result) {
+                listener.onDone(result);
+            }
+        });
+    }
+
     public void getImage(final String url, final GetImageListener listener ){
         String localFileName = URLUtil.guessFileName(url, null, null);
         final Bitmap image = loadImageFromFile(localFileName);

@@ -54,7 +54,7 @@ public class CreateAccountFragment extends Fragment {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.createUserWithEmailAndPassword(userEmailText.getText().toString(), passwordEt.getText().toString());
+                //auth.createUserWithEmailAndPassword(userEmailText.getText().toString(), passwordEt.getText().toString());
                 Student student = new Student();
                 String password = passwordEt.getText().toString();
                 student.userName = userEmailText.getText().toString();

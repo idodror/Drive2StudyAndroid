@@ -44,12 +44,13 @@ public class LoginScreenFragment extends Fragment {
             public void onClick(View v) {
                 String email = emailEt.getText().toString();
 
-                Matcher m = Patterns.EMAIL_ADDRESS.matcher(email);
+              /*  Matcher m = Patterns.EMAIL_ADDRESS.matcher(email);
                 if (!m.matches())    // check validation of email
                     validateEmailTxt.setVisibility(View.VISIBLE);
-                else if (delegate != null){
+                else if (delegate != null) {
                     delegate.onConWithEmail(email);
-                }
+                }*/
+                delegate.onConWithEmail(email);
             }
         });
 

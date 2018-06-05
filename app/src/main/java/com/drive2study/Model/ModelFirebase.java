@@ -71,6 +71,35 @@ public class ModelFirebase {
         });
     }
 
+    public void getUserExists(String email, final Model.GetUserExistsListener listener) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("students").child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue()!=null) {
+                    // use "username" already exists
+                    // Let the user know he needs to pick another username.
+                    listener.onDone(true);
+                } else {
+                    // User does not exist. NOW call createUserWithEmailAndPassword
+                    listener.onDone(false);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+  /*  public boolean userExists(String email){
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("students");
+        Log.d("TAG",ref.toString());
+
+        return (ref!=null);
+    }*/
+
 
     ////////////////////////////////////////////////////////
     ///////////          DriveRide                   ///////

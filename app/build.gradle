@@ -39,6 +39,8 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.firebaseui:firebase-ui:0.6.0'
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:1.1.1"

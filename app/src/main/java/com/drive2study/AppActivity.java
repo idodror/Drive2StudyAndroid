@@ -17,6 +17,7 @@ import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.AddDriverRiderPopupDialog;
+import com.drive2study.View.ChatFragment;
 import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.DriveRideListViewModel;
 import com.drive2study.View.EditProfileFragment;
@@ -37,7 +38,8 @@ public class AppActivity extends AppCompatActivity implements
         EditProfileFragment.EditProfileFragmentDelegate,
         MarkerClickPopupDialog.MarkerClickPopupDialogDelegate,
         DriveRideListFragment.DriveRideListFragmentDelegate,
-        AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate {
+        AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate,
+        ChatFragment.ChatFragmentDelegate {
 
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
@@ -47,6 +49,7 @@ public class AppActivity extends AppCompatActivity implements
     private DialogFragment addDriverRiderPopupDialog;
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
+    private ChatFragment chatFragment;
     public static DriveRideListViewModel dataModel;
 
     @Override

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.drive2study.Model.GPSTracker;
 import com.drive2study.R;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -46,7 +48,12 @@ public class AddDriverRiderPopupDialog extends DialogFragment {
                     // check if GPS or address
                     if (!addressTextView.getText().toString().equals(""))
                         delegate.onAddPopupOkClicked(addressTextView.getText().toString(), getArguments().getString("type"), null);
-                    //else delegate.onAddPopupOkClicked(null, getArguments().getString("type"), new LatLng(GPS));
+                    else {
+                        GPSTracker gps = new GPSTracker(getContext());
+                        double latitude = gps.getLatitude();
+                        double longitude = gps.getLongitude();
+                        delegate.onAddPopupOkClicked(null, getArguments().getString("type"), new LatLng(latitude, longitude));
+                    }
             }
         });
 

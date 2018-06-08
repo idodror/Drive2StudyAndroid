@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
+import com.drive2study.Model.GPSTracker;
 import com.drive2study.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,13 +43,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public MapFragmentDelegate delegate;
 
-    final double MAP_DEFAULT_LATITUDE = 32.087912;
-    final double MAP_DEFUALT_LONGITUDE = 34.790725;
     final int MAP_DEFUALT_ZOOM = 12;
 
     GoogleMap myGoogleMap;
     MapView mapView;
     Map<Marker, DriveRide> mapMarkersToDr;
+    Marker myLocationMarker;
 
     public MapFragment() {
         // Required empty public constructor
@@ -78,7 +78,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getActivity());
         myGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        CameraPosition cameraPosition = CameraPosition.builder().target(new LatLng(MAP_DEFAULT_LATITUDE, MAP_DEFUALT_LONGITUDE)).zoom(MAP_DEFUALT_ZOOM).bearing(0).build();
+
+        // Get my location and set on map as cameraPosition
+        GPSTracker gps = new GPSTracker(getContext());
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
+        CameraPosition cameraPosition = CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(MAP_DEFUALT_ZOOM).bearing(0).build();
 
         myGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
@@ -89,10 +94,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return true;
         });
 
+        // Add my location marker to the map
+        MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Location");
+        myLocationMarker = myGoogleMap.addMarker(markerOptions);
+
         AppActivity.dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
         AppActivity.dataModel.getData().observe(this, driveRideList -> {
             if(driveRideList != null)
                 myGoogleMap.clear();
+                myLocationMarker = myGoogleMap.addMarker(markerOptions);
                 addAllMapMarkers(driveRideList);
         });
     }

@@ -55,7 +55,7 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_fragment">Map</string>
-    <string name="toolbar_myprofile">My Profile</string>
+    <string name="toolbar_my_profile">My Profile</string>
     <string name="toolbar_logout">Logout</string>
     <string name="profile_edit_profile">Edit profile</string>
     <string name="profile_label_learning">Learning:</string>
@@ -78,6 +78,6 @@
     <string name="lost_password_dashes_or">----------------------- Or ----------------------</string>
     <string name="lost_password_try_again">Try sign-in again</string>
     <string name="add_dialog_popup_text">Would you like to add your self into the list? Please fill in an address if you would like other location than yours.</string>
-    <string name="add_dialog_popup_address">Address...</string>
-    <string name="add_dialog_popup_yes">Yes</string>
+    <string name="add_dialog_popup_address">Address…</string>
+    <string name="add_dialog_popup_yes">Add me to list</string>
 </resources>

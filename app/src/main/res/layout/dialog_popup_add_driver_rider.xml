@@ -63,6 +63,7 @@
         android:ems="10"
         android:hint="@string/add_dialog_popup_address"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

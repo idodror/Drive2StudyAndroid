@@ -1,7 +1,10 @@
 package com.drive2study.View;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +12,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
 
+import static android.app.Activity.RESULT_OK;
+
 public class EditProfileFragment extends Fragment {
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     public interface EditProfileFragmentDelegate {
         void onSaveClicked(Student student);
@@ -28,6 +38,8 @@ public class EditProfileFragment extends Fragment {
     EditText firstNameEt;
     EditText lastNameEt;
     EditText studyEt;
+    Button changeAvatar;
+    ImageView avatar;
     CheckBox[] days = new CheckBox[7];
 
 
@@ -38,6 +50,9 @@ public class EditProfileFragment extends Fragment {
         firstNameEt = view.findViewById(R.id.edit_profile_et_first_name);
         lastNameEt = view.findViewById(R.id.edit_profile_et_last_name);
         studyEt = view.findViewById(R.id.edit_profile_et_study);
+        changeAvatar = view.findViewById(R.id.btn_edit_profile_change_avatar);
+        avatar = view.findViewById(R.id.edit_profile_avatar);
+
         setDaysCheckBoxex(view);
 
         firstNameEt.setText(MyApplication.currentStudent.fName);
@@ -51,20 +66,54 @@ public class EditProfileFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Student student = new Student();
+                final Student student = new Student();
+                student.userName = MyApplication.currentStudent.userName;
+                student.loginType = MyApplication.currentStudent.loginType;
                 student.fName = firstNameEt.getText().toString();
                 student.lName = lastNameEt.getText().toString();
                 student.study = studyEt.getText().toString();
                 for (int i = 0; i < 7; i++)
                     if (days[i].isChecked())
                         student.daysInCollege[i] = true;
-                if (delegate != null){
-                    delegate.onSaveClicked(student);
+                //save image
+                if (imageBitmap != null && delegate != null) {
+                    Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
+                        @Override
+                        public void onDone(String url) {
+                            //save student obj
+                            student.imageUrl = url;
+                            delegate.onSaveClicked(student);
+                        }
+                    });
+                }
+            }
+        });
+
+        changeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open camera
+                Intent takePictureIntent = new Intent(
+                        MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
             }
         });
 
         return view;
+    }
+
+    Bitmap imageBitmap;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE &&
+                resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            avatar.setImageBitmap(imageBitmap);
+        }
     }
 
     private void setDaysCheckBoxex(View view) {

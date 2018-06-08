@@ -155,12 +155,6 @@ public class AppActivity extends AppCompatActivity implements
 
     @Override
     public void onSaveClicked(Student student) {
-
-        // garbage values - until authentication will work
-        student.loginType = "";
-        student.userName ="10";
-        student.imageUrl = "";
-
         Model.instance.addStudent(student);
         fragmentManager.popBackStack();
         Toast.makeText(AppActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();

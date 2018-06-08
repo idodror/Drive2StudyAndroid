@@ -8,13 +8,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.CreateAccountFragment;
 import com.drive2study.View.EmailLoginFragment;
 import com.drive2study.View.ForgotPasswordFragment;
 import com.drive2study.View.LoginScreenFragment;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements
         LoginScreenFragment.LoginScreenFragmentDelegate,
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onConWithFacebook() {
         MyApplication.currentStudent.study = "Computer Science";
-        MyApplication.currentStudent.userName = "ido@bla.com";
+        MyApplication.currentStudent.userName = "ido@bla,com";
         MyApplication.currentStudent.fName = "Ido";
         MyApplication.currentStudent.lName = "Dror";
         MyApplication.currentStudent.daysInCollege[2] = true;

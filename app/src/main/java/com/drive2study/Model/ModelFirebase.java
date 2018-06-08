@@ -154,7 +154,7 @@ public class ModelFirebase {
 
         Date d = new Date();
         String name = ""+ d.getTime();
-        StorageReference imagesRef = storage.getReference().child("images").child(name);
+        StorageReference imagesRef = storage.getReference().child("pics").child(name);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -169,7 +169,7 @@ public class ModelFirebase {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getStorage().getDownloadUrl().getResult();
+                @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 listener.onDone(downloadUrl.toString());
             }
         });

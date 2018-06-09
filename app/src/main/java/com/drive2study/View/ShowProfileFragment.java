@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.drive2study.Model.Model;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
 
@@ -39,9 +40,18 @@ public class ShowProfileFragment extends Fragment {
         learningTxt = view.findViewById(R.id.txt_profile_learning);
         daysList = view.findViewById(R.id.txt_profile_days_list);
 
-        String fullName = MyApplication.currentStudent.fName + " " + MyApplication.currentStudent.lName;
+        String fullName = MyApplication.currentStudent.getfName() + " " + MyApplication.currentStudent.getlName();
+        String imgUrl = MyApplication.currentStudent.getImageUrl();
         nameTxt.setText(fullName);
+        learningTxt.setText(MyApplication.currentStudent.getStudy());
         daysList.setText(daysAsStringBlock());
+
+        if(imgUrl != null && !imgUrl.equals("")) {
+            Model.instance.getImage(imgUrl, imageBitmap -> {
+                if(imageBitmap != null)
+                    avatarImg.setImageBitmap(imageBitmap);
+            });
+        }
 
         Button editProfile = view.findViewById(R.id.btn_edit_profile);
         editProfile.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +67,7 @@ public class ShowProfileFragment extends Fragment {
     }
 
     private String daysAsStringBlock() {
-        boolean[] days = MyApplication.currentStudent.daysInCollege;
+        boolean[] days = MyApplication.currentStudent.getDaysInCollege();
         String daysBlock = "";
         if (days[0]) daysBlock += "Sunday\n";
         if (days[1]) daysBlock += "Monday\n";

@@ -26,6 +26,8 @@ import java.util.Map;
 
 public class ModelFirebase {
 
+    List<DriveRide> drList = null;
+    DatabaseReference driveRideDatabase = FirebaseDatabase.getInstance().getReference().child("driveRide");
 
     ////////////////////////////////////////////////////////
     ///////////          Student                   /////////
@@ -38,7 +40,7 @@ public class ModelFirebase {
         mDatabase.updateChildren(dataMap);
     }
 
-    public void cancellGetAllStudents() {
+    public void cancelGetAllStudents() {
         DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("students");
         stRef.removeEventListener(eventListener);
     }
@@ -83,7 +85,6 @@ public class ModelFirebase {
                 } else {
                     // User does not exist. NOW call createUserWithEmailAndPassword
                     listener.onDone(false);
-
                 }
             }
 
@@ -93,12 +94,6 @@ public class ModelFirebase {
             }
         });
     }
-  /*  public boolean userExists(String email){
-        DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("students");
-        Log.d("TAG",ref.toString());
-
-        return (ref!=null);
-    }*/
 
 
     ////////////////////////////////////////////////////////
@@ -107,14 +102,17 @@ public class ModelFirebase {
     public void addDriveRide(DriveRide driveRide){
         final Map<String, Object> dataMap = new HashMap<>();
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("driveRide");
+        String lastChild;
+        if (driveRide.getType().equals(DriveRide.DRIVER))
+            lastChild = DriveRide.DRIVER;
+        else lastChild = DriveRide.RIDER;
+
         dataMap.put(driveRide.getUserName(), driveRide.toMap());
-        mDatabase.updateChildren(dataMap);
+        driveRideDatabase.child(lastChild).updateChildren(dataMap);
     }
 
-    public void cancellGetAllDriveRide() {
-        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("driveRide");
-        stRef.removeEventListener(eventDriveRideListener);
+    public void cancelGetAllDriveRide() {
+        driveRideDatabase.removeEventListener(eventDriveRideListener);
     }
 
     interface GetAllDriveRideListener{
@@ -124,20 +122,17 @@ public class ModelFirebase {
     private ValueEventListener eventDriveRideListener;
 
     public void getAllDriveRide(final GetAllDriveRideListener listener) {
-        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("driveRide");
-
-        eventDriveRideListener = stRef.addValueEventListener(new ValueEventListener() {
+        eventDriveRideListener = driveRideDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<DriveRide> drList = new LinkedList<>();
-                for (DataSnapshot drSnapshot: dataSnapshot.getChildren()) {
-                    DriveRide dr_rd = drSnapshot.getValue(DriveRide.class);
-                    Double lat = drSnapshot.child("lat").getValue(Double.class);
-                    Double lng = drSnapshot.child("lng").getValue(Double.class);
-                    if (lat != null && lng != null)
-                        dr_rd.setCoordinates(new LatLng(lat, lng));
-                    drList.add(dr_rd);
-                }
+                drList = new LinkedList<>();
+
+                for (DataSnapshot drSnapshot: dataSnapshot.child(DriveRide.RIDER).getChildren())
+                    drList.add(getDriveRideFromFirebaseSnapshot(drSnapshot));
+
+                for (DataSnapshot drSnapshot: dataSnapshot.child(DriveRide.DRIVER).getChildren())
+                    drList.add(getDriveRideFromFirebaseSnapshot(drSnapshot));
+
                 listener.onSuccess(drList);
             }
 
@@ -146,6 +141,15 @@ public class ModelFirebase {
 
             }
         });
+    }
+
+    private DriveRide getDriveRideFromFirebaseSnapshot(DataSnapshot drSnapshot) {
+        DriveRide dr = drSnapshot.getValue(DriveRide.class);
+        Double lat = drSnapshot.child("lat").getValue(Double.class);
+        Double lng = drSnapshot.child("lng").getValue(Double.class);
+        if (lat != null && lng != null)
+            dr.setCoordinates(new LatLng(lat, lng));
+        return dr;
     }
 
     //Managing Files

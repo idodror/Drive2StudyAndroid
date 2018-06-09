@@ -57,6 +57,16 @@ public class DriveRideListFragment extends Fragment {
                 Log.d("TAG","item selected:" + i);
             }
         });
+
+        AppActivity.dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
+        AppActivity.dataModel.getData().observe(this, driveRideList -> {
+            if(driveRideList != null)
+                driveRideList.removeIf(rec-> !rec.getType().equals(this.type));
+
+            myAdapter.notifyDataSetChanged();
+            Log.d("TAG","notifyDataSetChanged" + driveRideList.size());
+        });
+
         return view;
     }
 
@@ -67,21 +77,12 @@ public class DriveRideListFragment extends Fragment {
 
         if (getArguments() != null)
             this.type = getArguments().getString("type");
-
-        AppActivity.dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
-        AppActivity.dataModel.getData().observe(this, driveRideList -> {
-            if(driveRideList != null)
-                driveRideList.removeIf(rec-> !rec.getType().equals(this.type));
-
-            myAdapter.notifyDataSetChanged();
-            Log.d("TAG","notifyDataSetChanged" + driveRideList.size());
-        });
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Model.instance.cancellGetAllStudents();
+        Model.instance.cancellGetAllDriveRide();
     }
 
     @Override

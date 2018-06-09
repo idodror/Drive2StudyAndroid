@@ -41,6 +41,7 @@ public class AppActivity extends AppCompatActivity implements
         AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate,
         ChatFragment.ChatFragmentDelegate {
 
+    private BottomNavigationView bottomNavigationView;
     private MapFragment mapFragment;
     private ShowProfileFragment showProfileFragment;
     private EditProfileFragment editProfileFragment;
@@ -67,7 +68,7 @@ public class AppActivity extends AppCompatActivity implements
         driveListFragment = new DriveRideListFragment();
         rideListFragment = new DriveRideListFragment();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.app_nav_bar);
+        bottomNavigationView = findViewById(R.id.app_nav_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.app_nav_item_map:
@@ -102,7 +103,7 @@ public class AppActivity extends AppCompatActivity implements
     public void setFragment(Fragment fragment) {
         FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
         tran.replace(R.id.main_app_content, fragment);
-        tran.addToBackStack(null);
+        //tran.addToBackStack(null);
         tran.commit();
     }
 
@@ -159,7 +160,8 @@ public class AppActivity extends AppCompatActivity implements
     @Override
     public void onSaveClicked(Student student) {
         Model.instance.addStudent(student);
-        fragmentManager.popBackStack();
+        MyApplication.currentStudent = student;
+        setFragment(showProfileFragment);
         Toast.makeText(AppActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
     }
 
@@ -270,5 +272,15 @@ public class AppActivity extends AppCompatActivity implements
     @Override
     public void onItemSelected(String studentId) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (bottomNavigationView.getSelectedItemId () != R.id.app_nav_item_map) {
+            bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

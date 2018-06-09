@@ -76,15 +76,17 @@ public class EditProfileFragment extends Fragment {
                     if (days[i].isChecked())
                         student.daysInCollege[i] = true;
                 //save image
-                if (imageBitmap != null && delegate != null) {
-                    Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
-                        @Override
-                        public void onDone(String url) {
-                            //save student obj
-                            student.imageUrl = url;
-                            delegate.onSaveClicked(student);
-                        }
-                    });
+                if (delegate != null) {
+                    if (imageBitmap != null) {
+                        Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
+                            @Override
+                            public void onDone(String url) {
+                                //save student obj
+                                student.imageUrl = url;
+                                delegate.onSaveClicked(student);
+                            }
+                        });
+                    } else delegate.onSaveClicked(student);
                 }
             }
         });

@@ -38,17 +38,13 @@ public class Student implements Serializable {
         this.userName = userName;
     }
 
-    public String getfName() {
-        return fName;
-    }
+    public String getfName() { return this.fName; }
 
     public void setfName(String fName) {
         this.fName = fName;
     }
 
-    public String getlName() {
-        return lName;
-    }
+    public String getlName() { return this.lName; }
 
     public void setlName(String lName) {
         this.lName = lName;

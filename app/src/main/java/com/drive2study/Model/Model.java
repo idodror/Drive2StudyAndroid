@@ -10,7 +10,6 @@ import android.webkit.URLUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,10 +29,10 @@ public class Model {
     ////////////////////////////////////////////////////////
 
     public void cancellGetAllStudents() {
-        modelFirebase.cancellGetAllStudents();
+        modelFirebase.cancelGetAllStudents();
     }
 
-    class StudentListData extends  MutableLiveData<List<Student>>{
+    class StudentListData extends MutableLiveData<List<Student>>{
         @Override
         protected void onActive() {
             super.onActive();
@@ -52,8 +51,8 @@ public class Model {
         @Override
         protected void onInactive() {
             super.onInactive();
-            modelFirebase.cancellGetAllStudents();
-            Log.d("TAG","cancellGetAllStudents");
+            modelFirebase.cancelGetAllStudents();
+            Log.d("TAG","cancelGetAllStudents");
         }
 
         public StudentListData() {
@@ -83,7 +82,7 @@ public class Model {
     ////////////////////////////////////////////////////////
 
     public void cancellGetAllDriveRide() {
-        modelFirebase.cancellGetAllDriveRide();
+        modelFirebase.cancelGetAllDriveRide();
     }
 
     class DriveRideListData extends  MutableLiveData<List<DriveRide>>{
@@ -102,8 +101,8 @@ public class Model {
         @Override
         protected void onInactive() {
             super.onInactive();
-            modelFirebase.cancellGetAllDriveRide();
-            Log.d("TAG","cancellGetAllStudents");
+            modelFirebase.cancelGetAllDriveRide();
+            Log.d("TAG","cancelGetAllDriveRide");
         }
 
         public DriveRideListData() {
@@ -126,19 +125,13 @@ public class Model {
     //  Handle Image Files
     ////////////////////////////////////////////////////////
 
-
-
     public interface SaveImageListener{
         void onDone(String url);
     }
 
-
-
     public void saveImage(Bitmap imageBitmap, SaveImageListener listener) {
         modelFirebase.saveImage(imageBitmap,listener);
     }
-
-
 
     public interface GetImageListener{
         void onDone(Bitmap imageBitmap);
@@ -189,14 +182,13 @@ public class Model {
             }
             File imageFile = new File(dir,imageFileName);
             imageFile.createNewFile();
+            imageFile.createNewFile();
 
             OutputStream out = new FileOutputStream(imageFile);
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.close();
 
             //addPicureToGallery(imageFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -206,12 +198,10 @@ public class Model {
         Bitmap bitmap = null;
         try {
             File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-            File imageFile = new File(dir,imageFileName);
+            File imageFile = new File(dir, imageFileName);
             InputStream inputStream = new FileInputStream(imageFile);
             bitmap = BitmapFactory.decodeStream(inputStream);
-            Log.d("tag","got image from cache: " + imageFileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.d("tag", "got image from cache: " + imageFileName);
         } catch (IOException e) {
             e.printStackTrace();
         }

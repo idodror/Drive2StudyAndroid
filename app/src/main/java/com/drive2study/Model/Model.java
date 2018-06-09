@@ -32,6 +32,10 @@ public class Model {
         modelFirebase.cancelGetAllStudents();
     }
 
+    public interface GetStudentListener {
+        void onDone(Student student);
+    }
+
     class StudentListData extends MutableLiveData<List<Student>>{
         @Override
         protected void onActive() {
@@ -142,6 +146,15 @@ public class Model {
             @Override
             public void onDone(boolean result) {
                 listener.onDone(result);
+            }
+        });
+    }
+
+    public void getStudent(String email, final GetStudentListener listener){
+        modelFirebase.getStudent(email, new GetStudentListener() {
+            @Override
+            public void onDone(Student student) {
+                listener.onDone(student);
             }
         });
     }

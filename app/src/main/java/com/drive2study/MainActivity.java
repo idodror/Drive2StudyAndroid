@@ -2,6 +2,7 @@ package com.drive2study;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,10 @@ import com.drive2study.View.CreateAccountFragment;
 import com.drive2study.View.EmailLoginFragment;
 import com.drive2study.View.ForgotPasswordFragment;
 import com.drive2study.View.LoginScreenFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements
         LoginScreenFragment.LoginScreenFragmentDelegate,
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements
         ForgotPasswordFragment.ForgotPasswordFragmentDelegate {
 
     FragmentManager fragmentManager;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         fragmentManager = getSupportFragmentManager();
+        auth = FirebaseAuth.getInstance();
 
         if (savedInstanceState == null) {
             LoginScreenFragment fragment = new LoginScreenFragment();
@@ -80,6 +87,25 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onSignIn(String email, String password) {
         Log.d("TAG", "Signing in with: " + email + ", pass: " + password);
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d("TAG", "Success");
+                   Model.instance.getStudent(email, new Model.GetStudentListener() {
+                        @Override
+                        public void onDone(Student student) {
+                            MyApplication.currentStudent=student;
+                        }
+                    });
+                    startActivity(new Intent(MainActivity.this, AppActivity.class));
+                }
+                else{
+                    Log.d("TAG", "Failure");
+                    //add toast
+                }
+            }
+        });
     }
 
     @Override
@@ -100,8 +126,21 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onJoin(Student student) {
-        Model.instance.addStudent(student);
+    public void onJoin(Student student,String password) {
+
+        auth.createUserWithEmailAndPassword(student.userName,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Model.instance.addStudent(student);
+                    onSignIn(student.userName,password);
+                }
+                else{
+                    //add toast
+                }
+            }
+        });
+
     }
 
     @Override

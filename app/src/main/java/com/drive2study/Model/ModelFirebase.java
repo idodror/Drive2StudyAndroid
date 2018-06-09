@@ -95,6 +95,25 @@ public class ModelFirebase {
         });
     }
 
+    public void getStudent(String email, final Model.GetStudentListener listener) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("students").child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue()!=null) {
+                    listener.onDone((Student) dataSnapshot.getValue());
+                } else {
+                    // User does not exist. NOW call createUserWithEmailAndPassword
+                    listener.onDone(new Student());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     ////////////////////////////////////////////////////////
     ///////////          DriveRide                   ///////

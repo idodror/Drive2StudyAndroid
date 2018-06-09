@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class CreateAccountFragment extends Fragment {
     public interface CreateAccountFragmentDelegate {
-        void onJoin(Student student);
+        void onJoin(Student student,String password);
         void onNotYourEmailAtRegisterPressed();
     }
 
@@ -67,7 +67,7 @@ public class CreateAccountFragment extends Fragment {
                     student.imageUrl = "";
                     student.loginType = "RegularLogin";
                     if (delegate != null) {
-                        delegate.onJoin(student);
+                        delegate.onJoin(student,password);
                     }
                 }
             }

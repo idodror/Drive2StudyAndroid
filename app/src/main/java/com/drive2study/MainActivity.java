@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d("TAG", "Success");
-                   Model.instance.getStudent(email, new Model.GetStudentListener() {
+                   Model.instance.getStudent(email.replace(".",","), new Model.GetStudentListener() {
                         @Override
                         public void onDone(Student student) {
                             MyApplication.currentStudent=student;

@@ -142,7 +142,7 @@ public class Model {
     }
 
     public void userExists(String email, final GetUserExistsListener listener){
-        modelFirebase.getUserExists(email, new GetUserExistsListener() {
+        modelFirebase.getUserExists(email.replace(".",","), new GetUserExistsListener() {
             @Override
             public void onDone(boolean result) {
                 listener.onDone(result);

@@ -36,7 +36,7 @@ public class ModelFirebase {
         final Map<String, Object> dataMap = new HashMap<>();
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("students");
-        dataMap.put(student.userName, student.toMap());
+        dataMap.put(student.userName.replace(".",","), student.toMap());
         mDatabase.updateChildren(dataMap);
     }
 
@@ -101,7 +101,7 @@ public class ModelFirebase {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue()!=null) {
-                    listener.onDone((Student) dataSnapshot.getValue());
+                    listener.onDone(dataSnapshot.getValue(Student.class));
                 } else {
                     // User does not exist. NOW call createUserWithEmailAndPassword
                     listener.onDone(new Student());

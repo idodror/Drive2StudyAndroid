@@ -122,6 +122,8 @@ public class AppActivity extends AppCompatActivity implements
             case R.id.action_add:
                 openAddDriverRiderPopup();
                 break;
+            case R.id.toolbar_logout:
+                break;
         }
         return true;
     }

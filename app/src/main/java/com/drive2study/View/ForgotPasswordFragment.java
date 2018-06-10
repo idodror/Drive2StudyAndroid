@@ -15,7 +15,7 @@ import com.drive2study.R;
 public class ForgotPasswordFragment extends Fragment {
 
     public interface ForgotPasswordFragmentDelegate {
-        void onSendNow();
+        void onSendNow(String email);
         void onTrySignInAgain();
     }
 
@@ -32,6 +32,7 @@ public class ForgotPasswordFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_forgot_password, container, false);
 
         userEmailText = view.findViewById(R.id.forgot_password_text_username);
+        final String emailAddress = getArguments().getString("username");
         if (getArguments() != null)
             userEmailText.setText(getArguments().getString("username"));
 
@@ -40,7 +41,7 @@ public class ForgotPasswordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (delegate != null)
-                    delegate.onSendNow();
+                    delegate.onSendNow(emailAddress);
             }
         });
 

@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static android.os.Debug.waitForDebugger;
+
 public class MainActivity extends AppCompatActivity implements
         LoginScreenFragment.LoginScreenFragmentDelegate,
         EmailLoginFragment.EmailLoginFragmentDelegate,
@@ -130,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements
 
         auth.createUserWithEmailAndPassword(student.userName,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(Task<AuthResult> task) {
+                waitForDebugger();
                 if(task.isSuccessful()){
                     Model.instance.addStudent(student);
                     onSignIn(student.userName,password);
@@ -149,9 +152,17 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSendNow() {
-        // TODO: send Firebase reset password email
+    public void onSendNow(String email) {
 
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Reset Password", "Email sent.");
+                        }
+                    }
+                });
         Toast.makeText(this, "Reset password email sent", Toast.LENGTH_SHORT).show();
         fragmentManager.popBackStack();
         fragmentManager.popBackStack();

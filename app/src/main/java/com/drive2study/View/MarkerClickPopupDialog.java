@@ -1,7 +1,6 @@
 package com.drive2study.View;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
-import com.drive2study.Model.Student;
 import com.drive2study.R;
 
 import java.util.Objects;
@@ -68,24 +66,18 @@ public class MarkerClickPopupDialog extends DialogFragment {
     }
 
     private void GetStudentData(String username) {
-        Model.instance.getStudent(username, new Model.GetStudentListener() {
-            @Override
-            public void onDone(Student student) {
-                String studentName = student.getfName() + " " + student.getlName();
-                fullNameTxt.setText(studentName);
-                daysInCollegeTxt.setText(AppActivity.daysAsStringBlock(student.getDaysInCollege()));
-                if (student.getImageUrl() != null) {
-                    String url = student.getImageUrl();
-                    if (!url.equals("")) {
-                        Model.instance.getImage(url, new Model.GetImageListener() {
-                            @Override
-                            public void onDone(Bitmap imageBitmap) {
-                                if (imageBitmap != null) {
-                                    userImg.setImageBitmap(imageBitmap);
-                                }
-                            }
-                        });
-                    }
+        Model.instance.getStudent(username, student -> {
+            String studentName = student.getfName() + " " + student.getlName();
+            fullNameTxt.setText(studentName);
+            daysInCollegeTxt.setText(AppActivity.daysAsStringBlock(student.getDaysInCollege()));
+            if (student.getImageUrl() != null) {
+                String url = student.getImageUrl();
+                if (!url.equals("")) {
+                    Model.instance.getImage(url, imageBitmap -> {
+                        if (imageBitmap != null) {
+                            userImg.setImageBitmap(imageBitmap);
+                        }
+                    });
                 }
             }
         });

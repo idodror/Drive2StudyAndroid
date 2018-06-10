@@ -40,15 +40,9 @@ public class Model {
         @Override
         protected void onActive() {
             super.onActive();
-            modelFirebase.getAllStudents(new ModelFirebase.GetAllStudentsListener() {
-                @Override
-                public void onSuccess(List<Student> studentslist) {
-                    Log.d("TAG","FB data = " + studentslist.size() );
-                    setValue(studentslist);
-                    for (Student st : studentslist){
-                        //AppLocalDb.db.studentDao().insertAll(st);
-                    }
-                }
+            modelFirebase.getAllStudents(studentslist -> {
+                Log.d("TAG","FB data = " + studentslist.size() );
+                setValue(studentslist);
             });
         }
 

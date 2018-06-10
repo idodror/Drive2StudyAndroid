@@ -170,6 +170,32 @@ public class ModelFirebase {
         });
     }
 
+    public void getDriveRide(String email, final Model.GetStudentListener listener) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("students").child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    Student student = dataSnapshot.getValue(Student.class);
+                    GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {};
+                    ArrayList<Integer> daysAsIntList = dataSnapshot.child("days").getValue(t);
+                    boolean[] daysAsArray = Student.intListToBoolArray(daysAsIntList);
+                    if (student != null)
+                        student.setDaysInCollege(daysAsArray);
+                    listener.onDone(student);
+                } else {
+                    // User does not exist. NOW call createUserWithEmailAndPassword
+                    listener.onDone(new Student());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private DriveRide getDriveRideFromFirebaseSnapshot(DataSnapshot drSnapshot) {
         DriveRide dr = drSnapshot.getValue(DriveRide.class);
         Double lat = drSnapshot.child("lat").getValue(Double.class);

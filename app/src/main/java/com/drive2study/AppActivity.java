@@ -19,7 +19,7 @@ import com.drive2study.Model.Student;
 import com.drive2study.View.AddDriverRiderPopupDialog;
 import com.drive2study.View.ChatFragment;
 import com.drive2study.View.DriveRideListFragment;
-import com.drive2study.View.DriveRideListViewModel;
+import com.drive2study.View.DataViewModel;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.MarkerClickPopupDialog;
@@ -51,7 +51,7 @@ public class AppActivity extends AppCompatActivity implements
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
     private ChatFragment chatFragment;
-    public static DriveRideListViewModel dataModel;
+    public static DataViewModel dataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,12 +169,16 @@ public class AppActivity extends AppCompatActivity implements
 
     @Override
     public void onMarkerTap(DriveRide dr) {
+        openPopupToRideOrDrive(dr.getUserName(), dr.getType());
+    }
+
+    private void openPopupToRideOrDrive(String username, String type) {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
         markerClickPopupDialog = new MarkerClickPopupDialog();
         Bundle args = new Bundle();
-        args.putString("username", dr.getUserName());
-        args.putString("type", dr.getType());
+        args.putString("username", username);
+        args.putString("type", type);
         markerClickPopupDialog.setArguments(args);
         markerClickPopupDialog.show(ft, "dialog");
     }
@@ -200,8 +204,6 @@ public class AppActivity extends AppCompatActivity implements
         DriveRide dr = new DriveRide();
         dr.setUserName(MyApplication.currentStudent.userName.replace(".",","));
         dr.setType(type);
-
-        // TODO: get image from fb or local
 
         // address sent
         if (address != null) {
@@ -271,11 +273,6 @@ public class AppActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onItemSelected(String studentId) {
-
-    }
-
-    @Override
     public void onBackPressed() {
         if (bottomNavigationView.getSelectedItemId () != R.id.app_nav_item_map) {
             bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
@@ -298,5 +295,10 @@ public class AppActivity extends AppCompatActivity implements
         if (days[6]) daysBlock += "Saturday";
 
         return daysBlock;
+    }
+
+    @Override
+    public void onListItemSelected(String username, String type) {
+        openPopupToRideOrDrive(username, type);
     }
 }

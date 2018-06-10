@@ -97,8 +97,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Location");
         myLocationMarker = myGoogleMap.addMarker(markerOptions);
 
-        AppActivity.dataModel = ViewModelProviders.of(this).get(DriveRideListViewModel.class);
-        AppActivity.dataModel.getData().observe(this, driveRideList -> {
+        AppActivity.dataModel = ViewModelProviders.of(this).get(DataViewModel.class);
+        AppActivity.dataModel.getDriveRideListData().observe(this, driveRideList -> {
             if(driveRideList != null)
                 myGoogleMap.clear();
                 myLocationMarker = myGoogleMap.addMarker(markerOptions);

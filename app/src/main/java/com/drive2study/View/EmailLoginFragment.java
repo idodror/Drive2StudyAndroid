@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.drive2study.R;
@@ -30,6 +31,9 @@ public class EmailLoginFragment extends Fragment {
 
     EditText passwordEt;
     TextView userEmailText;
+    ProgressBar progressBar;
+
+    public ProgressBar getProgressBar(){return progressBar;}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,11 +43,15 @@ public class EmailLoginFragment extends Fragment {
         final String emailAddress = getArguments().getString("username");
         userEmailText.setText(emailAddress);
         passwordEt = view.findViewById(R.id.et_login_password);
+        progressBar = view.findViewById(R.id.progress_login_bar);
+        progressBar.setVisibility(View.GONE);
+
 
         Button signIn = view.findViewById(R.id.btn_signin);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String password = passwordEt.getText().toString();
                 if (delegate != null)
                     delegate.onSignIn(emailAddress, password);
@@ -70,6 +78,7 @@ public class EmailLoginFragment extends Fragment {
 
         return view;
     }
+
 
     @Override
     public void onAttach(Context context) {

@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.drive2study.Model.Model;
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSignIn(String email, String password) {
+        ProgressBar progress = ((EmailLoginFragment)getSupportFragmentManager().getFragments().get(0)).getProgressBar();
         Log.d("TAG", "Signing in with: " + email + ", pass: " + password);
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -115,12 +118,15 @@ public class MainActivity extends AppCompatActivity implements
                         @Override
                         public void onDone(Student student) {
                             MyApplication.currentStudent = student;
+                            progress.setVisibility(View.GONE);
                             startActivity(new Intent(MainActivity.this, AppActivity.class));
                         }
                     });
                 }
                 else{
                     Log.d("TAG", "Failure");
+                    progress.setVisibility(View.GONE);
+
                 }
             }
         });

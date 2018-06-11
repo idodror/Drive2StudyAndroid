@@ -1,6 +1,7 @@
 package com.drive2study.View;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -10,7 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
+import com.drive2study.Model.Model;
+import com.drive2study.Model.Student;
 import com.drive2study.R;
 
 import java.util.Objects;
@@ -37,15 +41,14 @@ public class MarkerClickPopupDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_popup_marker_click, container, false);
         getDialog().setTitle("Marker Details");
 
-        if (getArguments() != null) {
+        if (getArguments() != null)
             username = getArguments().getString("username");
-        }
 
         userImg = view.findViewById(R.id.popup_img_avatar);
         fullNameTxt = view.findViewById(R.id.popup_txt_full_name);
         daysInCollegeTxt = view.findViewById(R.id.popup_txt_days_in_college_list);
 
-        fullNameTxt.setText(username);
+        GetStudentData(username);
 
         Button closeBtn = view.findViewById(R.id.popup_btn_close);
         closeBtn.setOnClickListener(v -> {
@@ -54,7 +57,7 @@ public class MarkerClickPopupDialog extends DialogFragment {
         });
 
         Button driveOrRideBtn = view.findViewById(R.id.popup_btn_drive_or_ride);
-        String driveOrRideButtonString = Objects.equals(getArguments().getString("type"), DriveRide.DRIVER) ? "Drive with" : "Ride with!";
+        String driveOrRideButtonString = Objects.equals(getArguments().getString("type"), DriveRide.DRIVER) ? "Ride with!" : "Drive with!";
         driveOrRideBtn.setText(driveOrRideButtonString);
         driveOrRideBtn.setOnClickListener(v -> {
             if (delegate != null)
@@ -62,6 +65,30 @@ public class MarkerClickPopupDialog extends DialogFragment {
         });
 
         return view;
+    }
+
+    private void GetStudentData(String username) {
+        Model.instance.getStudent(username, new Model.GetStudentListener() {
+            @Override
+            public void onDone(Student student) {
+                String studentName = student.getfName() + " " + student.getlName();
+                fullNameTxt.setText(studentName);
+                daysInCollegeTxt.setText(AppActivity.daysAsStringBlock(student.getDaysInCollege()));
+                if (student.getImageUrl() != null) {
+                    String url = student.getImageUrl();
+                    if (!url.equals("")) {
+                        Model.instance.getImage(url, new Model.GetImageListener() {
+                            @Override
+                            public void onDone(Bitmap imageBitmap) {
+                                if (imageBitmap != null) {
+                                    userImg.setImageBitmap(imageBitmap);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 
     @Override

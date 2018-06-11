@@ -104,4 +104,14 @@ public class Student implements Serializable {
         }
         return list;
     }
+
+    public static boolean[] intListToBoolArray(List<Integer> daysInCollege) {
+        boolean[] array = new boolean[7];
+        for (int i = 0; i < 7; i++) {
+            if (daysInCollege.get(i) == 1)
+                array[i] = true;
+            else array[i] = false;
+        }
+        return array;
+    }
 }

@@ -1,8 +1,11 @@
 package com.drive2study;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements
 
     FragmentManager fragmentManager;
     FirebaseAuth auth;
+    Context contextCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +43,28 @@ public class MainActivity extends AppCompatActivity implements
 
         fragmentManager = getSupportFragmentManager();
         auth = FirebaseAuth.getInstance();
+        contextCompat = getBaseContext();
+
+        getPermissionsIfNeeded();
 
         if (savedInstanceState == null) {
             LoginScreenFragment fragment = new LoginScreenFragment();
             FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
             tran.add(R.id.main_container, fragment);
             tran.commit();
+        }
+    }
+
+    private void getPermissionsIfNeeded() {
+        int check;
+        String[] permissions = { android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                 android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                 android.Manifest.permission.ACCESS_COARSE_LOCATION };
+
+        for (String permission : permissions) {
+            check = ActivityCompat.checkSelfPermission(this, permission);
+            if (check != PackageManager.PERMISSION_GRANTED)
+                requestPermissions(new String[]{ permission },1024);
         }
     }
 
@@ -72,18 +92,17 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-
-
     }
 
     @Override
     public void onConWithFacebook() {
-        MyApplication.currentStudent.study = "Computer Science";
-        MyApplication.currentStudent.userName = "ido@bla,com";
-        MyApplication.currentStudent.fName = "Ido";
-        MyApplication.currentStudent.lName = "Dror";
-        MyApplication.currentStudent.daysInCollege[2] = true;
-        startActivity(new Intent(MainActivity.this, AppActivity.class));
+        Model.instance.getStudent("test2@gmail,com", new Model.GetStudentListener() {
+            @Override
+            public void onDone(Student student) {
+                MyApplication.currentStudent = student;
+                startActivity(new Intent(MainActivity.this, AppActivity.class));
+            }
+        });
     }
 
     @Override
@@ -97,10 +116,10 @@ public class MainActivity extends AppCompatActivity implements
                    Model.instance.getStudent(email.replace(".",","), new Model.GetStudentListener() {
                         @Override
                         public void onDone(Student student) {
-                            MyApplication.currentStudent=student;
+                            MyApplication.currentStudent = student;
+                            startActivity(new Intent(MainActivity.this, AppActivity.class));
                         }
                     });
-                    startActivity(new Intent(MainActivity.this, AppActivity.class));
                 }
                 else{
                     Log.d("TAG", "Failure");

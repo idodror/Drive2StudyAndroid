@@ -12,12 +12,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -100,8 +102,14 @@ public class ModelFirebase {
         ref.child("students").child(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue()!=null) {
-                    listener.onDone(dataSnapshot.getValue(Student.class));
+                if (dataSnapshot.getValue() != null) {
+                    Student student = dataSnapshot.getValue(Student.class);
+                    GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {};
+                    ArrayList<Integer> daysAsIntList = dataSnapshot.child("days").getValue(t);
+                    boolean[] daysAsArray = Student.intListToBoolArray(daysAsIntList);
+                    if (student != null)
+                        student.setDaysInCollege(daysAsArray);
+                    listener.onDone(student);
                 } else {
                     // User does not exist. NOW call createUserWithEmailAndPassword
                     listener.onDone(new Student());

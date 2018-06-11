@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.drive2study.AppActivity;
 import com.drive2study.Model.Model;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
@@ -44,7 +45,7 @@ public class ShowProfileFragment extends Fragment {
         String imgUrl = MyApplication.currentStudent.getImageUrl();
         nameTxt.setText(fullName);
         learningTxt.setText(MyApplication.currentStudent.getStudy());
-        daysList.setText(daysAsStringBlock());
+        daysList.setText(AppActivity.daysAsStringBlock(MyApplication.currentStudent.getDaysInCollege()));
 
         if(imgUrl != null && !imgUrl.equals("")) {
             Model.instance.getImage(imgUrl, imageBitmap -> {
@@ -64,20 +65,6 @@ public class ShowProfileFragment extends Fragment {
         });
 
         return view;
-    }
-
-    private String daysAsStringBlock() {
-        boolean[] days = MyApplication.currentStudent.getDaysInCollege();
-        String daysBlock = "";
-        if (days[0]) daysBlock += "Sunday\n";
-        if (days[1]) daysBlock += "Monday\n";
-        if (days[2]) daysBlock += "Tuesday\n";
-        if (days[3]) daysBlock += "Wednesday\n";
-        if (days[4]) daysBlock += "Thursday\n";
-        if (days[5]) daysBlock += "Friday\n";
-        if (days[6]) daysBlock += "Saturday";
-
-        return daysBlock;
     }
 
     @Override

@@ -195,7 +195,7 @@ public class Model {
             }
             File imageFile = new File(dir,imageFileName);
             imageFile.createNewFile();
-            imageFile.createNewFile();
+            //imageFile.createNewFile();
 
             OutputStream out = new FileOutputStream(imageFile);
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);

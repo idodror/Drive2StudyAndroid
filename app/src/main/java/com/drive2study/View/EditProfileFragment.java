@@ -41,7 +41,8 @@ public class EditProfileFragment extends Fragment {
     Button changeAvatar;
     ImageView avatar;
     CheckBox[] days = new CheckBox[7];
-
+    Bitmap imageBitmap;
+    boolean imageChanged;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +59,17 @@ public class EditProfileFragment extends Fragment {
         firstNameEt.setText(MyApplication.currentStudent.fName);
         lastNameEt.setText(MyApplication.currentStudent.lName);
         studyEt.setText(MyApplication.currentStudent.study);
+
+        imageChanged = false;
+
+        String url = MyApplication.currentStudent.getImageUrl();
+        if(url != null && !url.equals("")) {
+            Model.instance.getImage(url, imageBitmapFromDB -> {
+                if(imageBitmapFromDB != null)
+                    avatar.setImageBitmap(imageBitmapFromDB);
+            });
+        }
+
         for (int i = 0; i < 7; i++)
             if (MyApplication.currentStudent.daysInCollege[i])
                 days[i].setChecked(true);
@@ -72,17 +84,19 @@ public class EditProfileFragment extends Fragment {
                 student.fName = firstNameEt.getText().toString();
                 student.lName = lastNameEt.getText().toString();
                 student.study = studyEt.getText().toString();
+                student.imageUrl = MyApplication.currentStudent.getImageUrl();
+
                 for (int i = 0; i < 7; i++)
                     if (days[i].isChecked())
                         student.daysInCollege[i] = true;
                 //save image
                 if (delegate != null) {
-                    if (imageBitmap != null) {
+                    if (imageBitmap != null && imageChanged) {
                         Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
                             @Override
                             public void onDone(String url) {
                                 //save student obj
-                                student.imageUrl = url;
+                                student.setImageUrl(url);
                                 delegate.onSaveClicked(student);
                             }
                         });
@@ -106,7 +120,6 @@ public class EditProfileFragment extends Fragment {
         return view;
     }
 
-    Bitmap imageBitmap;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -115,6 +128,7 @@ public class EditProfileFragment extends Fragment {
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
             avatar.setImageBitmap(imageBitmap);
+            imageChanged = true;
         }
     }
 

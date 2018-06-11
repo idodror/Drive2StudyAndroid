@@ -14,7 +14,6 @@ public class DriveRide {
     private String fromWhere;
     private LatLng coordinates;
     private String type;
-    private String imageUrl;
 
     public DriveRide() {
         this.coordinates = new LatLng(0,0);
@@ -27,7 +26,6 @@ public class DriveRide {
         result.put("lat", coordinates.latitude);
         result.put("lng", coordinates.longitude);
         result.put("type", type);
-        result.put("imageUrl", imageUrl);
 
         return result;
     }
@@ -58,14 +56,6 @@ public class DriveRide {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
 }

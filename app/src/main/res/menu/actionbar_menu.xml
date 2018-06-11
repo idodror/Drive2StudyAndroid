@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_add"
+        android:id="@+id/toolbar_add_button"
+        android:icon="@android:drawable/ic_input_add"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_add"
-        android:title="Add"
-        app:showAsAction="always" />
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:visible="false" />
 
     <item
         android:id="@+id/toolbar_my_profile"

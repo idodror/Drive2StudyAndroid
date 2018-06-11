@@ -2,6 +2,7 @@ package com.drive2study.View;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.Model;
+import com.drive2study.Model.Student;
 import com.drive2study.R;
 
 public class DriveRideListFragment extends Fragment {
@@ -88,7 +90,7 @@ public class DriveRideListFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        //menu.findItem(R.id.toolbar_my_profile).setEnabled(false);
+        menu.findItem(R.id.toolbar_add_button).setVisible(true);
     }
     class MyAdapter extends BaseAdapter {
         private String type;
@@ -121,26 +123,36 @@ public class DriveRideListFragment extends Fragment {
 
             }
 
-            final DriveRide dr_rd = AppActivity.dataModel.getData().getValue().get(i);
+            final DriveRide dr = AppActivity.dataModel.getData().getValue().get(i);
 
             TextView userName = view.findViewById(R.id.driveListItem_name);
             TextView fromWhere = view.findViewById(R.id.driveListItem_fromWhere);
             final ImageView avatarView = view.findViewById(R.id.driveListItem_avatar);
 
-            userName.setText(dr_rd.getUserName());
-            fromWhere.setText(dr_rd.getFromWhere());
+            userName.setText(dr.getUserName());
+            fromWhere.setText(dr.getFromWhere());
             avatarView.setImageResource(R.drawable.student_avatar);
-            avatarView.setTag(dr_rd.getUserName());
-            /*if (dr_rd.getImageUrl() != null){
-                Model.instance.getImage(dr_rd.getImageUrl(), new Model.GetImageListener() {
-                    @Override
-                    public void onDone(Bitmap imageBitmap) {
-                        if (dr_rd.getUserName().equals(avatarView.getTag()) && imageBitmap != null) {
-                            avatarView.setImageBitmap(imageBitmap);
+            avatarView.setTag(dr.getUserName());
+
+            Model.instance.getStudent(dr.getUserName(), new Model.GetStudentListener() {
+                @Override
+                public void onDone(Student student) {
+                    if (student.getImageUrl() != null) {
+                        String url = student.getImageUrl();
+                        if (!url.equals("")) {
+                            Model.instance.getImage(url, new Model.GetImageListener() {
+                                @Override
+                                public void onDone(Bitmap imageBitmap) {
+                                    if (dr.getUserName().equals(avatarView.getTag()) && imageBitmap != null) {
+                                        avatarView.setImageBitmap(imageBitmap);
+                                    }
+                                }
+                            });
                         }
                     }
-                });
-            }*/
+                }
+            });
+
             return view;
         }
     }

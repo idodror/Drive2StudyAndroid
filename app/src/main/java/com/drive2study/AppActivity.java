@@ -119,7 +119,7 @@ public class AppActivity extends AppCompatActivity implements
             case R.id.toolbar_my_profile:
                 setFragment(showProfileFragment);
                 break;
-            case R.id.action_add:
+            case R.id.toolbar_add_button:
                 openAddDriverRiderPopup();
                 break;
             case R.id.toolbar_logout:
@@ -199,10 +199,9 @@ public class AppActivity extends AppCompatActivity implements
     public void onAddPopupOkClicked(String address, String type, LatLng gpsCoordinates) {
         DriveRide dr = new DriveRide();
         dr.setUserName(MyApplication.currentStudent.userName.replace(".",","));
-        if (MyApplication.currentStudent.imageUrl != null)
-            dr.setImageUrl(MyApplication.currentStudent.imageUrl);
-        else dr.setImageUrl("");
         dr.setType(type);
+
+        // TODO: get image from fb or local
 
         // address sent
         if (address != null) {
@@ -250,7 +249,7 @@ public class AppActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
 
-        String yourAddress = "bla";
+        String yourAddress = null;
         if (address.size() > 0) {
             yourAddress = address.get(0).getAddressLine(0);
         }
@@ -280,9 +279,24 @@ public class AppActivity extends AppCompatActivity implements
     public void onBackPressed() {
         if (bottomNavigationView.getSelectedItemId () != R.id.app_nav_item_map) {
             bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
+        } else if (bottomNavigationView.getSelectedItemId () == R.id.app_nav_item_map && !mapFragment.isVisible()) {
+            bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
         }
         else {
             super.onBackPressed();
         }
+    }
+
+    public static String daysAsStringBlock(boolean[] days) {
+        String daysBlock = "";
+        if (days[0]) daysBlock += "Sunday\n";
+        if (days[1]) daysBlock += "Monday\n";
+        if (days[2]) daysBlock += "Tuesday\n";
+        if (days[3]) daysBlock += "Wednesday\n";
+        if (days[4]) daysBlock += "Thursday\n";
+        if (days[5]) daysBlock += "Friday\n";
+        if (days[6]) daysBlock += "Saturday";
+
+        return daysBlock;
     }
 }

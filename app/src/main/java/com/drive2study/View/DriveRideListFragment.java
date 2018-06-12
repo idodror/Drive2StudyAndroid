@@ -45,7 +45,8 @@ public class DriveRideListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drivers_list, container, false);
 
-        this.type = getArguments().getString("type");
+        if (getArguments() != null)
+            this.type = getArguments().getString("type");
 
         list = view.findViewById(R.id.drivers_list_list);
         list.setAdapter(driveRideCellAdapter);
@@ -57,12 +58,14 @@ public class DriveRideListFragment extends Fragment {
                 driveRideList.removeIf(rec-> !rec.getType().equals(this.type));
 
             driveRideCellAdapter.notifyDataSetChanged();
-            Log.d("TAG","notifyDataSetChanged" + driveRideList.size());
+            if (driveRideList != null)
+                Log.d("TAG","notifyDataSetChanged" + driveRideList.size());
         });
 
         AppActivity.dataModel.getStudentsListData().observe(this, studentsList -> {
             driveRideCellAdapter.notifyDataSetChanged();
-            Log.d("TAG","notifyDataSetChanged" + studentsList.size());
+            if (studentsList != null)
+                Log.d("TAG","notifyDataSetChanged" + studentsList.size());
         });
 
         list.setOnItemClickListener((AdapterView<?> parent, View view12, int position, long id) -> {
@@ -93,7 +96,7 @@ public class DriveRideListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Model.instance.cancellGetAllDriveRide();
+        Model.instance.cancelGetAllDriveRide();
         Model.instance.cancellGetAllStudents();
     }
 

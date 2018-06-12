@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import com.drive2study.AppActivity;
 import com.drive2study.Model.DriveRide;
 import com.drive2study.Model.GPSTracker;
+import com.drive2study.Model.Model;
 import com.drive2study.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,14 +56,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         mapMarkersToDr = new HashMap<>();
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mapView = view.findViewById(R.id.map);
@@ -99,10 +101,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         AppActivity.dataModel = ViewModelProviders.of(this).get(DataViewModel.class);
         AppActivity.dataModel.getDriveRideListData().observe(this, driveRideList -> {
-            if(driveRideList != null)
+            if(driveRideList != null) {
                 myGoogleMap.clear();
                 myLocationMarker = myGoogleMap.addMarker(markerOptions);
                 addAllMapMarkers(driveRideList);
+            }
         });
     }
 
@@ -128,10 +131,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (vectorDrawable != null) {
             vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
         }
-        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        background.draw(canvas);
-        vectorDrawable.draw(canvas);
+        Bitmap bitmap = null;
+        if (background != null) {
+            bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            background.draw(canvas);
+            if (vectorDrawable != null)
+                vectorDrawable.draw(canvas);
+        }
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 

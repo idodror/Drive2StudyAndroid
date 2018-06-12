@@ -7,14 +7,14 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.drive2study.MyApplication;
 
-@Database(entities = {Student.class}, version = 1)
+@Database(entities = {DriveRide.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 abstract class AppLocalDbRepository extends RoomDatabase {
-    public abstract StudentDao studentDao();
+    public abstract DriveRideDao driveRideDao();
 }
 
-public class AppLocalDB {
+public class AppLocalDb {
     static public AppLocalDbRepository db = Room.databaseBuilder(MyApplication.context,
             AppLocalDbRepository.class,
-            "Student.db").fallbackToDestructiveMigration().build();
+            "dbFileName.db").fallbackToDestructiveMigration().build();
 }

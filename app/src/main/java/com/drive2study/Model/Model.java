@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Model {
+
     public static Model instance = new Model();
     ModelFirebase modelFirebase;
     private Model(){
@@ -79,20 +80,31 @@ public class Model {
     ///////////          DriveRide                   ///////
     ////////////////////////////////////////////////////////
 
-    public void cancellGetAllDriveRide() {
+    public void cancelGetAllDriveRide() {
         modelFirebase.cancelGetAllDriveRide();
     }
 
-    class DriveRideListData extends  MutableLiveData<List<DriveRide>>{
+    class DriveRideListData extends MutableLiveData<List<DriveRide>> {
+
         @Override
         protected void onActive() {
             super.onActive();
-            modelFirebase.getAllDriveRide(new ModelFirebase.GetAllDriveRideListener() {
-                @Override
-                public void onSuccess(List<DriveRide> driveRideList) {
-                    Log.d("TAG","FB data = " + driveRideList.size() );
+            // new thread tsks
+            // 1. get the students list from the local DB
+            DriveRideAsyncDao.getAll((List<DriveRide> data) -> {
+                // 2. onComplete: update the live data with the new student list
+                setValue(data);
+                Log.d("TAG","got students from local DB " + data.size());
+
+                // 3. get the student list from firebase
+                modelFirebase.getAllDriveRide(driveRideList -> {
+                    // 4. onSuccess: update the live data with the new student list
                     setValue(driveRideList);
-                }
+                    Log.d("TAG","got driveRides from firebase " + driveRideList.size());
+
+                    // 5. onComplete: update the local DB
+                    DriveRideAsyncDao.insertAll(driveRideList, data1 -> Log.d("TAG","local data updated: " + data1.toString()));
+                });
             });
         }
 
@@ -100,10 +112,10 @@ public class Model {
         protected void onInactive() {
             super.onInactive();
             modelFirebase.cancelGetAllDriveRide();
-            Log.d("TAG","cancelGetAllDriveRide");
+            Log.d("TAG","cancelGetAllDriveRides");
         }
 
-        public DriveRideListData() {
+        DriveRideListData() {
             super();
             setValue(new LinkedList<>());
         }

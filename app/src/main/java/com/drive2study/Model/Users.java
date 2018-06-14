@@ -64,7 +64,7 @@ public class Users extends AppCompatActivity {
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith = al.get(position);
+                MessageDetails.chatWith = al.get(position);
                 startActivity(new Intent(Users.this, ChatFragment.class));
             }
         });
@@ -80,7 +80,7 @@ public class Users extends AppCompatActivity {
             while(i.hasNext()){
                 key = i.next().toString();
 
-                if(!key.equals(UserDetails.username)) {
+                if(!key.equals(MessageDetails.username)) {
                     al.add(key);
                 }
 

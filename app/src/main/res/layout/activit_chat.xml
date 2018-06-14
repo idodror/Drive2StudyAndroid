@@ -33,6 +33,10 @@
         layout="@layout/message_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:gravity="bottom" />
+
+    <Button
+        android:layout_width="351dp"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 import android.webkit.URLUtil;
 
@@ -160,9 +161,42 @@ public class Model {
     public void addDriveRide(DriveRide dr_rd){ modelFirebase.addDriveRide(dr_rd); }
 
 
+    ////////////////////////////////////////////////////////
+    //  Messages                                        ////
+    ////////////////////////////////////////////////////////
+    public void addMessage (MessageDetails msg){
+        modelFirebase.addMessage(msg);
+    }
+
+    class MessagesListData extends MutableLiveData<List<MessageDetails>>{
+        @Override
+        protected void onActive() {
+            super.onActive();
+            modelFirebase.getAllMessages(messagesList -> {
+                setValue(messagesList);
+            });
+        }
+
+        @Override
+        protected void onInactive() {
+            super.onInactive();
+            modelFirebase.cancelGetAllMessages();
+        }
+
+        public MessagesListData() {
+            super();
+            setValue(new LinkedList<MessageDetails>());
+        }
+    }
+    MessagesListData messagesListData = new MessagesListData();
+
+    public LiveData<List<MessageDetails>> getAllMessages(){
+        return messagesListData;
+    }
+
 
     ////////////////////////////////////////////////////////
-    //  Handle Image Files
+    //  Handle Image Files                              ////
     ////////////////////////////////////////////////////////
 
     public interface SaveImageListener{

@@ -20,6 +20,7 @@ import com.drive2study.Model.Model;
 import com.drive2study.Model.Student;
 import com.drive2study.View.AddDriverRiderPopupDialog;
 import com.drive2study.View.ChatFragment;
+import com.drive2study.View.ChatListFragment;
 import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.DataViewModel;
 import com.drive2study.View.EditProfileFragment;
@@ -46,7 +47,8 @@ public class AppActivity extends AppCompatActivity implements
         DriveRideListFragment.DriveRideListFragmentDelegate,
         AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate,
         ChatFragment.ChatFragmentDelegate,
-        ExitPopupDialog.ExitPopupDialogDelegate {
+        ExitPopupDialog.ExitPopupDialogDelegate,
+        ChatListFragment.ChatListFragmentDelegate{
 
     private BottomNavigationView bottomNavigationView;
     private MapFragment mapFragment;
@@ -59,6 +61,7 @@ public class AppActivity extends AppCompatActivity implements
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
     private ChatFragment chatFragment;
+    private ChatListFragment chatListFragment;
     public static DataViewModel dataModel;
 
     @Override
@@ -76,6 +79,7 @@ public class AppActivity extends AppCompatActivity implements
         driveListFragment = new DriveRideListFragment();
         rideListFragment = new DriveRideListFragment();
         chatFragment = new ChatFragment();
+        chatListFragment = new ChatListFragment();
 
         bottomNavigationView = findViewById(R.id.app_nav_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -94,7 +98,7 @@ public class AppActivity extends AppCompatActivity implements
                     setFragment(rideListFragment);
                     break;
                 case R.id.app_nav_item_chat:
-                    setFragment(chatFragment);
+                    setFragment(chatListFragment);
                     break;
             }
             return true;
@@ -323,4 +327,8 @@ public class AppActivity extends AppCompatActivity implements
         openPopupToRideOrDrive(username, type);
     }
 
+    @Override
+    public void onChatListItemSelected(String username) {
+
+    }
 }

@@ -25,12 +25,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ModelFirebase {
 
     List<DriveRide> drList = null;
     DatabaseReference driveRideDatabase = FirebaseDatabase.getInstance().getReference().child("driveRide");
-
+    DatabaseReference msgDatabase = FirebaseDatabase.getInstance().getReference().child("messages");
     ////////////////////////////////////////////////////////
     ///////////          Student                   /////////
     ////////////////////////////////////////////////////////
@@ -46,6 +47,8 @@ public class ModelFirebase {
         DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("students");
         stRef.removeEventListener(eventListener);
     }
+
+
 
     interface GetAllStudentsListener{
         public void onSuccess(List<Student> studentslist);
@@ -203,6 +206,48 @@ public class ModelFirebase {
         if (lat != null && lng != null)
             dr.setCoordinates(new LatLng(lat, lng));
         return dr;
+    }
+
+
+    //chats
+    private ValueEventListener eventMessagesListener;
+
+    public void addMessage(MessageDetails msg) {
+        final Map<String, Object> dataMap = new HashMap<>();
+        String  uniqueID = UUID.randomUUID().toString();
+        dataMap.put(uniqueID,msg.toMap());
+        msgDatabase.updateChildren(dataMap);
+    }
+
+    interface GetAllMessagesListener{
+         void onSuccess(List<MessageDetails> messagesList);
+    }
+
+    public void getAllMessages(final GetAllMessagesListener listener) {
+        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("messages");
+
+        eventMessagesListener = stRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<MessageDetails> msgList = new LinkedList<>();
+
+                for (DataSnapshot stSnapshot: dataSnapshot.getChildren()) {
+                    MessageDetails msg = stSnapshot.getValue(MessageDetails.class);
+                    msgList.add(msg);
+                }
+                listener.onSuccess(msgList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void cancelGetAllMessages() {
+        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("messages");
+        stRef.removeEventListener(eventMessagesListener);
     }
 
     //Managing Files

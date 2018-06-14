@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,14 +17,15 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.drive2study.Model.UserDetails;
+import com.drive2study.Model.MessageDetails;
+import com.drive2study.Model.Model;
+import com.drive2study.MyApplication;
 import com.drive2study.R;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -63,36 +63,38 @@ public class ChatFragment extends Fragment {
         messageArea = view.findViewById(R.id.messageArea);
         scrollView = view.findViewById(R.id.scrollView);
 
-        Firebase.setAndroidContext(getContext());
-        reference = new Firebase("https://drivetostudyandorid.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
-
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
 
                 if(!messageText.equals("")){
-                    Map<String, String> map = new HashMap<String, String>();
-                    map.put("message", messageText);
-                    map.put("user", UserDetails.username);
-                    reference.push().setValue(map);
+                    MessageDetails newMsg = new MessageDetails();
+                    newMsg.setMessage(messageText);
+                    newMsg.setUsername(MyApplication.currentStudent.userName);
+                    newMsg.setChatWith("amonmoris@gmail.com");
+                    Model.instance.addMessage(newMsg);
                     messageArea.setText("");
                 }
             }
         });
 
+        Firebase.setAndroidContext(getContext());
+        //TODO: fix! add event lisetener!
+        reference = new Firebase("https://drivetostudyandorid.firebaseio.com/messages");
+
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Map map = dataSnapshot.getValue(Map.class);
-                String message = map.get("message").toString();
-                String userName = map.get("user").toString();
 
-                if(userName.equals(UserDetails.username)){
+                String message = dataSnapshot.getValue(MessageDetails.class).getMessage();
+                String userName =dataSnapshot.getValue(MessageDetails.class).getUsername();
+
+                if(userName.equals(MyApplication.currentStudent.userName)){
                     addMessageBox("You:-\n" + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
+                    //addMessageBox(MessageDetails.chatWith + ":-\n" + message, 2);
                 }
             }
 

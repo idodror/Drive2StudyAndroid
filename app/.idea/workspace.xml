@@ -10,13 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0994207e-65bc-4d8e-ada3-3e585b12e3bc" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_volley_volley_1_0_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_annotations_2_2_2_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_2_2_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_databind_2_2_2_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_firebase_firebase_client_android_2_5_2_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_firebase_firebase_client_jvm_2_5_2_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_firebase_tubesock_0_0_12_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/UserDetails.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/Users.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/activit_chat.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_user.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/message_area.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/AppActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/AppActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/Model.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/Model.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/ModelFirebase.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/ModelFirebase.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/View/ForgotPasswordFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/View/ForgotPasswordFragment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/View/LoginScreenFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/View/LoginScreenFragment.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/Model/ChatMessage.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_chat.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/message.xml" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,134 +54,70 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/MainActivity.java">
+      <file leaf-file-name="ChatFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4653">
-              <caret line="162" column="25" lean-forward="false" selection-start-line="162" selection-start-column="25" selection-end-line="162" selection-end-column="25" />
+            <state relative-caret-position="208">
+              <caret line="120" column="18" lean-forward="true" selection-start-line="120" selection-start-column="18" selection-end-line="120" selection-end-column="18" />
               <folding>
-                <element signature="e#4139#4140#0" expanded="true" />
-                <element signature="e#4185#4186#0" expanded="true" />
-                <element signature="e#5369#5370#0" expanded="true" />
-                <element signature="e#5415#5416#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2326#2342#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/MyApplication.java">
+      <file leaf-file-name="bubble_in.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bubble_in.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bubble_out.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bubble_out.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activit_chat.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activit_chat.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-16">
+              <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+              <folding>
+                <element signature="e#303#336#0" expanded="true" />
+                <element signature="e#361#396#0" expanded="true" />
+                <element signature="e#422#457#0" expanded="true" />
+                <element signature="e#481#514#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_user.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_user.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/AppActivity.java">
+      <file leaf-file-name="UserDetails.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/UserDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
+            <state relative-caret-position="231">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ForgotPasswordFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ForgotPasswordFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zzgx.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-database-15.0.0.aar/a3cd54a3e1c5576005876318ce7028f7/jars/classes.jar!/com/google/android/gms/internal/firebase_database/zzgx.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-              <folding>
-                <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-                <marker date="1528442350663" expanded="true" signature="456:567" ph="{...}" />
-                <marker date="1528442350663" expanded="true" signature="598:711" ph="{...}" />
-                <marker date="1528442350663" expanded="false" signature="749:760" ph=" { " />
-                <marker date="1528442350663" expanded="false" signature="777:783" ph=" }" />
-                <marker date="1528442350663" expanded="false" signature="815:826" ph=" { " />
-                <marker date="1528442350663" expanded="false" signature="843:849" ph=" }" />
-                <marker date="1528442350663" expanded="false" signature="879:890" ph=" { " />
-                <marker date="1528442350663" expanded="false" signature="907:913" ph=" }" />
-                <marker date="1528442350663" expanded="true" signature="943:954" ph=" { " />
-                <marker date="1528442350663" expanded="true" signature="974:980" ph=" }" />
-                <marker date="1528442350663" expanded="true" signature="1017:2010" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginScreenFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/LoginScreenFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zzhd.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-database-15.0.0.aar/a3cd54a3e1c5576005876318ce7028f7/jars/classes.jar!/com/google/android/gms/internal/firebase_database/zzhd.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-              <folding>
-                <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-                <marker date="1528442350663" expanded="true" signature="270:329" ph="{...}" />
-                <marker date="1528442350663" expanded="true" signature="359:1238" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Handler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/os/Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-              <folding>
-                <element signature="e#31153#31154#0" expanded="true" />
-                <element signature="e#31191#31192#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Looper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/os/Looper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="173" column="41" lean-forward="false" selection-start-line="173" selection-start-column="41" selection-end-line="173" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/Model.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="144" column="56" lean-forward="false" selection-start-line="144" selection-start-column="56" selection-end-line="144" selection-end-column="56" />
-              <folding>
-                <element signature="e#2248#2249#0" expanded="true" />
-                <element signature="e#2292#2293#0" expanded="true" />
-                <element signature="e#4437#4438#0" expanded="true" />
-                <element signature="e#4492#4493#0" expanded="true" />
-                <element signature="e#4727#4728#0" expanded="true" />
-                <element signature="e#4783#4784#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -189,6 +139,7 @@
       <find>onJ</find>
       <find>log</find>
       <find>addstu</find>
+      <find>setContentView</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2284,15 +2235,20 @@
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/Model/ChatMessage.java" />
         <option value="$PROJECT_DIR$/../build.gradle" />
         <option value="$PROJECT_DIR$/src/main/res/layout/fragment_chat.xml" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drive2study/View/CreateAccountFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/Model/ModelFirebase.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/View/ForgotPasswordFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/Model/Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/View/LoginScreenFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drive2study/AppActivity.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_user.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/message_area.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drive2study/View/CreateAccountFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drive2study/Model/Users.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activit_chat.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drive2study/Model/UserDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java" />
       </list>
     </option>
   </component>
@@ -2320,6 +2276,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
@@ -2355,6 +2312,23 @@
             </path>
             <path>
               <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="app" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -2362,7 +2336,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -2542,27 +2515,29 @@
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769367" sideWeight="0.15736246" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56785715" sideWeight="0.49676377" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32769367" sideWeight="0.84263754" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998219" sideWeight="0.55582523" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32769367" sideWeight="0.5226537" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="87" y="87" width="2386" height="1186" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32769367" sideWeight="0.47734627" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.104185216" sideWeight="0.47734627" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56785715" sideWeight="0.49676377" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25323623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769367" sideWeight="0.8450647" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998219" sideWeight="0.55582523" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2571,8 +2546,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2648,202 +2621,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/lang/reflect/Modifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21233">
-          <caret line="1323" column="0" lean-forward="false" selection-start-line="1323" selection-start-column="0" selection-end-line="1323" selection-end-column="0" />
-          <folding>
-            <element signature="e#25200#25201#0" expanded="false" />
-            <element signature="e#25249#25250#0" expanded="false" />
-            <element signature="e#43524#43525#0" expanded="false" />
-            <element signature="e#43558#43559#0" expanded="false" />
-            <element signature="e#53860#53861#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="e#2532#2533#0" expanded="false" />
-            <element signature="e#2567#2568#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20808">
-          <caret line="1262" column="0" lean-forward="false" selection-start-line="1262" selection-start-column="0" selection-end-line="1262" selection-end-column="0" />
-          <folding>
-            <element signature="e#50185#50186#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/app/BackStackRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10846">
-          <caret line="683" column="0" lean-forward="false" selection-start-line="683" selection-start-column="0" selection-end-line="683" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/app/FragmentManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31127">
-          <caret line="1920" column="0" lean-forward="false" selection-start-line="1920" selection-start-column="0" selection-end-line="1920" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2567">
-          <caret line="177" column="0" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/util/AbstractList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.1.aar/55ea0ed1e93428f04064d158c5f15415/jars/classes.jar!/com/google/firebase/auth/FirebaseAuth.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="91" column="42" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="116" column="19" lean-forward="false" selection-start-line="116" selection-start-column="19" selection-end-line="116" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="66" lean-forward="false" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/DriveRide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/jre/jre/lib/rt.jar!/java/util/concurrent/ThreadPoolExecutor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="902" column="0" lean-forward="false" selection-start-line="902" selection-start-column="0" selection-end-line="902" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/util/concurrent/ThreadPoolExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="616" column="0" lean-forward="false" selection-start-line="616" selection-start-column="0" selection-end-line="616" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/jre/jre/lib/rt.jar!/java/lang/Thread.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_drivers_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/MapFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
-          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/DriveRideListViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/DriveRideListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="793">
-          <caret line="135" column="41" lean-forward="false" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ShowProfileFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="12" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1528572709930" expanded="true" signature="2327:2720" ph="{...}" />
-            <marker date="1528572709930" expanded="true" signature="2778:3099" ph="{...}" />
-            <marker date="1528572709930" expanded="true" signature="3142:3200" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/message.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_chat.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="10" column="56" lean-forward="false" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+        <state relative-caret-position="231">
+          <caret line="7" column="5" lean-forward="false" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -2856,29 +2637,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="42" column="18" lean-forward="false" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/ChatMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1023">
           <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2886,7 +2648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="25" column="19" lean-forward="false" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2902,52 +2663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="47" column="41" lean-forward="false" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
-          <folding>
-            <marker date="1526915549146" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1526915549146" expanded="false" signature="152:754" ph="..." />
-            <marker date="1526915549146" expanded="true" signature="1103:1110" ph="{}" />
-            <marker date="1526915549146" expanded="true" signature="1150:1267" ph="{...}" />
-            <marker date="1526915549146" expanded="false" signature="1306:1317" ph=" { " />
-            <marker date="1526915549146" expanded="false" signature="1334:1340" ph=" }" />
-            <marker date="1526915549146" expanded="true" signature="1382:1535" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="1574:1883" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="1975:2394" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="2452:2569" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="2686:2768" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="2909:3003" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="3144:3321" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="3421:3503" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="3627:3721" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="3845:4022" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="4133:4216" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="4351:4445" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="4580:4757" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="4908:4982" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="5157:5287" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="5448:5526" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="5628:5711" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="5837:5931" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="6057:6234" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="6419:6549" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="6714:6844" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="7003:7078" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="7126:7330" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="7384:7659" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="7721:7997" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="8065:8412" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="8446:8720" ph="{...}" />
-            <marker date="1526915549146" expanded="false" signature="8775:8786" ph=" { " />
-            <marker date="1526915549146" expanded="false" signature="8851:8857" ph=" }" />
-            <marker date="1526915549146" expanded="false" signature="8912:8923" ph=" { " />
-            <marker date="1526915549146" expanded="false" signature="8989:8995" ph=" }" />
-            <marker date="1526915549146" expanded="true" signature="9051:9167" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="9199:9385" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="9442:10699" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="9569:9851" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="9897:10010" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="10059:10216" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="10267:10693" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2955,88 +2670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="396" column="104" lean-forward="false" selection-start-line="396" selection-start-column="104" selection-end-line="396" selection-end-column="104" />
-          <folding>
-            <marker date="1528442348438" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442348438" expanded="false" signature="148:1832" ph="..." />
-            <marker date="1528442348438" expanded="false" signature="2457:2468" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="2506:2512" ph=" }" />
-            <marker date="1528442348438" expanded="false" signature="2593:2604" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="2621:2627" ph=" }" />
-            <marker date="1528442348438" expanded="true" signature="2671:2879" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="2968:3610" ph="{...}" />
-            <marker date="1528442348438" expanded="false" signature="3666:3677" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="3694:3700" ph=" }" />
-            <marker date="1528442348438" expanded="false" signature="3742:3753" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="3806:3812" ph=" }" />
-            <marker date="1528442348438" expanded="true" signature="3948:5228" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="5258:5709" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="5785:5883" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="5950:6070" ph="{...}" />
-            <marker date="1528442348438" expanded="false" signature="6103:6114" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="6131:6137" ph=" }" />
-            <marker date="1528442348438" expanded="true" signature="6215:6624" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="6705:6789" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="6907:7026" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="7110:7149" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="7270:7392" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="7477:7586" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="7674:7713" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="7771:8326" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="8384:8808" ph="{...}" />
-            <marker date="1528442348438" expanded="false" signature="8883:8894" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="8927:8933" ph=" }" />
-            <marker date="1528442348438" expanded="true" signature="9033:9398" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="9492:10138" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="10243:10924" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="11022:11682" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="11769:11890" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="12004:12174" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="12281:12383" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="12446:12798" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="13001:13376" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="13446:14108" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="14170:14254" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="14341:14443" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="14554:14722" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="14825:14994" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="15112:15282" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="15288:15306" ph="/**...*/" />
-            <marker date="1528442348438" expanded="true" signature="15311:15335" ph="@{...}" />
-            <marker date="1528442348438" expanded="true" signature="15418:15515" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="15620:15717" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="15832:16000" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="16097:16266" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="16376:16544" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="16641:16810" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="16892:17018" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="17135:17420" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="17522:17971" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="18036:18107" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="18211:18487" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="18574:18671" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="18746:18843" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="18928:19025" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="19127:19273" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="19348:19454" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="19482:19585" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="19641:19798" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="19850:19964" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="19999:20120" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="20188:20248" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="20343:20453" ph="{...}" />
-            <marker date="1528442348438" expanded="false" signature="20358:20373" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="20381:20391" ph=" }" />
-            <marker date="1528442348438" expanded="true" signature="20436:20447" ph="{}" />
-            <marker date="1528442348438" expanded="true" signature="20571:20856" ph="{...}" />
-            <marker date="1528442348438" expanded="false" signature="20586:20601" ph=" { " />
-            <marker date="1528442348438" expanded="false" signature="20609:20619" ph=" }" />
-            <marker date="1528442348438" expanded="true" signature="20664:20850" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="20944:21287" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="20960:20971" ph="{}" />
-            <marker date="1528442348438" expanded="true" signature="21097:21281" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="21328:21396" ph="{...}" />
-            <marker date="1528442348438" expanded="true" signature="21435:21501" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3044,9 +2677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="24770" column="0" lean-forward="false" selection-start-line="24770" selection-start-column="0" selection-end-line="24770" selection-end-column="0" />
-          <folding>
-            <element signature="e#980629#980630#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3054,27 +2684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="67" column="29" lean-forward="false" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
-          <folding>
-            <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442350663" expanded="false" signature="173:346" ph="..." />
-            <marker date="1528442350663" expanded="true" signature="665:750" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="822:907" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="939:1768" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="1807:1818" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1853:1859" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1909:1920" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1948:1954" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="1983:1994" ph=" { " />
-            <marker date="1528442350663" expanded="true" signature="2011:2017" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="2062:2170" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="2222:2344" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="2394:3000" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="3038:3049" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="3108:3114" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="3145:3513" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="3544:3912" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="3973:4455" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3082,33 +2691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="59" column="42" lean-forward="false" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
-          <folding>
-            <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442350663" expanded="false" signature="152:530" ph="..." />
-            <marker date="1528442350663" expanded="true" signature="682:739" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="784:958" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="1001:1201" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="1235:1246" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1288:1294" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1323:1334" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1367:1373" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1417:1428" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1461:1467" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1523:1534" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1571:1577" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="1633:1644" ph=" { " />
-            <marker date="1528442350663" expanded="true" signature="1693:1699" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="1771:1836" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="1872:1883" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1927:1933" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1972:1983" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1999:2005" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="2033:2044" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="2069:2075" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="2125:2213" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="2247:2377" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="2408:2732" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3116,10 +2698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="508" column="24" lean-forward="false" selection-start-line="508" selection-start-column="24" selection-end-line="508" selection-end-column="24" />
-          <folding>
-            <element signature="e#18649#18650#0" expanded="false" />
-            <element signature="e#18682#18683#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3131,34 +2709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/CreateAccountFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/162dc532a3e8570984d32d80b177ee1b/jars/classes.jar!/com/google/android/gms/tasks/zzj.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <marker date="1526915549146" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1526915549146" expanded="true" signature="212:273" ph="{...}" />
-            <marker date="1526915549146" expanded="true" signature="303:486" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/ModelFirebase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding>
-            <element signature="e#7234#7235#0" expanded="false" />
-            <element signature="e#7287#7288#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3166,13 +2720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="13" column="55" lean-forward="false" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
-          <folding>
-            <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442350663" expanded="true" signature="238:297" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="353:443" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="498:509" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="537:543" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3180,26 +2727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="40" column="38" lean-forward="false" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
-          <folding>
-            <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442350663" expanded="false" signature="173:363" ph="..." />
-            <marker date="1528442350663" expanded="true" signature="569:654" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="695:706" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="731:737" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="784:945" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="979:1081" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="1131:1282" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="1321:1415" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="1462:1473" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1501:1507" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1545:1556" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1600:1606" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="1648:1731" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="1761:1772" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1789:1795" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="1831:1842" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="1874:1880" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3207,20 +2734,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-          <folding>
-            <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442350663" expanded="true" signature="456:567" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="598:711" ph="{...}" />
-            <marker date="1528442350663" expanded="false" signature="749:760" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="777:783" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="815:826" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="843:849" ph=" }" />
-            <marker date="1528442350663" expanded="false" signature="879:890" ph=" { " />
-            <marker date="1528442350663" expanded="false" signature="907:913" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="943:954" ph=" { " />
-            <marker date="1528442350663" expanded="true" signature="974:980" ph=" }" />
-            <marker date="1528442350663" expanded="true" signature="1017:2010" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3228,11 +2741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <marker date="1528442350663" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528442350663" expanded="true" signature="270:329" ph="{...}" />
-            <marker date="1528442350663" expanded="true" signature="359:1238" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3240,16 +2748,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding>
-            <element signature="e#31153#31154#0" expanded="true" />
-            <element signature="e#31191#31192#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/os/Looper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
+        <state relative-caret-position="4983">
           <caret line="173" column="41" lean-forward="false" selection-start-line="173" selection-start-column="41" selection-end-line="173" selection-end-column="41" />
           <folding />
         </state>
@@ -3257,22 +2761,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="144" column="56" lean-forward="false" selection-start-line="144" selection-start-column="56" selection-end-line="144" selection-end-column="56" />
+        <state relative-caret-position="4785">
+          <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
           <folding>
-            <element signature="e#2248#2249#0" expanded="true" />
-            <element signature="e#2292#2293#0" expanded="true" />
-            <element signature="e#4437#4438#0" expanded="true" />
-            <element signature="e#4492#4493#0" expanded="true" />
-            <element signature="e#4727#4728#0" expanded="true" />
-            <element signature="e#4783#4784#0" expanded="true" />
+            <marker date="1528972427552" expanded="true" signature="5776:5803" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ForgotPasswordFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
+        <state relative-caret-position="1122">
           <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
           <folding />
         </state>
@@ -3280,38 +2779,255 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/LoginScreenFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="1485">
+          <caret line="59" column="21" lean-forward="false" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/MyApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4653">
-          <caret line="162" column="25" lean-forward="false" selection-start-line="162" selection-start-column="25" selection-end-line="162" selection-end-column="25" />
-          <folding>
-            <element signature="e#4139#4140#0" expanded="true" />
-            <element signature="e#4185#4186#0" expanded="true" />
-            <element signature="e#5369#5370#0" expanded="true" />
-            <element signature="e#5415#5416#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="132">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_login_screen.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1518">
+          <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/AppActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
+        <state relative-caret-position="157">
+          <caret line="96" column="46" lean-forward="false" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#6449#6450#0" expanded="false" />
+            <element signature="e#6497#6498#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="42" column="52" lean-forward="false" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/message_area.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="26" column="15" lean-forward="false" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/CreateAccountFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="37" column="83" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/DriveRideListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="135" column="41" lean-forward="false" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/EditProfileFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="35" column="5" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="35" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ShowProfileFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="40" lean-forward="false" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/MapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="66" column="54" lean-forward="false" selection-start-line="64" selection-start-column="3" selection-end-line="66" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/Users.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="70" column="5" lean-forward="false" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1598#1599#0" expanded="false" />
+            <element signature="e#1644#1645#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/ModelFirebase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="31" column="42" lean-forward="false" selection-start-line="31" selection-start-column="42" selection-end-line="31" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bubble_in.9">
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bubble_out.9.png">
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_app.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/dialog_popup_exit.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="1" column="44" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-xxhdpi/chat_bubble_out.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-xhdpi/chat_bubble_out.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-mdpi/chat_bubble_out.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-hdpi/chat_bubble_out.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-mdpi/chat_bubble_in.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-hdpi/chat_bubble_in.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bubble_in.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bubble_out.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activit_chat.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="e#303#336#0" expanded="true" />
+            <element signature="e#361#396#0" expanded="true" />
+            <element signature="e#422#457#0" expanded="true" />
+            <element signature="e#481#514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_user.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/Model/UserDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drive2study/View/ChatFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="120" column="18" lean-forward="true" selection-start-line="120" selection-start-column="18" selection-end-line="120" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2326#2342#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

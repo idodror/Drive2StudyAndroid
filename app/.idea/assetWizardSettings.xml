@@ -34,10 +34,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Keren\Desktop\logo.PNG" />
-                                      <entry key="outputName" value="logo" />
+                                      <entry key="imageAsset" value="C:\Users\Keren\Desktop\bubble_out.png" />
+                                      <entry key="outputName" value="chat_bubble_out" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="000000" />
+                                      <entry key="themeColor" value="b575a5" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -75,6 +75,7 @@ public class AppActivity extends AppCompatActivity implements
         fragmentManager = getSupportFragmentManager();
         driveListFragment = new DriveRideListFragment();
         rideListFragment = new DriveRideListFragment();
+        chatFragment = new ChatFragment();
 
         bottomNavigationView = findViewById(R.id.app_nav_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -93,7 +94,7 @@ public class AppActivity extends AppCompatActivity implements
                     setFragment(rideListFragment);
                     break;
                 case R.id.app_nav_item_chat:
-                    Toast.makeText(AppActivity.this, "Chat Clicked", Toast.LENGTH_SHORT).show();
+                    setFragment(chatFragment);
                     break;
             }
             return true;

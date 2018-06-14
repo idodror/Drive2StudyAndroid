@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class AddDriverRiderPopupDialog extends DialogFragment {
 
     public interface AddDriverRiderPopupDialogDelegate {
-        void onAddPopupClose();
+        void onClose(DialogFragment dialogFragment);
         void onAddPopupOkClicked(String address, String type, LatLng gpsCoordinates);
     }
 
@@ -38,10 +38,10 @@ public class AddDriverRiderPopupDialog extends DialogFragment {
         Button closeBtn = view.findViewById(R.id.popup_btn_close);
         closeBtn.setOnClickListener(v -> {
             if (delegate != null)
-                delegate.onAddPopupClose();
+                delegate.onClose(this);
         });
 
-        Button okBtn = view.findViewById(R.id.yes_button);
+        Button okBtn = view.findViewById(R.id.add_popup_button);
         okBtn.setOnClickListener(v -> {
             if (delegate != null) {
                 if (delegate != null)

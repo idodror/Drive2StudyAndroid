@@ -80,4 +80,7 @@
     <string name="add_dialog_popup_text">Would you like to add your self into the list? Please fill in an address if you would like other location than yours.</string>
     <string name="add_dialog_popup_address">Address…</string>
     <string name="add_dialog_popup_yes">Add me to list</string>
+    <string name="exit_popup_txt">Would you like to exit?</string>
+    <string name="yes_string">Yes</string>
+    <string name="no_string">No</string>
 </resources>

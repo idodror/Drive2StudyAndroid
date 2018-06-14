@@ -1,5 +1,7 @@
 package com.drive2study;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -21,10 +23,14 @@ import com.drive2study.View.ChatFragment;
 import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.DataViewModel;
 import com.drive2study.View.EditProfileFragment;
+import com.drive2study.View.ExitPopupDialog;
+import com.drive2study.View.LoginScreenFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.MarkerClickPopupDialog;
 import com.drive2study.View.ShowProfileFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +45,8 @@ public class AppActivity extends AppCompatActivity implements
         MarkerClickPopupDialog.MarkerClickPopupDialogDelegate,
         DriveRideListFragment.DriveRideListFragmentDelegate,
         AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate,
-        ChatFragment.ChatFragmentDelegate {
+        ChatFragment.ChatFragmentDelegate,
+        ExitPopupDialog.ExitPopupDialogDelegate {
 
     private BottomNavigationView bottomNavigationView;
     private MapFragment mapFragment;
@@ -48,6 +55,7 @@ public class AppActivity extends AppCompatActivity implements
     private FragmentManager fragmentManager;
     private DialogFragment markerClickPopupDialog;
     private DialogFragment addDriverRiderPopupDialog;
+    private DialogFragment exitPopupDialog;
     private DriveRideListFragment driveListFragment;
     private DriveRideListFragment rideListFragment;
     private ChatFragment chatFragment;
@@ -123,6 +131,9 @@ public class AppActivity extends AppCompatActivity implements
                 openAddDriverRiderPopup();
                 break;
             case R.id.toolbar_logout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                MyApplication.sharedPref.edit().putBoolean("logout", true).apply();
                 break;
         }
         return true;
@@ -184,8 +195,8 @@ public class AppActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onClose() {
-        markerClickPopupDialog.dismissAllowingStateLoss();
+    public void onClose(DialogFragment dialogFragment) {
+        dialogFragment.dismissAllowingStateLoss();
     }
 
     @Override
@@ -194,10 +205,11 @@ public class AppActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onAddPopupClose() {
-        addDriverRiderPopupDialog.dismissAllowingStateLoss();
+    public void onYesExit() {
+        finish();
+        moveTaskToBack(false);
+        MyApplication.sharedPref.edit().putBoolean("exit", true).apply();
     }
-
 
     @Override
     public void onAddPopupOkClicked(String address, String type, LatLng gpsCoordinates) {
@@ -214,7 +226,7 @@ public class AppActivity extends AppCompatActivity implements
             dr.setCoordinates(gpsCoordinates);
             addNewDriveRideAsyncWithLatLng(dr, gpsCoordinates);
         }
-        onAddPopupClose();
+        onClose(addDriverRiderPopupDialog);
         Toast.makeText(AppActivity.this, "Added Successfully", Toast.LENGTH_SHORT).show();
     }
 
@@ -278,10 +290,18 @@ public class AppActivity extends AppCompatActivity implements
             bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
         } else if (bottomNavigationView.getSelectedItemId () == R.id.app_nav_item_map && !mapFragment.isVisible()) {
             bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
+        } else {
+            // the user see the map
+            openExitPopup();
+            //super.onBackPressed();
         }
-        else {
-            super.onBackPressed();
-        }
+    }
+
+    private void openExitPopup() {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.addToBackStack(null);
+        exitPopupDialog = new ExitPopupDialog();
+        exitPopupDialog.show(ft, "dialog");
     }
 
     public static String daysAsStringBlock(boolean[] days) {
@@ -301,4 +321,5 @@ public class AppActivity extends AppCompatActivity implements
     public void onListItemSelected(String username, String type) {
         openPopupToRideOrDrive(username, type);
     }
+
 }

@@ -19,6 +19,19 @@ import java.util.List;
 
 public class Model {
 
+    public interface GetStudentListener {
+        void onDone(Student student);
+    }
+
+    public interface GetStudentCredListener {
+        void onDone(StudentCred studentCred);
+    }
+
+    public interface GetUserExistsListener{
+        void onDone(boolean result);
+    }
+
+
     public static Model instance = new Model();
     ModelFirebase modelFirebase;
     private Model(){
@@ -33,8 +46,18 @@ public class Model {
         modelFirebase.cancelGetAllStudents();
     }
 
-    public interface GetStudentListener {
-        void onDone(Student student);
+    public void setUserCred(String email, String password) {
+        StudentCredDao studentCredDao = AppLocalDb.db.studentCredDao();
+        StudentCred studentCred = new StudentCred();
+        studentCred.setEmail(email);
+        studentCred.setPassword(password);
+
+        studentCredDao.clearTable();
+        studentCredDao.insert(studentCred);
+    }
+
+    public void clearStudentCred() {
+        AppLocalDb.db.studentCredDao().clearTable();
     }
 
     class StudentListData extends MutableLiveData<List<Student>>{
@@ -71,10 +94,17 @@ public class Model {
         modelFirebase.addStudent(st);
     }
 
-    public interface GetUserExistsListener{
-        void onDone(boolean result);
+    public void getStudent(String email, final GetStudentListener listener){
+        email = email.replace(".", ",");
+        modelFirebase.getStudent(email, student -> listener.onDone(student));
     }
 
+    public void getStudentCred(final GetStudentCredListener listener) {
+        List<StudentCred> list = AppLocalDb.db.studentCredDao().getUserCred();
+        if (list.size() == 1) {
+            listener.onDone(list.get(0));
+        } else listener.onDone(null);
+    }
 
     ////////////////////////////////////////////////////////
     ///////////          DriveRide                   ///////
@@ -152,15 +182,6 @@ public class Model {
             @Override
             public void onDone(boolean result) {
                 listener.onDone(result);
-            }
-        });
-    }
-
-    public void getStudent(String email, final GetStudentListener listener){
-        modelFirebase.getStudent(email, new GetStudentListener() {
-            @Override
-            public void onDone(Student student) {
-                listener.onDone(student);
             }
         });
     }

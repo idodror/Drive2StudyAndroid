@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,9 +20,6 @@ import com.drive2study.View.CreateAccountFragment;
 import com.drive2study.View.EmailLoginFragment;
 import com.drive2study.View.ForgotPasswordFragment;
 import com.drive2study.View.LoginScreenFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements
@@ -35,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements
     FragmentManager fragmentManager;
     FirebaseAuth auth;
     Context contextCompat;
+    LoginScreenFragment loginScreenFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +45,35 @@ public class MainActivity extends AppCompatActivity implements
 
         getPermissionsIfNeeded();
 
-        if (savedInstanceState == null) {
-            LoginScreenFragment fragment = new LoginScreenFragment();
-            FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
-            tran.add(R.id.main_container, fragment);
-            tran.commit();
+        MyApplication.sharedPref.edit().putBoolean("logout", false).apply();
+        MyApplication.sharedPref.edit().putBoolean("exit", false).apply();
+
+        Model.instance.getStudentCred(studentCred -> {
+            if (studentCred != null)
+                onSignIn(studentCred.getEmail(), studentCred.getPassword());
+            else showLoginScreen();
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (MyApplication.sharedPref.getBoolean("logout", false)) {
+            Model.instance.clearStudentCred();
+            showLoginScreen();
         }
+        if (MyApplication.sharedPref.getBoolean("exit", false)) {
+            finish();
+            moveTaskToBack(true);
+        }
+    }
+
+    public void showLoginScreen() {
+        if(loginScreenFragment == null)
+            loginScreenFragment = new LoginScreenFragment();
+        FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
+        tran.add(R.id.main_container, loginScreenFragment);
+        tran.commit();
     }
 
     private void getPermissionsIfNeeded() {
@@ -70,28 +91,27 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onConWithEmail(String email) {
+        Model.instance.userExists(email.replace(".",","), result -> {
+            if(FirebaseAuth.getInstance().getCurrentUser() != null)
 
-
-        Model.instance.userExists(email.replace(".",","), new Model.GetUserExistsListener() {
-            @Override
-            public void onDone(boolean result) {
-
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                Bundle args = new Bundle();
-                args.putString("username", email);
-                Fragment nextFrag;
-
-                if (result)
-                    nextFrag = new EmailLoginFragment();
-                else nextFrag = new CreateAccountFragment();
-
-                nextFrag.setArguments(args);
-                transaction.replace(R.id.main_container, nextFrag);
-                transaction.addToBackStack("firstAppScreen");
-                transaction.commit();
-            }
+                Model.instance.getStudent(email, student -> {
+                    loginAndSet(student);
+                });
+            else if (result)
+                setArgAndTranFragment(new EmailLoginFragment(), email);
+            else setArgAndTranFragment(new CreateAccountFragment(), email);
         });
+    }
 
+    private void setArgAndTranFragment(Fragment nextFrag, String email){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("username", email);
+
+        nextFrag.setArguments(args);
+        transaction.replace(R.id.main_container, nextFrag);
+        transaction.addToBackStack("firstAppScreen");
+        transaction.commit();
     }
 
     @Override
@@ -99,35 +119,43 @@ public class MainActivity extends AppCompatActivity implements
         Model.instance.getStudent("test2@gmail,com", new Model.GetStudentListener() {
             @Override
             public void onDone(Student student) {
-                MyApplication.currentStudent = student;
-                startActivity(new Intent(MainActivity.this, AppActivity.class));
+                loginAndSet(student);
             }
         });
     }
 
+    private void loginAndSet(Student student) {
+        MyApplication.currentStudent = student;
+        startActivity(new Intent(MainActivity.this, AppActivity.class));
+    }
+
     @Override
     public void onSignIn(String email, String password) {
-        ProgressBar progress = ((EmailLoginFragment)getSupportFragmentManager().getFragments().get(0)).getProgressBar();
-        Log.d("TAG", "Signing in with: " + email + ", pass: " + password);
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Log.d("TAG", "Success");
-                   Model.instance.getStudent(email.replace(".",","), new Model.GetStudentListener() {
-                        @Override
-                        public void onDone(Student student) {
-                            MyApplication.currentStudent = student;
-                            progress.setVisibility(View.GONE);
-                            startActivity(new Intent(MainActivity.this, AppActivity.class));
-                        }
-                    });
-                }
-                else{
-                    Log.d("TAG", "Failure");
-                    progress.setVisibility(View.GONE);
+        ProgressBar progress = null;
 
-                }
+        if (fragmentManager.getFragments().size() > 0) {
+            Fragment frag = fragmentManager.getFragments().get(0);
+            if (frag instanceof EmailLoginFragment)
+                progress = ((EmailLoginFragment) frag).getProgressBar() ;
+        }
+
+        Log.d("TAG", "Signing in with: " + email + ", pass: " + password);
+        ProgressBar finalProgress = progress;
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d("TAG", "Success");
+                Model.instance.setUserCred(email, password);
+                Model.instance.getStudent(email.replace(".",","), student -> {
+                    MyApplication.currentStudent = student;
+                    if(finalProgress != null)
+                        finalProgress.setVisibility(View.GONE);
+                    startActivity(new Intent(MainActivity.this, AppActivity.class));
+                });
+            }
+            else{
+                Log.d("TAG", "Failure");
+                if(finalProgress != null)
+                    finalProgress.setVisibility(View.GONE);
             }
         });
     }
@@ -151,14 +179,12 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onJoin(Student student,String password) {
-
         auth.createUserWithEmailAndPassword(student.userName,password).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 Model.instance.addStudent(student);
                 onSignIn(student.userName, password);
             }
         });
-
     }
 
     @Override
@@ -168,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSendNow(String email) {
-
         auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
             if (task.isSuccessful())
                 Log.d("Reset Password", "Email sent.");
@@ -184,4 +209,5 @@ public class MainActivity extends AppCompatActivity implements
         fragmentManager.popBackStack();
         fragmentManager.popBackStack();
     }
+
 }

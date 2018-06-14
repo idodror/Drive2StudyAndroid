@@ -8,7 +8,7 @@
     android:background="@android:color/background_light">
 
     <Button
-        android:id="@+id/popup_btn_close"
+        android:id="@+id/exit_popup_btn_close"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@android:drawable/ic_delete"
@@ -18,54 +18,55 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/add_popup_textView"
+        android:id="@+id/exit_popup_text_label"
         android:layout_width="261dp"
-        android:layout_height="59dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/add_dialog_popup_text"
+        android:layout_marginTop="56dp"
+        android:text="@string/exit_popup_txt"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_popup_button"
+        android:id="@+id/no_button"
         android:layout_width="97dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/green_button_background"
-        android:text="@string/add_dialog_popup_yes"
+        android:text="@string/no_string"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exit_popup_text_label" />
+
+    <Button
+        android:id="@+id/yes_button"
+        android:layout_width="97dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/green_button_background"
+        android:text="@string/yes_string"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAddressView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/exit_popup_text_label" />
 
 
-    <EditText
-        android:id="@+id/textAddressView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/add_dialog_popup_address"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_popup_textView" />
 </android.support.constraint.ConstraintLayout>

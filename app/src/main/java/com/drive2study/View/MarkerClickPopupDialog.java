@@ -20,7 +20,7 @@ import java.util.Objects;
 public class MarkerClickPopupDialog extends DialogFragment {
 
     public interface MarkerClickPopupDialogDelegate {
-        void onClose();
+        void onClose(DialogFragment dialogFragment);
         void onDriveOrRideClicked(String username);
     }
 
@@ -51,7 +51,7 @@ public class MarkerClickPopupDialog extends DialogFragment {
         Button closeBtn = view.findViewById(R.id.popup_btn_close);
         closeBtn.setOnClickListener(v -> {
             if (delegate != null)
-                delegate.onClose();
+                delegate.onClose(this);
         });
 
         Button driveOrRideBtn = view.findViewById(R.id.popup_btn_drive_or_ride);

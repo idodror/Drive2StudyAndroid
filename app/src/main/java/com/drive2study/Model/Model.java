@@ -46,6 +46,11 @@ public class Model {
         void onDone(String url);
     }
 
+    public interface GetMessageListener{
+        void onDone(MessageDetails msg);
+    }
+
+
     //endregion
 
     //region Data members and CTOR
@@ -215,6 +220,15 @@ public class Model {
 
     public void addMessage (MessageDetails msg){
         chatModelFirebase.addMessage(msg);
+    }
+
+    public void addChildAddedListener (final GetMessageListener listener){
+        chatModelFirebase.addChildAddedListener(new GetMessageListener() {
+            @Override
+            public void onDone(MessageDetails msg) {
+                listener.onDone(msg);
+            }
+        });
     }
     //endregion
 

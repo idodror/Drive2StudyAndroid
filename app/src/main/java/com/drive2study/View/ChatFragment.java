@@ -21,11 +21,6 @@ import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.Model.Model;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-
 
 public class ChatFragment extends Fragment {
 
@@ -48,7 +43,6 @@ public class ChatFragment extends Fragment {
     ImageView sendButton;
     EditText messageArea;
     ScrollView scrollView;
-    Firebase reference;
 
 
     @Override
@@ -76,44 +70,17 @@ public class ChatFragment extends Fragment {
                 }
             }
         });
-
-        Firebase.setAndroidContext(getContext());
-        //TODO: fix! add event lisetener!
-        reference = new Firebase("https://drivetostudyandorid.firebaseio.com/messages");
-
-        reference.addChildEventListener(new ChildEventListener() {
+        Model.instance.addChildAddedListener(new Model.GetMessageListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                String message = dataSnapshot.getValue(MessageDetails.class).getMessage();
-                String userName =dataSnapshot.getValue(MessageDetails.class).getUsername();
-
+            public void onDone(MessageDetails msg) {
+                String message = msg.getMessage();
+                String userName = msg.getUsername();
                 if(userName.equals(MyApplication.currentStudent.userName)){
                     addMessageBox("You:-\n" + message, 1);
                 }
                 else{
                     //addMessageBox(MessageDetails.chatWith + ":-\n" + message, 2);
                 }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
     }

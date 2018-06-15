@@ -1,6 +1,8 @@
 package com.drive2study.Model.ModelFirebase;
 
+import com.drive2study.Model.Model;
 import com.drive2study.Model.Objects.MessageDetails;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,43 @@ public class ChatModelFirebase {
         msgDatabase.updateChildren(dataMap);
     }
 
+    public void addChildAddedListener(final Model.GetMessageListener listener){
+        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("messages");
+        stRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String message = dataSnapshot.getValue(MessageDetails.class).getMessage();
+                String userName =dataSnapshot.getValue(MessageDetails.class).getUsername();
+                String chatWith = dataSnapshot.getValue(MessageDetails.class).getChatWith();
+                MessageDetails msg = new MessageDetails();
+                msg.setMessage(message);
+                msg.setUsername(userName);
+                msg.setChatWith(chatWith);
+                listener.onDone(msg);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+    }
 
     public void getAllMessages(final GetAllMessagesListener listener) {
         DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("messages");

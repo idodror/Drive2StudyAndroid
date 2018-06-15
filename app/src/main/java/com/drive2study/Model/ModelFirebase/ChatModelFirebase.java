@@ -1,7 +1,9 @@
 package com.drive2study.Model.ModelFirebase;
 
 import com.drive2study.Model.Model;
+import com.drive2study.Model.Objects.DriveRide;
 import com.drive2study.Model.Objects.MessageDetails;
+import com.drive2study.Model.Objects.Student;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class ChatModelFirebase {
 
     //region Data Members
+    List<MessageDetails> chatList;
     private ValueEventListener eventMessagesListener;
     DatabaseReference msgDatabase = FirebaseDatabase.getInstance().getReference().child("messages");
     //endregion
@@ -75,18 +78,18 @@ public class ChatModelFirebase {
     }
 
     public void getAllMessages(final GetAllMessagesListener listener) {
-        DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("messages");
-
-        eventMessagesListener = stRef.addValueEventListener(new ValueEventListener() {
+        eventMessagesListener = msgDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<MessageDetails> msgList = new LinkedList<>();
+                chatList = new LinkedList<>();
+                int index = 0;
 
-                for (DataSnapshot stSnapshot: dataSnapshot.getChildren()) {
-                    MessageDetails msg = stSnapshot.getValue(MessageDetails.class);
-                    msgList.add(msg);
+                for (DataSnapshot msgSnapshot: dataSnapshot.getChildren()) {
+                    MessageDetails msg = msgSnapshot.getValue(MessageDetails.class);
+                    chatList.add(msg);
+
                 }
-                listener.onSuccess(msgList);
+                listener.onSuccess(chatList);
             }
 
             @Override

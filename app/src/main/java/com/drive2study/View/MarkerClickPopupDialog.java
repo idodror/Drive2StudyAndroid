@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.drive2study.AppActivity;
 import com.drive2study.Model.Objects.DriveRide;
 import com.drive2study.Model.Model;
+import com.drive2study.MyApplication;
 import com.drive2study.R;
 
 import java.util.Objects;
@@ -21,7 +22,7 @@ public class MarkerClickPopupDialog extends DialogFragment {
 
     public interface MarkerClickPopupDialogDelegate {
         void onClose(DialogFragment dialogFragment);
-        void onDriveOrRideClicked(String username);
+        void onDriveOrRideClicked(String username, String type);
     }
 
     public MarkerClickPopupDialogDelegate delegate;
@@ -55,12 +56,14 @@ public class MarkerClickPopupDialog extends DialogFragment {
         });
 
         Button driveOrRideBtn = view.findViewById(R.id.popup_btn_drive_or_ride);
-        String driveOrRideButtonString = Objects.equals(getArguments().getString("type"), DriveRide.DRIVER) ? "Ride with!" : "Drive with!";
-        driveOrRideBtn.setText(driveOrRideButtonString);
-        driveOrRideBtn.setOnClickListener(v -> {
-            if (delegate != null)
-                delegate.onDriveOrRideClicked(username);
-        });
+        if (!MyApplication.currentStudent.getUserName().equals(username.replace(",","."))) {
+            String driveOrRideButtonString = Objects.equals(getArguments().getString("type"), DriveRide.DRIVER) ? "Ride with!" : "Drive with!";
+            driveOrRideBtn.setText(driveOrRideButtonString);
+            driveOrRideBtn.setOnClickListener(v -> {
+                if (delegate != null)
+                    delegate.onDriveOrRideClicked(username, getArguments().getString("type"));
+            });
+        } else driveOrRideBtn.setVisibility(View.INVISIBLE);
 
         return view;
     }

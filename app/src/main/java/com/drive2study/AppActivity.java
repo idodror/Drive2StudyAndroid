@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.drive2study.Model.Objects.DriveRide;
 import com.drive2study.Model.Model;
+import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.Model.Objects.Student;
 import com.drive2study.View.AddDriverRiderPopupDialog;
 import com.drive2study.View.ChatFragment;
@@ -200,9 +201,21 @@ public class AppActivity extends AppCompatActivity implements
         dialogFragment.dismissAllowingStateLoss();
     }
 
-    @Override
-    public void onDriveOrRideClicked(String username) {
 
+
+    @Override
+    public void onDriveOrRideClicked(String username,String type) {
+        MessageDetails msg = new MessageDetails();
+        msg.setUsername(MyApplication.currentStudent.getUserName());
+        msg.setChatWith(username);
+        msg.setType(type);
+        if(type.equals(DriveRide.DRIVER)) {
+            msg.setMessage("Hello, would you like a ride to college?");
+        }
+        else{
+            msg.setMessage("Hello, can I have a ride to college?");
+        }
+        Model.instance.addMessage(msg);
     }
 
     @Override
@@ -325,6 +338,9 @@ public class AppActivity extends AppCompatActivity implements
 
     @Override
     public void onChatListItemSelected(String username) {
-
+        Bundle args = new Bundle();
+        args.putString("username",username);
+        chatFragment.setArguments(args);
+        setFragment(chatFragment);
     }
 }

@@ -4,9 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MessageDetails {
-    public static String username;
-    public static String chatWith;
-    public static String message;
+    public String username;
+    public String chatWith;
+    public String message;
+    public String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public MessageDetails(){
+
+    }
 
     public String getUsername() {
         return username;
@@ -34,10 +47,10 @@ public class MessageDetails {
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("username", username);
         result.put("chatWith", chatWith);
         result.put("message", message);
-
+        result.put("username", username);
+        result.put("type", type);
         return result;
     }
 }

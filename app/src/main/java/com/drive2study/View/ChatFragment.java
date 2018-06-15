@@ -1,6 +1,7 @@
 package com.drive2study.View;
 
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,13 +18,18 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.drive2study.AppActivity;
 import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.Model.Model;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
 
+import java.util.List;
+
 public class ChatFragment extends Fragment {
 
+    private String username;
+    private Boolean fetch = true;
     public interface ChatFragmentDelegate{
     }
 
@@ -35,6 +41,7 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activit_chat, container, false);
+        username = this.getArguments().getString("username");
         return view;
     }
 
@@ -64,28 +71,45 @@ public class ChatFragment extends Fragment {
                     MessageDetails newMsg = new MessageDetails();
                     newMsg.setMessage(messageText);
                     newMsg.setUsername(MyApplication.currentStudent.userName);
-                    newMsg.setChatWith("amonmoris@gmail.com");
+                    newMsg.setChatWith(username);
                     Model.instance.addMessage(newMsg);
                     messageArea.setText("");
                 }
             }
         });
+
+        AppActivity.dataModel = ViewModelProviders.of(this).get(DataViewModel.class);
+        AppActivity.dataModel.getMessageDetailsListData().observe(this, (List<MessageDetails> chatList) -> {
+            if(fetch) {
+                if (chatList.size() != 0) {
+                    for (MessageDetails msg : chatList) {
+                        filterChats(msg);
+                    }
+                    fetch = false;
+                }
+            }
+        });
+
         Model.instance.addChildAddedListener(new Model.GetMessageListener() {
             @Override
             public void onDone(MessageDetails msg) {
-                String message = msg.getMessage();
-                String userName = msg.getUsername();
-                if(userName.equals(MyApplication.currentStudent.userName)){
-                    addMessageBox("You:-\n" + message, 1);
-                }
-                else{
-                    //addMessageBox(MessageDetails.chatWith + ":-\n" + message, 2);
-                }
+                msg.setType("regular");
+                filterChats(msg);
             }
         });
     }
 
-    public void addMessageBox(String message, int type){
+    private void filterChats(MessageDetails msg) {
+        if ((msg.getChatWith().replace(",",".").equals(username) && msg.getUsername().replace(",",".").equals(MyApplication.currentStudent.userName))) {
+            String message = msg.getMessage();
+            addMessageBox("You:-\n" + message, "out");
+        } else if (msg.getChatWith().replace(",",".").equals(MyApplication.currentStudent.getUserName()) && msg.getUsername().replace(",",".").equals(username)) {
+            String message = msg.getMessage();
+            addMessageBox(username + ":-\n" + message, "in");
+        }
+    }
+
+    public void addMessageBox(String message, String type){
         TextView textView = new TextView(getContext());
         textView.setText(message);
         textView.setTextSize(16f);
@@ -93,11 +117,11 @@ public class ChatFragment extends Fragment {
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp2.weight = 1.0f;
 
-        if(type == 1) {
+        if(type.equals("in")) {
             lp2.gravity = Gravity.LEFT;
             textView.setBackgroundResource(R.drawable.bubble_in);
         }
-        else{
+        else if(type.equals("out")){
             lp2.gravity = Gravity.RIGHT;
             textView.setBackgroundResource(R.drawable.bubble_out);
         }

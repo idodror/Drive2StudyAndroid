@@ -1,7 +1,5 @@
 package com.drive2study;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -15,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.drive2study.Model.DriveRide;
+import com.drive2study.Model.Objects.DriveRide;
 import com.drive2study.Model.Model;
-import com.drive2study.Model.Student;
+import com.drive2study.Model.Objects.Student;
 import com.drive2study.View.AddDriverRiderPopupDialog;
 import com.drive2study.View.ChatFragment;
 import com.drive2study.View.ChatListFragment;
@@ -25,13 +23,11 @@ import com.drive2study.View.DriveRideListFragment;
 import com.drive2study.View.DataViewModel;
 import com.drive2study.View.EditProfileFragment;
 import com.drive2study.View.ExitPopupDialog;
-import com.drive2study.View.LoginScreenFragment;
 import com.drive2study.View.MapFragment;
 import com.drive2study.View.MarkerClickPopupDialog;
 import com.drive2study.View.ShowProfileFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;

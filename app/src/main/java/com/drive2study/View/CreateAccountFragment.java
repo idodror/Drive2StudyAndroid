@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.drive2study.Model.Student;
+import com.drive2study.Model.Objects.Student;
 import com.drive2study.R;
 import com.google.firebase.auth.FirebaseAuth;
 

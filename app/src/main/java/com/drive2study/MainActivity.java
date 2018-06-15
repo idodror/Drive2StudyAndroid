@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.drive2study.Model.Model;
-import com.drive2study.Model.Student;
+import com.drive2study.Model.Objects.Student;
 import com.drive2study.View.CreateAccountFragment;
 import com.drive2study.View.EmailLoginFragment;
 import com.drive2study.View.ForgotPasswordFragment;

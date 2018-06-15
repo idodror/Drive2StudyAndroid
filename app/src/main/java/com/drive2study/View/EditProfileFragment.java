@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.drive2study.Model.Model;
-import com.drive2study.Model.Student;
+import com.drive2study.Model.Objects.Student;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
 

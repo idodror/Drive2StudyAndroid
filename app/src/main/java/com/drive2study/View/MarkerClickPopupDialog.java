@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.drive2study.AppActivity;
-import com.drive2study.Model.DriveRide;
+import com.drive2study.Model.Objects.DriveRide;
 import com.drive2study.Model.Model;
 import com.drive2study.R;
 

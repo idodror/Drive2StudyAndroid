@@ -3,7 +3,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.drive2study.AppActivity;
-import com.drive2study.Model.DriveRide;
-import com.drive2study.Model.MessageDetails;
-import com.drive2study.Model.Model;
+import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.R;
 
 public class ChatListFragment extends Fragment {

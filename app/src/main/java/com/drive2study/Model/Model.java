@@ -5,9 +5,17 @@ import android.arch.lifecycle.MutableLiveData;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.os.Message;
 import android.util.Log;
 import android.webkit.URLUtil;
+
+import com.drive2study.Model.ModelFirebase.ChatModelFirebase;
+import com.drive2study.Model.ModelFirebase.DriveRideModelFirebase;
+import com.drive2study.Model.ModelFirebase.StorageModelFirebase;
+import com.drive2study.Model.ModelFirebase.StudentModelFirebase;
+import com.drive2study.Model.Objects.DriveRide;
+import com.drive2study.Model.Objects.MessageDetails;
+import com.drive2study.Model.Objects.Student;
+import com.drive2study.Model.Objects.StudentCred;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Model {
+
+    //region Interfaces Listener
 
     public interface GetStudentListener {
         void onDone(Student student);
@@ -32,19 +42,67 @@ public class Model {
         void onDone(boolean result);
     }
 
-
-    public static Model instance = new Model();
-    ModelFirebase modelFirebase;
-    private Model(){
-        modelFirebase = new ModelFirebase();
+    public interface SaveImageListener{
+        void onDone(String url);
     }
 
-    ////////////////////////////////////////////////////////
-    ///////////          Student                   /////////
-    ////////////////////////////////////////////////////////
+    //endregion
+
+    //region Data members and CTOR
+
+    public static Model instance = new Model();
+    DriveRideModelFirebase driveRideModelFirebase;
+    StorageModelFirebase storageModelFirebase;
+    StudentModelFirebase studentModelFirebase;
+    ChatModelFirebase chatModelFirebase;
+
+    private Model(){
+        driveRideModelFirebase = new DriveRideModelFirebase();
+        storageModelFirebase = new StorageModelFirebase();
+        studentModelFirebase = new StudentModelFirebase();
+        chatModelFirebase = new ChatModelFirebase();
+    }
+    //endregion
+
+    //region List Data's
+
+    StudentListData studentListData = new StudentListData();
+    DriveRideListData driveRideListData = new DriveRideListData();
+    MessagesListData messagesListData = new MessagesListData();
+    //endregion
+
+    //region Student Model
+
+    class StudentListData extends MutableLiveData<List<Student>>{
+        @Override
+        protected void onActive() {
+            super.onActive();
+            studentModelFirebase.getAllStudents(studentslist -> {
+                Log.d("TAG","FB data = " + studentslist.size() );
+                setValue(studentslist);
+            });
+        }
+
+        @Override
+        protected void onInactive() {
+            super.onInactive();
+            studentModelFirebase.cancelGetAllStudents();
+            Log.d("TAG","cancelGetAllStudents");
+        }
+
+        public StudentListData() {
+            super();
+            //setValue(AppLocalDb.db.studentDao().getAll());
+            setValue(new LinkedList<Student>());
+        }
+    }
 
     public void cancellGetAllStudents() {
-        modelFirebase.cancelGetAllStudents();
+        studentModelFirebase.cancelGetAllStudents();
+    }
+
+    public LiveData<List<Student>> getAllStudents(){
+        return studentListData;
     }
 
     public void setUserCred(String email, String password) {
@@ -57,47 +115,17 @@ public class Model {
         studentCredDao.insert(studentCred);
     }
 
-    public void clearStudentCred() {
-        AppLocalDb.db.studentCredDao().clearTable();
-    }
-
-    class StudentListData extends MutableLiveData<List<Student>>{
-        @Override
-        protected void onActive() {
-            super.onActive();
-            modelFirebase.getAllStudents(studentslist -> {
-                Log.d("TAG","FB data = " + studentslist.size() );
-                setValue(studentslist);
-            });
-        }
-
-        @Override
-        protected void onInactive() {
-            super.onInactive();
-            modelFirebase.cancelGetAllStudents();
-            Log.d("TAG","cancelGetAllStudents");
-        }
-
-        public StudentListData() {
-            super();
-            //setValue(AppLocalDb.db.studentDao().getAll());
-            setValue(new LinkedList<Student>());
-        }
-    }
-
-    StudentListData studentListData = new StudentListData();
-
-    public LiveData<List<Student>> getAllStudents(){
-        return studentListData;
+    public void getStudent(String email, final GetStudentListener listener){
+        email = email.replace(".", ",");
+        studentModelFirebase.getStudent(email, student -> listener.onDone(student));
     }
 
     public void addStudent(Student st){
-        modelFirebase.addStudent(st);
+        studentModelFirebase.addStudent(st);
     }
 
-    public void getStudent(String email, final GetStudentListener listener){
-        email = email.replace(".", ",");
-        modelFirebase.getStudent(email, student -> listener.onDone(student));
+    public void clearStudentCred() {
+        AppLocalDb.db.studentCredDao().clearTable();
     }
 
     public void getStudentCred(final GetStudentCredListener listener) {
@@ -107,14 +135,9 @@ public class Model {
         } else listener.onDone(null);
     }
 
-    ////////////////////////////////////////////////////////
-    ///////////          DriveRide                   ///////
-    ////////////////////////////////////////////////////////
+    //endregion
 
-    public void cancelGetAllDriveRide() {
-        modelFirebase.cancelGetAllDriveRide();
-    }
-
+    //region DriveRide Model
     class DriveRideListData extends MutableLiveData<List<DriveRide>> {
 
         @Override
@@ -128,7 +151,7 @@ public class Model {
                 Log.d("TAG","got students from local DB " + data.size());
 
                 // 3. get the student list from firebase
-                modelFirebase.getAllDriveRide(driveRideList -> {
+                driveRideModelFirebase.getAllDriveRide(driveRideList -> {
                     // 4. onSuccess: update the live data with the new student list
                     setValue(driveRideList);
                     Log.d("TAG","got driveRides from firebase " + driveRideList.size());
@@ -142,7 +165,7 @@ public class Model {
         @Override
         protected void onInactive() {
             super.onInactive();
-            modelFirebase.cancelGetAllDriveRide();
+            driveRideModelFirebase.cancelGetAllDriveRide();
             Log.d("TAG","cancelGetAllDriveRides");
         }
 
@@ -152,27 +175,24 @@ public class Model {
         }
     }
 
-    private DriveRideListData driveRideListData = new DriveRideListData();
-
     public LiveData<List<DriveRide>> getAllDriveRide(){
         return driveRideListData;
     }
 
-    public void addDriveRide(DriveRide dr_rd){ modelFirebase.addDriveRide(dr_rd); }
+    public void addDriveRide(DriveRide dr_rd){ driveRideModelFirebase.addDriveRide(dr_rd); }
 
-
-    ////////////////////////////////////////////////////////
-    //  Messages                                        ////
-    ////////////////////////////////////////////////////////
-    public void addMessage (MessageDetails msg){
-        modelFirebase.addMessage(msg);
+    public void cancelGetAllDriveRide() {
+        driveRideModelFirebase.cancelGetAllDriveRide();
     }
 
+    //endregion
+
+    //region Messages Model
     class MessagesListData extends MutableLiveData<List<MessageDetails>>{
         @Override
         protected void onActive() {
             super.onActive();
-            modelFirebase.getAllMessages(messagesList -> {
+            chatModelFirebase.getAllMessages(messagesList -> {
                 setValue(messagesList);
             });
         }
@@ -180,7 +200,7 @@ public class Model {
         @Override
         protected void onInactive() {
             super.onInactive();
-            modelFirebase.cancelGetAllMessages();
+            chatModelFirebase.cancelGetAllMessages();
         }
 
         public MessagesListData() {
@@ -188,23 +208,20 @@ public class Model {
             setValue(new LinkedList<MessageDetails>());
         }
     }
-    MessagesListData messagesListData = new MessagesListData();
 
     public LiveData<List<MessageDetails>> getAllMessages(){
         return messagesListData;
     }
 
-
-    ////////////////////////////////////////////////////////
-    //  Handle Image Files                              ////
-    ////////////////////////////////////////////////////////
-
-    public interface SaveImageListener{
-        void onDone(String url);
+    public void addMessage (MessageDetails msg){
+        chatModelFirebase.addMessage(msg);
     }
+    //endregion
+
+    //region Handle Image Files
 
     public void saveImage(Bitmap imageBitmap, SaveImageListener listener) {
-        modelFirebase.saveImage(imageBitmap,listener);
+        storageModelFirebase.saveImage(imageBitmap,listener);
     }
 
     public interface GetImageListener{
@@ -212,7 +229,7 @@ public class Model {
     }
 
     public void userExists(String email, final GetUserExistsListener listener){
-        modelFirebase.getUserExists(email.replace(".",","), new GetUserExistsListener() {
+        studentModelFirebase.getUserExists(email.replace(".",","), new GetUserExistsListener() {
             @Override
             public void onDone(boolean result) {
                 listener.onDone(result);
@@ -224,7 +241,7 @@ public class Model {
         String localFileName = URLUtil.guessFileName(url, null, null);
         final Bitmap image = loadImageFromFile(localFileName);
         if (image == null) {                                      //if image not found - try downloading it from parse
-            modelFirebase.getImage(url, new GetImageListener() {
+            storageModelFirebase.getImage(url, new GetImageListener() {
                 @Override
                 public void onDone(Bitmap imageBitmap) {
                     if (imageBitmap == null) {
@@ -245,7 +262,10 @@ public class Model {
         }
     }
 
-    // Store / Get from local mem
+    //endregion
+
+    //region Local Storage
+
     private void saveImageToFile(Bitmap imageBitmap, String imageFileName){
         if (imageBitmap == null) return;
         try {
@@ -281,5 +301,6 @@ public class Model {
         }
         return bitmap;
     }
+    //endregion
 
 }

@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.drive2study.Model.MessageDetails;
+import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.Model.Model;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
@@ -25,8 +25,6 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-
-import java.util.Map;
 
 
 public class ChatFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.drive2study.Model;
+package com.drive2study.Model.Objects;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

@@ -2,10 +2,10 @@ package com.drive2study.View;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import com.drive2study.Model.DriveRide;
-import com.drive2study.Model.MessageDetails;
+import com.drive2study.Model.Objects.DriveRide;
+import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.Model.Model;
-import com.drive2study.Model.Student;
+import com.drive2study.Model.Objects.Student;
 
 import java.util.List;
 

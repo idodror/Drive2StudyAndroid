@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.drive2study.Model.Student;
+import com.drive2study.Model.Objects.Student;
 
 public class MyApplication extends Application {
 

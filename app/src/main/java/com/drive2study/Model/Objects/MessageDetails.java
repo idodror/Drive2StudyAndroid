@@ -1,4 +1,4 @@
-package com.drive2study.Model;
+package com.drive2study.Model.Objects;
 
 import java.util.HashMap;
 import java.util.Map;

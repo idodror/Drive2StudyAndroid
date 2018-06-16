@@ -190,6 +190,9 @@ public class Model {
         driveRideModelFirebase.cancelGetAllDriveRide();
     }
 
+    public void cancelGetAllMessages() {
+        chatModelFirebase.cancelGetAllMessages();
+    }
     //endregion
 
     //region Messages Model

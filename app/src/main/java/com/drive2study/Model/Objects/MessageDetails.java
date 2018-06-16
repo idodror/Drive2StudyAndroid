@@ -8,6 +8,7 @@ public class MessageDetails {
     public String chatWith;
     public String message;
     public String type;
+    public String date;
 
     public String getType() {
         return type;
@@ -45,12 +46,20 @@ public class MessageDetails {
         this.message = message;
     }
 
+    public void setDate(String date) { this.date = date; }
+
+    public String getDate() { return date; }
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("chatWith", chatWith);
         result.put("message", message);
         result.put("username", username);
         result.put("type", type);
+        result.put("date", date);
         return result;
     }
+
+
+
 }

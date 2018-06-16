@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.drive2study.AppActivity;
+import com.drive2study.Model.Model;
 import com.drive2study.Model.Objects.MessageDetails;
 import com.drive2study.MyApplication;
 import com.drive2study.R;
@@ -99,8 +100,7 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //Model.instance.cancelGetAllDriveRide();
-        //Model.instance.cancellGetAllStudents();
+        Model.instance.cancelGetAllMessages();
     }
 
 

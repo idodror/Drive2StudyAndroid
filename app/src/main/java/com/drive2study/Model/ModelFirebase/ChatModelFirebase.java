@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +25,8 @@ public class ChatModelFirebase {
     List<MessageDetails> chatList;
     private ValueEventListener eventMessagesListener;
     DatabaseReference msgDatabase = FirebaseDatabase.getInstance().getReference().child("messages");
+    public String prevKey="";
+
     //endregion
 
     //region Interface Listener
@@ -35,23 +39,31 @@ public class ChatModelFirebase {
     public void addMessage(MessageDetails msg) {
         final Map<String, Object> dataMap = new HashMap<>();
         String  uniqueID = UUID.randomUUID().toString();
-        dataMap.put(uniqueID,msg.toMap());
+        dataMap.put(DateFormat.getDateTimeInstance().format(new Date())+uniqueID,msg.toMap());
         msgDatabase.updateChildren(dataMap);
     }
 
     public void addChildAddedListener(final Model.GetMessageListener listener){
         DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("messages");
         stRef.addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String message = dataSnapshot.getValue(MessageDetails.class).getMessage();
-                String userName =dataSnapshot.getValue(MessageDetails.class).getUsername();
-                String chatWith = dataSnapshot.getValue(MessageDetails.class).getChatWith();
-                MessageDetails msg = new MessageDetails();
-                msg.setMessage(message);
-                msg.setUsername(userName);
-                msg.setChatWith(chatWith);
-                listener.onDone(msg);
+                if(!prevKey.equals(dataSnapshot.getKey())) {
+                    prevKey = dataSnapshot.getKey();
+                    String message = dataSnapshot.getValue(MessageDetails.class).getMessage();
+                    String userName = dataSnapshot.getValue(MessageDetails.class).getUsername();
+                    String chatWith = dataSnapshot.getValue(MessageDetails.class).getChatWith();
+                    String type= dataSnapshot.getValue(MessageDetails.class).getType();
+                    String date= dataSnapshot.getValue(MessageDetails.class).getDate();
+                    MessageDetails msg = new MessageDetails();
+                    msg.setMessage(message);
+                    msg.setUsername(userName);
+                    msg.setChatWith(chatWith);
+                    msg.setType(type);
+                    msg.setDate(date);
+                    listener.onDone(msg);
+                }
             }
 
             @Override

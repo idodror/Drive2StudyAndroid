@@ -1,5 +1,6 @@
 package com.drive2study;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -31,7 +32,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
@@ -45,7 +48,7 @@ public class AppActivity extends AppCompatActivity implements
         AddDriverRiderPopupDialog.AddDriverRiderPopupDialogDelegate,
         ChatFragment.ChatFragmentDelegate,
         ExitPopupDialog.ExitPopupDialogDelegate,
-        ChatListFragment.ChatListFragmentDelegate{
+        ChatListFragment.ChatListFragmentDelegate {
 
     private BottomNavigationView bottomNavigationView;
     private MapFragment mapFragment;
@@ -209,11 +212,13 @@ public class AppActivity extends AppCompatActivity implements
         msg.setUsername(MyApplication.currentStudent.getUserName());
         msg.setChatWith(username);
         msg.setType(type);
-        if(type.equals(DriveRide.DRIVER)) {
-            msg.setMessage("Hello, would you like a ride to college?");
+        msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+
+        if(type.equals("d")) {
+            msg.setMessage("Hello, can I have a ride to college?");
         }
         else{
-            msg.setMessage("Hello, can I have a ride to college?");
+            msg.setMessage("Hello, would you like a ride to college?");
         }
         Model.instance.addMessage(msg);
     }

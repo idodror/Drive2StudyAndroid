@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,12 @@ public class ChatListFragment extends Fragment {
                 chatList.addAll(newList);
                 chatCellAdapter.notifyDataSetChanged();
             }
+        });
+
+        AppActivity.dataModel.getStudentsListData().observe(this, studentsList -> {
+            chatCellAdapter.notifyDataSetChanged();
+            if (studentsList != null)
+                Log.d("TAG","notifyDataSetChanged" + studentsList.size());
         });
 
         list.setOnItemClickListener((AdapterView<?> parent, View view12, int position, long id) -> {
@@ -130,11 +137,25 @@ public class ChatListFragment extends Fragment {
             final ImageView avatarView = view.findViewById(R.id.chat_list_item_avatar_img);
 
             TextView studentName = view.findViewById(R.id.chat_list_item_name_txt);
-            studentName.setText(msg.getUsername());
             studentName.setTag(msg.getUsername());
 
             avatarView.setImageResource(R.drawable.student_avatar);
             avatarView.setTag(msg.getUsername());
+
+            Model.instance.getStudent(msg.getUsername(), student -> {
+                if (student.getImageUrl() != null) {
+                    String name = student.getfName() + " " + student.getlName();
+                    studentName.setText(name);
+                    String url = student.getImageUrl();
+                    if (!url.equals("")) {
+                        Model.instance.getImage(url, imageBitmap -> {
+                            if (msg.getUsername().equals(avatarView.getTag()) && imageBitmap != null) {
+                                avatarView.setImageBitmap(imageBitmap);
+                            }
+                        });
+                    }
+                }
+            });
 
             return view;
         }

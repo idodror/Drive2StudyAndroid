@@ -78,41 +78,21 @@ public class ChatFragment extends Fragment {
         scrollView = view.findViewById(R.id.scrollView);
 
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String messageText = messageArea.getText().toString();
-                if(!messageText.equals("")){
-                    MessageDetails newMsg = new MessageDetails();
-                    newMsg.setType("regular");
-                    newMsg.setMessage(messageText);
-                    newMsg.setUsername(MyApplication.currentStudent.userName);
-                    newMsg.setChatWith(username);
-                    newMsg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-                    Model.instance.addMessage(newMsg);
-                    messageArea.setText("");
-                }
+        sendButton.setOnClickListener(v -> {
+            String messageText = messageArea.getText().toString();
+            if(!messageText.equals("")){
+                MessageDetails newMsg = new MessageDetails();
+                newMsg.setType("regular");
+                newMsg.setMessage(messageText);
+                newMsg.setUsername(MyApplication.currentStudent.userName);
+                newMsg.setChatWith(username);
+                newMsg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                Model.instance.addMessage(newMsg);
+                messageArea.setText("");
             }
         });
 
-        /*AppActivity.dataModel = ViewModelProviders.of(this).get(DataViewModel.class);
-        AppActivity.dataModel.getMessageDetailsListData().observe(this, (List<MessageDetails> chatList) -> {
-            if(fetch) {
-                if (chatList.size() != 0) {
-                    for (MessageDetails msg : chatList) {
-                        filterChats(msg);
-                    }
-                    fetch = false;
-                }
-            }
-        });*/
-
-        Model.instance.addChildAddedListener(new Model.GetMessageListener() {
-            @Override
-            public void onDone(MessageDetails msg) {
-                filterChats(msg);
-            }
-        });
+        Model.instance.addChildAddedListener(msg -> filterChats(msg));
     }
 
     private void filterChats(MessageDetails msg) {

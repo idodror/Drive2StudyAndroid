@@ -51,35 +51,29 @@ public class CreateAccountFragment extends Fragment {
         emptyFieldsText = view.findViewById(R.id.txt_empty_fields);
 
         Button join = view.findViewById(R.id.btn_join);
-        join.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //auth.createUserWithEmailAndPassword(userEmailText.getText().toString(), passwordEt.getText().toString());
-                Student student = new Student();
-                String password = passwordEt.getText().toString();
-                student.userName = userEmailText.getText().toString();
-                student.fName = fNameEt.getText().toString();
-                student.lName = lNameEt.getText().toString();
-                student.study = studyEt.getText().toString();
-                if (student.study.equals("") || student.fName.equals("") || student.study.equals("") || password.equals("")) {
-                    emptyFieldsText.setVisibility(View.VISIBLE);
-                } else {
-                    student.imageUrl = "";
-                    student.loginType = "RegularLogin";
-                    if (delegate != null) {
-                        delegate.onJoin(student,password);
-                    }
+        join.setOnClickListener(v -> {
+            //auth.createUserWithEmailAndPassword(userEmailText.getText().toString(), passwordEt.getText().toString());
+            Student student = new Student();
+            String password = passwordEt.getText().toString();
+            student.userName = userEmailText.getText().toString();
+            student.fName = fNameEt.getText().toString();
+            student.lName = lNameEt.getText().toString();
+            student.study = studyEt.getText().toString();
+            if (student.study.equals("") || student.fName.equals("") || student.study.equals("") || password.equals("")) {
+                emptyFieldsText.setVisibility(View.VISIBLE);
+            } else {
+                student.imageUrl = "";
+                student.loginType = "RegularLogin";
+                if (delegate != null) {
+                    delegate.onJoin(student,password);
                 }
             }
         });
 
         Button notYourEmailBtn = view.findViewById(R.id.register_btn_not_your_email);
-        notYourEmailBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null)
-                    delegate.onNotYourEmailAtRegisterPressed();
-            }
+        notYourEmailBtn.setOnClickListener(v -> {
+            if (delegate != null)
+                delegate.onNotYourEmailAtRegisterPressed();
         });
 
         return view;

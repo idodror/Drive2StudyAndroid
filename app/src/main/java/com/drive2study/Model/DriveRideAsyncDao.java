@@ -1,9 +1,7 @@
 package com.drive2study.Model;
 
 import android.os.AsyncTask;
-
 import com.drive2study.Model.Objects.DriveRide;
-
 import java.util.List;
 
 public class DriveRideAsyncDao {

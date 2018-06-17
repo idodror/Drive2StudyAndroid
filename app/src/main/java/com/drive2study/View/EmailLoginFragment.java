@@ -15,8 +15,6 @@ import com.drive2study.R;
 
 public class EmailLoginFragment extends Fragment {
 
-    private static final String ARG_EMAIL = "ARG_EMAIL";
-
     public interface EmailLoginFragmentDelegate {
         void onSignIn(String email, String password);
         void onNotYourEmailAtLoginClicked();
@@ -48,32 +46,23 @@ public class EmailLoginFragment extends Fragment {
 
 
         Button signIn = view.findViewById(R.id.btn_signin);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                String password = passwordEt.getText().toString();
-                if (delegate != null)
-                    delegate.onSignIn(emailAddress, password);
-            }
+        signIn.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            String password = passwordEt.getText().toString();
+            if (delegate != null)
+                delegate.onSignIn(emailAddress, password);
         });
 
         Button notYouEmailBtn = view.findViewById(R.id.login_btn_not_your_email);
-        notYouEmailBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null)
-                    delegate.onNotYourEmailAtLoginClicked();
-            }
+        notYouEmailBtn.setOnClickListener(v -> {
+            if (delegate != null)
+                delegate.onNotYourEmailAtLoginClicked();
         });
 
         Button forgotPassBtn = view.findViewById(R.id.login_btn_forgot_password);
-        forgotPassBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null)
-                    delegate.onForgotPasswordClicked(emailAddress);
-            }
+        forgotPassBtn.setOnClickListener(v -> {
+            if (delegate != null)
+                delegate.onForgotPasswordClicked(emailAddress);
         });
 
         return view;

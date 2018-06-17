@@ -71,12 +71,12 @@ public class ChatListFragment extends Fragment {
     }
 
     private List<MessageDetails> deleteDuplicates(List<MessageDetails> chatList) {
-        HashMap<String,MessageDetails> map = new HashMap<>();
+        HashMap<String, MessageDetails> map = new HashMap<>();
         List<MessageDetails> newChatList = new LinkedList<>();
         MessageDetails msg;
-        for(int i = 0; i<chatList.size();i++){
+        for(int i = 0; i < chatList.size(); i++){
             msg = chatList.get(i);
-            if(msg!=null) {
+            if(msg != null) {
                 if (!(map.containsKey(msg.getUsername()))) {
                     map.put(msg.getUsername(), msg);
                     newChatList.add(msg);
@@ -135,21 +135,6 @@ public class ChatListFragment extends Fragment {
 
             avatarView.setImageResource(R.drawable.student_avatar);
             avatarView.setTag(msg.getUsername());
-
-            /*Model.instance.getStudent(msg.getUsername(), student -> {
-                if (student.getImageUrl() != null) {
-                    String name = student.getfName() + " " + student.getlName();
-                    studentName.setText(name);
-                    String url = student.getImageUrl();
-                    if (!url.equals("")) {
-                        Model.instance.getImage(url, imageBitmap -> {
-                            if (dr.getUserName().equals(avatarView.getTag()) && imageBitmap != null) {
-                                avatarView.setImageBitmap(imageBitmap);
-                            }
-                        });
-                    }
-                }
-            });*/
 
             return view;
         }

@@ -116,12 +116,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onConWithFacebook() {
-        Model.instance.getStudent("test2@gmail,com", new Model.GetStudentListener() {
-            @Override
-            public void onDone(Student student) {
-                loginAndSet(student);
-            }
-        });
+        Model.instance.getStudent("test2@gmail,com", student -> loginAndSet(student));
     }
 
     private void loginAndSet(Student student) {

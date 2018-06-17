@@ -1,6 +1,5 @@
 package com.drive2study;
 
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -116,7 +115,6 @@ public class AppActivity extends AppCompatActivity implements
     public void setFragment(Fragment fragment) {
         FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
         tran.replace(R.id.main_app_content, fragment);
-        //tran.addToBackStack(null);
         tran.commit();
     }
 
@@ -204,23 +202,21 @@ public class AppActivity extends AppCompatActivity implements
         dialogFragment.dismissAllowingStateLoss();
     }
 
-
-
     @Override
-    public void onDriveOrRideClicked(String username,String type) {
+    public void onDriveOrRideClicked(String username, String type) {
         MessageDetails msg = new MessageDetails();
         msg.setUsername(MyApplication.currentStudent.getUserName());
         msg.setChatWith(username);
         msg.setType(type);
         msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
 
-        if(type.equals("d")) {
+        if(type.equals("d"))
             msg.setMessage("Hello, can I have a ride to college?");
-        }
-        else{
-            msg.setMessage("Hello, would you like a ride to college?");
-        }
+        else msg.setMessage("Hello, would you like a ride to college?");
+
         Model.instance.addMessage(msg);
+        markerClickPopupDialog.dismissAllowingStateLoss();
+        Toast.makeText(AppActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -311,9 +307,7 @@ public class AppActivity extends AppCompatActivity implements
             bottomNavigationView.setSelectedItemId(R.id.app_nav_item_map);
         } else {
             // the user see the map
-            openExitPopup();
-            //super.onBackPressed();
-        }
+            openExitPopup(); }
     }
 
     private void openExitPopup() {

@@ -40,28 +40,22 @@ public class LoginScreenFragment extends Fragment {
         validateEmailTxt = view.findViewById(R.id.label_valid_email_required);
 
         Button continueWithEmail = view.findViewById(R.id.btn_email_login);
-        continueWithEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailEt.getText().toString();
+        continueWithEmail.setOnClickListener(v -> {
+            String email = emailEt.getText().toString();
 
-               Matcher m = Patterns.EMAIL_ADDRESS.matcher(email);
-                if (!m.matches())    // check validation of email
-                    validateEmailTxt.setVisibility(View.VISIBLE);
-                else if (delegate != null) {
-                    delegate.onConWithEmail(email);
-                }
-
+           Matcher m = Patterns.EMAIL_ADDRESS.matcher(email);
+            if (!m.matches())    // check validation of email
+                validateEmailTxt.setVisibility(View.VISIBLE);
+            else if (delegate != null) {
+                delegate.onConWithEmail(email);
             }
+
         });
 
         Button continueWithFacebook = view.findViewById(R.id.btn_facebook);
-        continueWithFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null)
-                    delegate.onConWithFacebook();
-            }
+        continueWithFacebook.setOnClickListener(v -> {
+            if (delegate != null)
+                delegate.onConWithFacebook();
         });
 
         return view;

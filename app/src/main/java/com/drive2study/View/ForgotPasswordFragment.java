@@ -37,21 +37,15 @@ public class ForgotPasswordFragment extends Fragment {
             userEmailText.setText(getArguments().getString("username"));
 
         Button sendNow = view.findViewById(R.id.btn_send_reset_pass_code);
-        sendNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null)
-                    delegate.onSendNow(emailAddress);
-            }
+        sendNow.setOnClickListener(v -> {
+            if (delegate != null)
+                delegate.onSendNow(emailAddress);
         });
 
         Button trySignInAgain = view.findViewById(R.id.forgot_pass_btn_try_signin_again);
-        trySignInAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null)
-                    delegate.onTrySignInAgain();
-            }
+        trySignInAgain.setOnClickListener(v -> {
+            if (delegate != null)
+                delegate.onTrySignInAgain();
         });
 
         return view;

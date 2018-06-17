@@ -75,45 +75,36 @@ public class EditProfileFragment extends Fragment {
                 days[i].setChecked(true);
 
         Button save = view.findViewById(R.id.btn_save_edit_profile_changes);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Student student = new Student();
-                student.userName = MyApplication.currentStudent.userName;
-                student.loginType = MyApplication.currentStudent.loginType;
-                student.fName = firstNameEt.getText().toString();
-                student.lName = lastNameEt.getText().toString();
-                student.study = studyEt.getText().toString();
-                student.imageUrl = MyApplication.currentStudent.getImageUrl();
+        save.setOnClickListener(v -> {
+            final Student student = new Student();
+            student.userName = MyApplication.currentStudent.userName;
+            student.loginType = MyApplication.currentStudent.loginType;
+            student.fName = firstNameEt.getText().toString();
+            student.lName = lastNameEt.getText().toString();
+            student.study = studyEt.getText().toString();
+            student.imageUrl = MyApplication.currentStudent.getImageUrl();
 
-                for (int i = 0; i < 7; i++)
-                    if (days[i].isChecked())
-                        student.daysInCollege[i] = true;
-                //save image
-                if (delegate != null) {
-                    if (imageBitmap != null && imageChanged) {
-                        Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
-                            @Override
-                            public void onDone(String url) {
-                                //save student obj
-                                student.setImageUrl(url);
-                                delegate.onSaveClicked(student);
-                            }
-                        });
-                    } else delegate.onSaveClicked(student);
-                }
+            for (int i = 0; i < 7; i++)
+                if (days[i].isChecked())
+                    student.daysInCollege[i] = true;
+            //save image
+            if (delegate != null) {
+                if (imageBitmap != null && imageChanged) {
+                    Model.instance.saveImage(imageBitmap, url1 -> {
+                        //save student obj
+                        student.setImageUrl(url1);
+                        delegate.onSaveClicked(student);
+                    });
+                } else delegate.onSaveClicked(student);
             }
         });
 
-        changeAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //open camera
-                Intent takePictureIntent = new Intent(
-                        MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
+        changeAvatar.setOnClickListener(view1 -> {
+            //open camera
+            Intent takePictureIntent = new Intent(
+                    MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         });
 

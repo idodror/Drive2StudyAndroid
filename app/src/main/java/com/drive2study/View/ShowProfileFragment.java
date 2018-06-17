@@ -55,12 +55,9 @@ public class ShowProfileFragment extends Fragment {
         }
 
         Button editProfile = view.findViewById(R.id.btn_edit_profile);
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null){
-                    delegate.onEditProfileClicked();
-                }
+        editProfile.setOnClickListener(v -> {
+            if (delegate != null){
+                delegate.onEditProfileClicked();
             }
         });
 

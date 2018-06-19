@@ -81,5 +81,4 @@
     <string name="exit_popup_txt">Would you like to exit?</string>
     <string name="yes_string">Yes</string>
     <string name="no_string">No</string>
-    <string name="txt_invalid_password">Invalid password, try again</string>
 </resources>

@@ -2,6 +2,7 @@ package com.drive2study.View;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,28 +31,30 @@ public class EmailLoginFragment extends Fragment {
     EditText passwordEt;
     TextView userEmailText;
     ProgressBar progressBar;
-    TextView validPassword;
 
     public ProgressBar getProgressBar(){return progressBar;}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_email_login, container, false);
 
         userEmailText = view.findViewById(R.id.forgot_password_text_username);
-        final String emailAddress = getArguments().getString("username");
+        String emailAddress = "";
+        if (getArguments() != null)
+            emailAddress = getArguments().getString("username");
+
         userEmailText.setText(emailAddress);
         passwordEt = view.findViewById(R.id.et_login_password);
-        validPassword = view.findViewById(R.id.label_invalid_password);
         progressBar = view.findViewById(R.id.progress_login_bar);
         progressBar.setVisibility(View.GONE);
 
         Button signIn = view.findViewById(R.id.btn_signin);
+        String finalEmailAddress = emailAddress;    // for error fix in delegate call
         signIn.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             String password = passwordEt.getText().toString();
             if (delegate != null)
-                delegate.onSignIn(emailAddress, password);
+                delegate.onSignIn(finalEmailAddress, password);
         });
 
         Button notYouEmailBtn = view.findViewById(R.id.login_btn_not_your_email);
@@ -63,7 +66,7 @@ public class EmailLoginFragment extends Fragment {
         Button forgotPassBtn = view.findViewById(R.id.login_btn_forgot_password);
         forgotPassBtn.setOnClickListener(v -> {
             if (delegate != null)
-                delegate.onForgotPasswordClicked(emailAddress);
+                delegate.onForgotPasswordClicked(finalEmailAddress);
         });
 
         return view;

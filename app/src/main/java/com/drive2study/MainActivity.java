@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements
     FirebaseAuth auth;
     Context contextCompat;
     LoginScreenFragment loginScreenFragment;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements
         fragmentManager = getSupportFragmentManager();
         auth = FirebaseAuth.getInstance();
         contextCompat = getBaseContext();
-
+        progressBar = this.findViewById(R.id.main_activity_progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
         getPermissionsIfNeeded();
 
         MyApplication.sharedPref.edit().putBoolean("logout", false).apply();
@@ -91,10 +93,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onConWithEmail(String email) {
         Model.instance.userExists(email.replace(".",","), result -> {
-            if(FirebaseAuth.getInstance().getCurrentUser() != null)
-
+            if (FirebaseAuth.getInstance().getCurrentUser() != null)
                 Model.instance.getStudent(email, student -> {
-                    loginAndSet(student);
+                    MyApplication.currentStudent = student;
+                    startActivity(new Intent(MainActivity.this, AppActivity.class));
                 });
             else if (result)
                 setArgAndTranFragment(new EmailLoginFragment(), email);
@@ -113,10 +115,6 @@ public class MainActivity extends AppCompatActivity implements
         transaction.commit();
     }
 
-    private void loginAndSet(Student student) {
-        MyApplication.currentStudent = student;
-        startActivity(new Intent(MainActivity.this, AppActivity.class));
-    }
 
     @Override
     public void onSignIn(String email, String password) {
@@ -143,8 +141,10 @@ public class MainActivity extends AppCompatActivity implements
             }
             else {
                 Log.d("TAG", "Failure");
-                if (finalProgress != null)
+                if (finalProgress != null) {
+                    Toast.makeText(this, "Wrong Password", Toast.LENGTH_SHORT).show();
                     finalProgress.setVisibility(View.GONE);
+                }
             }
         });
     }

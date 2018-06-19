@@ -20,7 +20,6 @@ public class LoginScreenFragment extends Fragment {
 
     public interface LoginScreenFragmentDelegate {
         void onConWithEmail(String email);
-        void onConWithFacebook();
     }
 
     public LoginScreenFragmentDelegate delegate;
@@ -50,12 +49,6 @@ public class LoginScreenFragment extends Fragment {
                 delegate.onConWithEmail(email);
             }
 
-        });
-
-        Button continueWithFacebook = view.findViewById(R.id.btn_facebook);
-        continueWithFacebook.setOnClickListener(v -> {
-            if (delegate != null)
-                delegate.onConWithFacebook();
         });
 
         return view;

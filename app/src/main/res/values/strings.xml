@@ -5,9 +5,7 @@
     <string name="login_dashes_line">-------------------------------------------------</string>
     <string name="login_not_your_email">Not your email?</string>
     <string name="login_password">Password</string>
-    <string name="login_facebook">     Connect With Facebook</string>
     <string name="login_sign_in_or_register">Sign-in or register to start</string>
-    <string name="login_or_email">----------------- Or use email -----------------</string>
     <string name="login_email">Email Address</string>
     <string name="login_con_with_email">Continue With Email</string>
     <string name="register_create_account">Create your account</string>
@@ -83,4 +81,5 @@
     <string name="exit_popup_txt">Would you like to exit?</string>
     <string name="yes_string">Yes</string>
     <string name="no_string">No</string>
+    <string name="txt_invalid_password">Invalid password, try again</string>
 </resources>

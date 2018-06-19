@@ -30,6 +30,7 @@ public class EmailLoginFragment extends Fragment {
     EditText passwordEt;
     TextView userEmailText;
     ProgressBar progressBar;
+    TextView validPassword;
 
     public ProgressBar getProgressBar(){return progressBar;}
 
@@ -41,9 +42,9 @@ public class EmailLoginFragment extends Fragment {
         final String emailAddress = getArguments().getString("username");
         userEmailText.setText(emailAddress);
         passwordEt = view.findViewById(R.id.et_login_password);
+        validPassword = view.findViewById(R.id.label_invalid_password);
         progressBar = view.findViewById(R.id.progress_login_bar);
         progressBar.setVisibility(View.GONE);
-
 
         Button signIn = view.findViewById(R.id.btn_signin);
         signIn.setOnClickListener(v -> {

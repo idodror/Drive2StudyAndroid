@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements
     Context contextCompat;
     LoginScreenFragment loginScreenFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,11 +113,6 @@ public class MainActivity extends AppCompatActivity implements
         transaction.commit();
     }
 
-    @Override
-    public void onConWithFacebook() {
-        Model.instance.getStudent("test2@gmail,com", student -> loginAndSet(student));
-    }
-
     private void loginAndSet(Student student) {
         MyApplication.currentStudent = student;
         startActivity(new Intent(MainActivity.this, AppActivity.class));
@@ -147,9 +141,9 @@ public class MainActivity extends AppCompatActivity implements
                     startActivity(new Intent(MainActivity.this, AppActivity.class));
                 });
             }
-            else{
+            else {
                 Log.d("TAG", "Failure");
-                if(finalProgress != null)
+                if (finalProgress != null)
                     finalProgress.setVisibility(View.GONE);
             }
         });
